@@ -2,7 +2,7 @@
 ## preview
 [预览](./index.html#/demo/up-load-files-demo)
 ## download
-[组件下载](./components/up-load-files-demo.zip)
+[组件下载](./components/upload-files.zip)
 ## dependence
 Vue.js、ElementUI环境
 
