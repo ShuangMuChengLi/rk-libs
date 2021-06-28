@@ -1,17 +1,46 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true
+  'env': {
+    'browser': true,
+    'es6': true,
+    'node':true
   },
-  extends: [
-    'plugin:vue/essential',
-    '@vue/standard'
+  'plugins': [
+    'vue'
   ],
-  parserOptions: {
-    parser: 'babel-eslint'
+  'extends': 'plugin:vue/recommended',
+  'globals': {
+    'Atomics': 'readonly',
+    'SharedArrayBuffer': 'readonly'
   },
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+  'parserOptions': {
+    'parser': 'babel-eslint',
+    'ecmaVersion': 2018,
+    'sourceType': 'module'
+  },
+  'rules': {
+    'eqeqeq': ['error', 'smart'], // 必须全等号代替等号
+    'vue/no-v-html':0,
+    'vue/html-indent':[
+      'error',
+      2
+    ],
+    'indent': [
+      'error',
+      2
+    ],
+    // 禁止出现多个空格
+    'no-multi-spaces': [
+      'error'
+    ],
+    'space-infix-ops': ['error'], // 二元运算符左右两边要有一个空格
+    'comma-spacing': ['error', { 'before': false, 'after': true }], // 逗号前没空格，逗号后有空格
+    'quotes': [
+      'error',
+      'single'
+    ],
+    'semi': [
+      'error',
+      'always'
+    ]
   }
-}
+};
