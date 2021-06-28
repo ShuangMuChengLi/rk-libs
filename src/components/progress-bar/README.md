@@ -5,6 +5,16 @@
 [组件下载](./components/progress-bar.zip)
 ## dependence
 Vue.js环境、moment
+
+## Attributes
+| 参数 |	说明 |类型 |可选值	| 默认值 |
+| ---- | ---- |---- | ----   |----  | 
+| current | 时间轴的当前时间 | Date | - | new Date()  | 
+## Events
+| 事件名称 |	说明 |回调参数 |
+| ---- | ---- |---- | 
+| playBack | 点击开始播放按钮的回调 | Array [开始时间, 结束时间] | 
+| exit | 点击退出按钮的回调 | null | 
 ## usage
 ```
 <template>
@@ -42,12 +52,3 @@ export default {
 </script>
 
 ```
-## Attributes
-| 参数 |	说明 |类型 |可选值	| 默认值 |
-| ---- | ---- |---- | ----   |----  | 
-| current | 时间轴的当前时间 | Date | - | new Date()  | 
-## Events
-| 事件名称 |	说明 |回调参数 |
-| ---- | ---- |---- | 
-| playBack | 点击开始播放按钮的回调 | Array [开始时间, 结束时间] | 
-| exit | 点击退出按钮的回调 | null | 

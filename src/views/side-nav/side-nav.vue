@@ -33,27 +33,14 @@
 </template>
 
 <script>
+import { menu } from '../../../config/menu';
+
 export default {
   name: 'Menu',
   data(){
     return {
       current: '时间轴选择器',
-      menu: [
-        {
-          label: '组件',
-          children: [
-            {
-              label: '视频',
-              children: [
-                {
-                  label: '时间轴选择器',
-                  source: require('../../components/progress-bar/README.md')
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      menu: menu
     };
   },
   mounted () {
@@ -61,6 +48,7 @@ export default {
   },
   methods:{
     tap(item){
+      this.current = item.label;
       this.$emit('change', item.source);
     }
   }

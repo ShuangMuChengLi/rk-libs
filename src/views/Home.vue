@@ -2,7 +2,7 @@
   <div class="home">
     <div class="headerWrapper">
       <div class="container">
-        <h1>前端组件库</h1>
+        <h1>前端组件函数库</h1>
       </div>
     </div>
     <div class="left">
@@ -10,7 +10,7 @@
         @change="navChange"
       />
     </div>
-    <div class="right">
+    <div id="main" class="right">
       <vue-markdown :source="h" />
     </div>
   </div>
@@ -32,6 +32,12 @@ export default {
     };
   },
   mounted () {
+    document.getElementById('main').addEventListener('click', (e)=>{
+      if(e.target.nodeName === 'A'){
+        window.open(e.target.href);
+        e.preventDefault();
+      }
+    });
   },
   methods:{
     navChange(source){

@@ -5,12 +5,15 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "jest"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "element-ui": "^2.15.2",
+    "jest": "^27.0.5",
     "moment": "^2.29.1",
+    "ol": "^6.5.0",
     "text-loader": "^0.0.1",
     "vue": "^2.6.11",
     "vue-markdown": "^2.2.4",

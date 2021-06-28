@@ -6,13 +6,19 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Home',
     component: ()=>import('../views/Home.vue')
   },
   {
     path: '/demo/Progress-bar-demo',
-    name: 'Home',
     component: ()=>import('../views/demo/Progress-bar-demo')
+  },
+  {
+    path: '/demo/up-load-files-demo',
+    component: ()=>import('../views/demo/up-load-files-demo')
+  },
+  {
+    path: '/js-test/map/intersectsCoordinate-test',
+    component: ()=>import('../views/js-test/map/intersectsCoordinate-test')
   },
 ];
 
