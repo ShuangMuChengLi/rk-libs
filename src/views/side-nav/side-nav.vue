@@ -11,7 +11,10 @@
         :key="'group' + groupKey"
         class="nav-group"
       >
-        <div class="nav-group__title">
+        <div
+          v-if="group.label"
+          class="nav-group__title"
+        >
           {{ group.label }}
         </div>
         <ul class="sub-nav">

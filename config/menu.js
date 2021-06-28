@@ -65,5 +65,19 @@ export const menu = [
         ]
       },
     ]
+  },
+  {
+    label: '技术方案',
+    children: [
+      {
+        label: '',
+        children: [
+          {
+            label: '语义识别、关键词提取',
+            source: require('../src/experience/get-keyword/README.md')
+          }
+        ]
+      }
+    ]
   }
 ];
