@@ -1,0 +1,100 @@
+@import "../base-color-param";
+.video-console-wrapper{
+  background: url("./images/bg.png");
+  width: 282px;
+  height: unset;
+  background-size: 100% 100%;
+  box-sizing: border-box;
+  padding: 20px 7px 10px 12px;
+  .video-console-inner{
+    background-color: rgba(2, 67, 128, 0.5);
+    border-radius: 5px;
+    color: #0bc8ff;
+    .video-console-title{
+      height: 43px;
+      line-height: 43px;
+      text-align: center;
+    }
+    .video-console-panel{
+      background: url("./images/inner-bg-1.png") 0 0 no-repeat;
+      height: 236px;
+      width: 264px;
+      padding: 10px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      &.video-console-panel-mini{
+        background: url("./images/inner-bg-2.png") 0 0 no-repeat;
+        min-height: 143px;
+        height: unset;
+        width: 264px;
+        background-size: 100% 100%;
+        .video-console-panel-body{
+          box-sizing: border-box;
+          padding: 10px 0;
+        }
+      }
+      .video-console-panel-header{
+        display: flex;
+        justify-content: space-between;
+      }
+      .video-console-panel-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .panel{
+          background: url("./images/panel.png") 0 0 no-repeat;
+          width: 151px;
+          height: 152px;
+        }
+      }
+      .video-console-panel-footer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .btn-wrapper{
+          display: flex;
+          justify-content: space-between;
+          margin-top: 5px;
+          .near-btn{
+            background: url("./images/near.png") 0 0 no-repeat;
+            width: 37px;
+            height: 37px;
+            margin: 0 10px;
+            cursor: pointer;
+          }
+          .far-btn{
+            .near-btn;
+            background: url("./images/far.png") 0 0 no-repeat;
+          }
+        }
+      }
+    }
+
+  }
+}
+.input-bg{
+  background-color: rgba(18, 86, 154, 0.8);
+  border:1px solid #338be4;
+  color: #fff;
+}
+/deep/.el-date-editor.el-input, .el-date-editor.el-input__inner{
+  .el-input__inner{
+    .input-bg;
+  }
+}
+/deep/.el-date-editor.el-range-editor.el-input__inner{
+  .input-bg;
+  &:focus, &.hover{
+    .input-bg;
+  }
+  .el-range-input{
+    background-color: unset;
+    color: #fff;
+  }
+  .el-range-separator{
+    color: #fff;
+  }
+}
+.cursor{
+  cursor: pointer;
+}

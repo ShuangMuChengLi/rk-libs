@@ -1,0 +1,86 @@
+@import "../base-color-param";
+.icon-position{
+  position: absolute;
+  display: inline-block;
+}
+.icon-background-image{
+  background-origin: padding-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.common-dialog{
+  position: absolute;
+  opacity: 0.8;
+  transition: opacity 0.4s ease-in;
+  background: url("images/dialog-bg.png") 0 0 no-repeat;
+  background-size: 100% 100%;
+  &.active{
+    opacity: 1;
+    transition: opacity 0.4s ease-out;
+  }
+  //margin: 20px;
+  .close-icon{
+    position: absolute;
+    right: -17px;
+    top: -17px;
+    display: inline-block;
+    width: 37px;
+    height: 37px;
+    cursor: pointer;
+    z-index: 4;
+  }
+  .close-icon_1{
+    background-image: url("./images/close-icon.png");
+    background-origin: padding-box;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .ci-body{
+    position: relative;
+    .title-content{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: @dialogTextColor;
+      font-family: Microsoft YaHei, serif;
+      font-weight:bold;
+      font-size: 16px;
+      user-select: none;
+      height: 46px;
+      .icon-box{
+        position: relative;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .content{
+      position: inherit;
+      box-sizing: border-box;
+      z-index: 5;
+    }
+  }
+}
+
+.setCenter{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.left{
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.right{
+  position: fixed;
+  left: calc(100vw - 20px);
+  top: 50%;
+  transform: translate(-100%, -50%);
+}

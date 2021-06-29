@@ -17,6 +17,10 @@ const routes = [
     component: ()=>import('../views/demo/up-load-files-demo')
   },
   {
+    path: '/demo/h5s-player-dialog-demo',
+    component: ()=>import('../views/demo/h5s-player-dialog-demo')
+  },
+  {
     path: '/js-test/map/intersectsCoordinate-test',
     component: ()=>import('../views/js-test/map/intersectsCoordinate-test')
   },

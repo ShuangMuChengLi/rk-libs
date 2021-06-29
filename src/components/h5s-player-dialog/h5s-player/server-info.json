@@ -1,0 +1,7 @@
+{
+  "usage": "用于vnc登录公司视频服务器，启动视频服务，因为是测试版，一小时断一次。",
+  "soft": "vnc",
+  "server": "192.168.18.67:7000",
+  "user": "administrator",
+  "password": "Ropeok12#$"
+}

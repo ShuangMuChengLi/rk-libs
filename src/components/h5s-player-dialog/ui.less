@@ -1,0 +1,54 @@
+/*element ui 主题*/
+@import "./base-color-param";
+/deep/.common-img {
+  .el-image__error, .el-image__placeholder {
+    background-color: unset;
+  }
+}
+/*树结构样式重写*/
+.common-tree {
+  /deep/.el-tree {
+    background-color: transparent;
+    margin-top: 7px;
+    overflow-y: auto;
+    .el-tree-node:focus>.el-tree-node__content {
+      background-color: unset;
+    }
+    .el-tree-node__content {
+      //background-color: transparent; // 点选中效果移除
+      color: @normalColor;
+      height: 30px;
+      &:hover {
+        background: linear-gradient(to right,transparent, @treeNodeContentBg, transparent);
+        .tree-item-type {
+          color: #aaa;
+          &.active{
+            color: #fff;
+          }
+        }
+      }
+    }
+    .custom-tree-node {
+      color: @normalColor;
+    }
+    .is-current {
+      .el-tree-node__content {
+        background: transparent;
+        //background: linear-gradient(to right,transparent, @treeNodeContentBg, transparent);
+      }
+    }
+    .el-icon-caret-right {
+      &:before {
+        color: @borderExteriorLine;
+      }
+    }
+    .is-leaf.el-icon-caret-right {
+      &:before {
+        color: unset;
+      }
+    }
+  }
+}
+.el-image__error, .el-image__placeholder{
+  background: transparent;
+}

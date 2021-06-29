@@ -8,7 +8,11 @@ export const menu = [
           {
             label: '时间轴选择器',
             source: require('../src/components/progress-bar/README.md')
-          }
+          },
+          {
+            label: 'h5s播放弹窗',
+            source: require('../src/components/h5s-player-dialog/README.md')
+          },
         ]
       },
       {

@@ -1,0 +1,29 @@
+.h5s-lice-player-box{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .h5video{
+    width: 100%;
+    height: 100%;
+    //pointer-events: none;
+  }
+  .full-screen-icon{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: url("./images/full-screen.png") no-repeat;
+    background-size: 100% 100%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .player-layer{
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0.1) 90%, transparent);
+    z-index: 1;
+  }
+}
+

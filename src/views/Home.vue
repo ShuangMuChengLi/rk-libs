@@ -10,7 +10,10 @@
         @change="navChange"
       />
     </div>
-    <div id="main" class="right">
+    <div
+      id="main"
+      class="right"
+    >
       <vue-markdown :source="h" />
     </div>
   </div>
