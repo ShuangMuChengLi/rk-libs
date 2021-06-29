@@ -1,6 +1,6 @@
 // vue.config.js
 const path = require('path');
-const buildPath = path.resolve(__dirname, './dist');
+const buildPath = path.resolve(__dirname, './rk-libs');
 let configVue = {
   publicPath: '',
   chainWebpack (webpackConfig) {

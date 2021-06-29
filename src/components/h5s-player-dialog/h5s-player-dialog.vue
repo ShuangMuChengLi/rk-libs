@@ -18,6 +18,7 @@
             :channel-id="channelCode"
             :play-back-range="playBackRange"
             class="video-area"
+            :serverInfo="serverInfo"
           />
         </template>
         <div
@@ -69,7 +70,7 @@
 import CommonDialog from './common-dialog/common-dialog';
 import H5sLivePlayer from './h5s-player/h5s-live-player';
 import VideoConsole from './video-console/video-console';
-import ProgressBar from '../progress-bar/progress-bar';
+import ProgressBar from './progress-bar/progress-bar';
 import moment from 'moment';
 export default {
   name: 'H5sPlayerDialog',
@@ -87,6 +88,10 @@ export default {
       type: String,
       default: null
     },
+    serverInfo:{
+      default: null,
+      type: Object
+    }
   },
   data(){
     return{

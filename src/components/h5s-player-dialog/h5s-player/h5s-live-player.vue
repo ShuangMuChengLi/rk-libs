@@ -1,11 +1,5 @@
 <template>
   <div class="h5s-lice-player-box">
-    <div
-      v-if="propsShowFullScreenIcon"
-      v-show="isShowFullScreenIcon"
-      class="player-layer"
-      :style="setLayerHeight"
-    />
     <video
       :id="id"
       class="h5video"
@@ -22,30 +16,9 @@ import axios from 'axios';
 import { setCookie, getCookie } from '../../../js/html/cookie-util/cookie-util';
 import rkEncrypt from './rk-encrypt';
 import _ from 'lodash';
-const serverUrl = 'http://50.72.110.37:8080';
-const webLivePlayerApi = {
-  'userLogin': serverUrl + '/api/v1/Login', // 视频登录接口
-  'manualRecordStart': serverUrl + '/api/v1/ManualRecordStart', //开始回放
-  'manualRecordStop': serverUrl + '/api/v1/ManualRecordStop', //结束回放
-  'search': serverUrl + '/api/v1/Search', //获取录像列表
-  'SearchDeviceRecordByTime': serverUrl + '/api/v1/SearchDeviceRecordByTime', //获取录像列表
-  'ptz': serverUrl + '/api/v1/Ptz', // 云台控制接口
-  'PtzPreset':  serverUrl + '/api/v1/PtzPreset', // 云台还原
-  'SetPreset':  serverUrl + '/api/v1/SetPreset', // 云台设置默认还原点
-};
-let userInfo = {
-  'serverUrl': 'http://50.72.110.37:8080',
-  'serverHost': '50.72.110.37:8080',
-  'account': 'admin',
-  'password': '12345'
-};
 export default {
   name: 'H5sLivePlayer',
   props:{
-    propsShowFullScreenIcon:{
-      default: true,
-      type: Boolean
-    },
     id:{
       default:'h5sVideo1',
       type: String
@@ -62,6 +35,10 @@ export default {
     playBackRange:{
       default: null,
       type: Object
+    },
+    serverInfo:{
+      default: null,
+      type: Object
     }
   },
   data(){
@@ -75,13 +52,9 @@ export default {
       fullScreenStyleTop: 0,
       isShowFullScreenIcon: false,
       resizeTimer: null,
-      isInitPlayerVideos: false //是否是初始化播放视频
+      isInitPlayerVideos: false, //是否是初始化播放视频
+      webLivePlayerApi: null
     };
-  },
-  computed:{
-    setLayerHeight(){
-      return `top:${this.fullScreenStyleTop - 1}px`;
-    },
   },
   watch:{
     channelId:{
@@ -95,6 +68,17 @@ export default {
     }
   },
   mounted(){
+    const serverUrl = 'http://' + this.serverInfo.serverHost;
+    this.webLivePlayerApi = {
+      'userLogin': serverUrl + '/api/v1/Login', // 视频登录接口
+      'manualRecordStart': serverUrl + '/api/v1/ManualRecordStart', //开始回放
+      'manualRecordStop': serverUrl + '/api/v1/ManualRecordStop', //结束回放
+      'search': serverUrl + '/api/v1/Search', //获取录像列表
+      'SearchDeviceRecordByTime': serverUrl + '/api/v1/SearchDeviceRecordByTime', //获取录像列表
+      'ptz': serverUrl + '/api/v1/Ptz', // 云台控制接口
+      'PtzPreset':  serverUrl + '/api/v1/PtzPreset', // 云台还原
+      'SetPreset':  serverUrl + '/api/v1/SetPreset', // 云台设置默认还原点
+    };
   },
   beforeDestroy(){
     this.stopVideo();
@@ -148,9 +132,9 @@ export default {
     async login() {
       if(getCookie('videoPlayerToken')) return getCookie('videoPlayerToken');
 
-      let result = await axios.get(this.addQueryToUrl(this.addQueryToUrl(webLivePlayerApi.userLogin, {
-        user: encodeURIComponent(userInfo.account),
-        password: rkEncrypt(userInfo.password)
+      let result = await axios.get(this.addQueryToUrl(this.addQueryToUrl(this.webLivePlayerApi.userLogin, {
+        user: encodeURIComponent(this.serverInfo.account),
+        password: rkEncrypt(this.serverInfo.password)
       }))).then((data) => {
         if (_.get(data, 'data.bStatus')) {
           return _.get(data, 'data.strSession', false);
@@ -177,7 +161,7 @@ export default {
       let conf1 = {
         videoid: this.id,
         protocol: window.location.protocol, //'http:' or 'https:'
-        host: userInfo.serverHost, //'localhost:8080'
+        host: this.serverInfo.serverHost, //'localhost:8080'
         rootpath: '/', // '/' or window.location.pathname
         // token: 'cluster||gb||node86||' + this.channelId,
         token: this.channelId,
@@ -195,7 +179,7 @@ export default {
      * @return {boolean}
      */
     async SearchDeviceRecordByTime(){
-      return await axios.get(this.addQueryToUrl(webLivePlayerApi.SearchDeviceRecordByTime, {
+      return await axios.get(this.addQueryToUrl(this.webLivePlayerApi.SearchDeviceRecordByTime, {
         token: this.channelId,
         start: this.playBackRange?.start,
         end: this.playBackRange?.end,
@@ -208,7 +192,6 @@ export default {
       });
     },
     startPlayback(){
-      console.log('startPlayback');
       const pbconf1 = {
         begintime: this.playBackRange?.start,
         endtime: this.playBackRange?.end,
@@ -221,7 +204,7 @@ export default {
       const conf1 = {
         videoid: this.id,
         protocol: window.location.protocol, //'http:' or 'https:'
-        host: userInfo.serverHost, //'localhost:8080'
+        host: this.serverInfo.serverHost, //'localhost:8080'
         rootpath: '/', // '/' or window.location.pathname
         token: this.channelId,
         pbconf: pbconf1,
@@ -249,7 +232,7 @@ export default {
      *
      * */
     async setRequestPtzControl(controlDirection){
-      let result = await axios.get(this.addQueryToUrl(webLivePlayerApi.ptz, {
+      let result = await axios.get(this.addQueryToUrl(this.webLivePlayerApi.ptz, {
         token: this.channelId,
         action: controlDirection,
         speed: this.turnSpeed,
@@ -275,7 +258,7 @@ export default {
      *
      * */
     async manualRecordStart(){
-      let result = await axios.get(this.addQueryToUrl(webLivePlayerApi.manualRecordStart, {
+      let result = await axios.get(this.addQueryToUrl(this.webLivePlayerApi.manualRecordStart, {
         token: this.channelId,
         duration: 300,
         session: this.token
@@ -285,15 +268,13 @@ export default {
         console.error(error);
         return false;
       });
-
-      console.log(result);
     },
     /**
      *  结束录像
      *
      * */
     async manualRecordStop(){
-      let result = await axios.get(this.addQueryToUrl(webLivePlayerApi.manualRecordStop, {
+      let result = await axios.get(this.addQueryToUrl(this.webLivePlayerApi.manualRecordStop, {
         token: this.channelId,
         duration: 300,
         session: this.token
@@ -303,21 +284,18 @@ export default {
         console.error(error);
         return false;
       });
-
-      console.log(result);
     },
     /**
      * 设置还原点
      *
      * */
     async setPreset(){
-      let result = await axios.get(this.addQueryToUrl(webLivePlayerApi.SetPreset, {
+      let result = await axios.get(this.addQueryToUrl(this.webLivePlayerApi.SetPreset, {
         token: this.channelId,
         presetname: '1',
         presettoken: '1',
         session: this.token
       })).then((res)=>{
-        console.log(res);
         this.$message.success('设置成功');
       }).catch((error)=>{
         console.error(error);
@@ -325,7 +303,7 @@ export default {
       });
     },
     async resetDeviceViewer(){
-      let result = await axios.get(this.addQueryToUrl(webLivePlayerApi.ptz, {
+      let result = await axios.get(this.addQueryToUrl(this.webLivePlayerApi.ptz, {
         token: this.channelId,
         action: 'preset',
         preset: '1',

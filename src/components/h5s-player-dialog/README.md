@@ -2,52 +2,53 @@
 ## preview
 [预览](./index.html#/demo/h5s-player-dialog-demo)
 ## download
-[组件下载](./components/progress-bar.zip)
+[组件下载](./components/h5s-player-dialog.zip)
 ## dependence
-Vue.js环境、moment
+Vue.js\ElementUI环境、moment、lodash、axios
 
 ## Attributes
 | 参数 |	说明 |类型 |可选值	| 默认值 |
 | ---- | ---- |---- | ----   |----  | 
-| current | 时间轴的当前时间 | Date | - | new Date()  | 
-## Events
-| 事件名称 |	说明 |回调参数 |
-| ---- | ---- |---- | 
-| playBack | 点击开始播放按钮的回调 | Array [开始时间, 结束时间] | 
-| exit | 点击退出按钮的回调 | null | 
+| liveVideoVisible | 弹窗是否显示 | Boolean | - | false  | 
+| channelCode | 通道号 | String | - | null  | 
+| channelName | 视频名称 | String | - | null  | 
+| serverInfo | 服务器信息 | Object | - | null  | 
+### serverInfo
+| 参数 |	说明 |类型 |可选值	| 默认值 |
+| ---- | ---- |---- | ----   |----  | 
+| serverHost | 视频服务地址(IP:Port) | Boolean | - | null  | 
+| account | 账号 | String | - | null  | 
+| password | 密码 | String | - | null  | 
 ## usage
 ```
 <template>
-  <div class="home">
-    <progress-bar
-      :current="progressBarDate"
-      @playBack="playBack"
-      @exit="progressBarExit"
+  <div class="live-video-wrapper-test">
+    <h5s-player-dialog
+      :visible.sync="liveVideoVisible"
+      :channel-code="channelCode"
+      :channel-name="channelName"
+      :server-info="serverInfo"
     />
   </div>
 </template>
 
 <script>
-
-import ProgressBar from '@/components/progress-bar/progress-bar';
+import H5sPlayerDialog from '@/components/h5s-player-dialog/h5s-player-dialog';
 export default {
-  name: 'ProgressBarDemo',
-  components: {
-    ProgressBar
-  },
+  name: 'H5sPlayerDialogDemo',
+  components: { H5sPlayerDialog },
   data(){
-    return {
-      progressBarDate: new Date()
+    return{
+      liveVideoVisible: true,
+      channelCode: '50011602001310010263',
+      channelName: '16020153东城相府与鞍子街路口1',
+      serverInfo: {
+        'serverHost': '50.72.110.37:8080',
+        'account': 'admin',
+        'password': '12345'
+      }
     };
   },
-  methods:{
-    playBack(start, end){
-      console.log('播放按钮触发', start, end);
-    },
-    progressBarExit(){
-      console.log('退出按钮触发');
-    }
-  }
 };
 </script>
 
