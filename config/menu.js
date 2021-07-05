@@ -66,6 +66,10 @@ export const menu = [
             label: 'cookie工具类',
             source: require('../src/js/html/cookie-util/README.md')
           },
+          {
+            label: '页面水印',
+            source: require('../src/js/html/watermark/README.md')
+          },
         ]
       },
     ]
