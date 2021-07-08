@@ -18,7 +18,7 @@
             :channel-id="channelCode"
             :play-back-range="playBackRange"
             class="video-area"
-            :serverInfo="serverInfo"
+            :server-info="serverInfo"
           />
         </template>
         <div

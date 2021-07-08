@@ -5,6 +5,10 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/detail/:type',
+    component: ()=>import('../views/Home.vue')
+  },
+  {
     path: '/',
     component: ()=>import('../views/Home.vue')
   },
@@ -19,6 +23,10 @@ const routes = [
   {
     path: '/demo/watermark-demo',
     component: ()=>import('../views/demo/watermark-demo')
+  },
+  {
+    path: '/demo/three-slide-demo',
+    component: ()=>import('../views/demo/three-slide-demo.vue')
   },
   {
     path: '/demo/h5s-player-dialog-demo',

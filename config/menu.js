@@ -23,7 +23,7 @@ export const menu = [
             source: require('../src/components/upLoad-files/README.md')
           }
         ]
-      },
+      }
     ]
   },
   {
@@ -70,6 +70,10 @@ export const menu = [
             label: '页面水印',
             source: require('../src/js/html/watermark/README.md')
           },
+          {
+            label: 'threejs的三维轮盘幻灯片',
+            source: require('../src/js/html/three-slide/README.md')
+          },
         ]
       },
     ]
@@ -85,7 +89,16 @@ export const menu = [
             source: require('../src/experience/get-keyword/README.md')
           }
         ]
-      }
+      },
+      {
+        label: '',
+        children: [
+          {
+            label: '屏幕截屏',
+            source: require('../src/experience/screenshot/README.md')
+          }
+        ]
+      },
     ]
   }
 ];
