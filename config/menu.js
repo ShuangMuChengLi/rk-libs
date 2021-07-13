@@ -52,6 +52,14 @@ export const menu = [
           {
             label: '计算年龄',
             source: require('../src/js/math/getAge/README.md')
+          },
+          {
+            label: 'md5、sha加密',
+            source: require('../src/js/math/md5-sha/README.md')
+          },
+          {
+            label: 'sm2加密、解密',
+            source: require('../src/js/math/rk-sm2/README.md')
           }
         ]
       },

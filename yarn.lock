@@ -6410,6 +6410,11 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+jsbn@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.nlark.com/jsbn/download/jsbn-1.1.0.tgz#b01307cb29b618a1ed26ec79e911f803c4da0040"
+  integrity sha1-sBMHyym2GKHtJux56RH4A8TaAEA=
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.nlark.com/jsbn/download/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -9131,6 +9136,13 @@ slice-ansi@^2.1.0:
     ansi-styles "^3.2.0"
     astral-regex "^1.0.0"
     is-fullwidth-code-point "^2.0.0"
+
+sm-crypto@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.nlark.com/sm-crypto/download/sm-crypto-0.3.0.tgz#0ec8cc2c29ed27ca8e92c518656e9cce8c510c74"
+  integrity sha1-DsjMLCntJ8qOksUYZW6czoxRDHQ=
+  dependencies:
+    jsbn "^1.1.0"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"

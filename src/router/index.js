@@ -33,6 +33,10 @@ const routes = [
     component: ()=>import('../views/demo/h5s-player-dialog-demo')
   },
   {
+    path: '/demo/rk-sm2-demo',
+    component: ()=>import('../views/demo/rk-sm2-demo')
+  },
+  {
     path: '/js-test/map/intersectsCoordinate-test',
     component: ()=>import('../views/js-test/map/intersectsCoordinate-test')
   },
