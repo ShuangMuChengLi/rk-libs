@@ -60,6 +60,10 @@ export const menu = [
           {
             label: 'sm2加密、解密',
             source: require('../src/js/math/rk-sm2/README.md')
+          },
+          {
+            label: '3des加密、解密',
+            source: require('../src/js/math/rk-3des/README.md')
           }
         ]
       },
