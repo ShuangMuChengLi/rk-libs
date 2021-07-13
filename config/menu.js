@@ -67,6 +67,10 @@ export const menu = [
             source: require('../src/js/html/cookie-util/README.md')
           },
           {
+            label: 'url工具类',
+            source: require('../src/js/html/rk-url/README.md')
+          },
+          {
             label: '页面水印',
             source: require('../src/js/html/watermark/README.md')
           },
@@ -82,7 +86,7 @@ export const menu = [
     label: '技术方案',
     children: [
       {
-        label: '',
+        label: '算法',
         children: [
           {
             label: '语义识别、关键词提取',
@@ -91,11 +95,20 @@ export const menu = [
         ]
       },
       {
-        label: '',
+        label: 'html',
         children: [
           {
             label: '屏幕截屏',
             source: require('../src/experience/screenshot/README.md')
+          }
+        ]
+      },
+      {
+        label: '特效',
+        children: [
+          {
+            label: '动态连接颗粒背景',
+            source: require('../src/experience/special-effects/particles/README.md')
           }
         ]
       },
