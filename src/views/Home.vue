@@ -34,6 +34,11 @@ export default {
       h: ''
     };
   },
+  watch:{
+    '$route':function(){
+      document.documentElement.scrollTop = 0;
+    }
+  },
   mounted () {
     document.getElementById('main').addEventListener('click', (e)=>{
       if(e.target.nodeName === 'A'){

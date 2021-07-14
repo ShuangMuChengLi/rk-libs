@@ -22,6 +22,7 @@
             v-for="(subItem, subItemKey) in group.children"
             :key="'subItem' + subItemKey"
             class="nav-item"
+            :title="subItem.label"
             @click="tap(subItem)"
           >
             <span

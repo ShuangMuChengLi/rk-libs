@@ -98,20 +98,32 @@ export const menu = [
     label: '技术方案',
     children: [
       {
-        label: '算法',
+        label: '方案',
         children: [
           {
+            label: '前端发布平台',
+            source: require('../src/experience/solution/publish-system/README.md')
+          },
+          {
             label: '语义识别、关键词提取',
-            source: require('../src/experience/get-keyword/README.md')
-          }
+            source: require('../src/experience/solution/get-keyword/README.md')
+          },
         ]
       },
       {
         label: 'html',
         children: [
           {
+            label: '常用css效果汇总',
+            source: require('../src/experience/html/css/README.md')
+          },
+          {
+            label: 'Vue.js页面初始化加载中效果',
+            source: require('../src/experience/html/loading/README.md')
+          },
+          {
             label: '屏幕截屏',
-            source: require('../src/experience/screenshot/README.md')
+            source: require('../src/experience/html/screenshot/README.md')
           }
         ]
       },

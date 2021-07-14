@@ -6,12 +6,39 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+      <style>
+          .body-loading{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              overflow: hidden;
+          }
+          .body-loading-bg{
+              position: relative;
+          }
+          .loading-test{
+              text-align: center;
+              color: #aaa;
+              position: absolute;
+              bottom: 30px;
+              left: 50%;
+              transform: translate(-50%, 0);
+          }
+      </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+        <div class="body-loading">
+            <div class="body-loading-bg">
+                <img src="./loading2.gif"/>
+                <p class="loading-test">Ping Ming Loading……</p>
+            </div>
+        </div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
