@@ -3,14 +3,22 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
+  {
+    path: '/order',
+    component: ()=>import('../views/order.vue')
+  },
   {
     path: '/detail/:type',
     component: ()=>import('../views/Home.vue')
   },
   {
-    path: '/',
+    path: '/index',
     component: ()=>import('../views/Home.vue')
+  },
+  {
+    path: '/demo/picture-verify-demo',
+    component: ()=>import('../views/demo/picture-verify-demo.vue')
   },
   {
     path: '/demo/Progress-bar-demo',
@@ -41,7 +49,12 @@ const routes = [
     component: ()=>import('../views/js-test/map/intersectsCoordinate-test')
   },
 ];
-
+const ENV = process.env.NODE_ENV;
+if(ENV === 'production'){
+  routes.push({ path: '/', redirect: '/index' });// 开发环境"/"重定向到路由列表页
+}else if (ENV === 'development') {
+  routes.push({ path: '/', redirect: '/order' });// 开发环境"/"重定向到路由列表页
+}
 const router = new VueRouter({
   routes
 });

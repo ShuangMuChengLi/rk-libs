@@ -3,6 +3,15 @@ export const menu = [
     label: '组件',
     children: [
       {
+        label: '登录相关',
+        children: [
+          {
+            label: '图片拼图验证码',
+            source: require('../src/components/picture-verify/README.md')
+          },
+        ]
+      },
+      {
         label: '视频',
         children: [
           {
