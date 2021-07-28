@@ -32,6 +32,15 @@ export const menu = [
             source: require('../src/components/upLoad-files/README.md')
           }
         ]
+      },
+      {
+        label: '其他',
+        children: [
+          {
+            label: '日历（最简版骨架）',
+            source: require('../src/components/rk-calendar/README.md')
+          }
+        ]
       }
     ]
   },

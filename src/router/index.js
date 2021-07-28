@@ -41,6 +41,14 @@ export const routes = [
     component: ()=>import('../views/demo/h5s-player-dialog-demo')
   },
   {
+    path: '/vue-test',
+    component: ()=>import('../views/demo/vue-test')
+  },
+  {
+    path: '/demo/rk-calendar-demo',
+    component: ()=>import('../views/demo/rk-calendar-demo.vue')
+  },
+  {
     path: '/demo/rk-sm2-demo',
     component: ()=>import('../views/demo/rk-sm2-demo')
   },
