@@ -34,6 +34,15 @@ export const menu = [
         ]
       },
       {
+        label: '流程图',
+        children: [
+          {
+            label: '箭头',
+            source: require('../src/components/flow-chart/arrow/README.md')
+          }
+        ]
+      },
+      {
         label: '其他',
         children: [
           {
