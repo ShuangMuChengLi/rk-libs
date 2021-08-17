@@ -4,7 +4,7 @@
 ## download
 [组件下载](./components/flow-chart/arrow.zip)
 ## dependence
-Vue.js\ElementUI环境、moment、lodash、axios
+Vue.js
 
 ## Attributes
 | 参数 |	说明 |类型 |可选值	| 默认值 |

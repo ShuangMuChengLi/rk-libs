@@ -135,6 +135,10 @@ export const menu = [
             label: '语义识别、关键词提取',
             source: require('../src/experience/solution/get-keyword/README.md')
           },
+          {
+            label: '正则表达式汇总',
+            source: require('../src/experience/solution/regular/README.md')
+          },
         ]
       },
       {
