@@ -6,7 +6,8 @@
 ## website
 [官网](https://github.com/matthieua/WOW)
 ## info
-由于npm install wowjs获取的包无法通过es6方式加载，download中改写了库文件作为es6方式加载
+由于npm install wowjs获取的包无法通过es6方式加载，download中改写了库文件作为es6方式加载。   
+同时只支持特定版本的animate.css。所以请用download中的animate.css进行样式加载。
 ## usage
 ```
 <template>
