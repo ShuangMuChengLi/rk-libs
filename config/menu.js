@@ -164,7 +164,11 @@ export const menu = [
           {
             label: '动态连接颗粒背景',
             source: require('../src/experience/special-effects/particles/README.md')
-          }
+          },
+          {
+            label: '滚动显示特效',
+            source: require('../src/experience/special-effects/wow/README.md')
+          },
         ]
       },
     ]
