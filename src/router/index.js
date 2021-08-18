@@ -45,6 +45,10 @@ export const routes = [
     component: ()=>import('../views/demo/vue-test')
   },
   {
+    path: '/wow-demo',
+    component: ()=>import('../views/demo/wow-demo.vue')
+  },
+  {
     path: '/demo/rk-calendar-demo',
     component: ()=>import('../views/demo/rk-calendar-demo.vue')
   },
