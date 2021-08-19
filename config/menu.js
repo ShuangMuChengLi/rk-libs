@@ -139,6 +139,10 @@ export const menu = [
             label: '正则表达式汇总',
             source: require('../src/experience/solution/regular/README.md')
           },
+          {
+            label: '常用webpack配置汇总(VueJS环境)',
+            source: require('../src/experience/solution/webpack/README.md')
+          },
         ]
       },
       {
@@ -155,6 +159,10 @@ export const menu = [
           {
             label: '屏幕截屏',
             source: require('../src/experience/html/screenshot/README.md')
+          },
+          {
+            label: 'css动画库animate.js',
+            source: require('../src/experience/special-effects/animate/README.md')
           }
         ]
       },

@@ -12,7 +12,7 @@
       :show-tooltip="false"
       @input="input"
       @change="change"
-    ></el-slider>
+    />
   </div>
 </template>
 <script>

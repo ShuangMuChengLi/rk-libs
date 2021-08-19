@@ -57,8 +57,24 @@ export const routes = [
     component: ()=>import('../views/demo/arrow-demo.vue')
   },
   {
+    path: '/demo/animate',
+    component: ()=>import('../views/demo/animate.vue')
+  },
+  {
     path: '/demo/rk-sm2-demo',
     component: ()=>import('../views/demo/rk-sm2-demo')
+  },
+  {
+    path: '/demo/axios',
+    component: ()=>import('../views/demo/axios')
+  },
+  {
+    path: '/demo/animate',
+    component: ()=>import('../views/demo/animate')
+  },
+  {
+    path: '/demo/worker-demo',
+    component: ()=>import('../views/demo/worker-demo/worker-test')
   },
   {
     path: '/js-test/map/intersectsCoordinate-test',

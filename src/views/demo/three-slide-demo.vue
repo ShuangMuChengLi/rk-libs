@@ -15,8 +15,7 @@
     <div
       id="target"
       class="ctx"
-    >
-    </div>
+    />
     <div
       v-show="false"
       id="source"
