@@ -69,6 +69,10 @@ export const menu = [
         label: '数学',
         children: [
           {
+            label: '数学函数库',
+            source: require('../src/js/math/rk-math/README.md')
+          },
+          {
             label: '二维数组穷尽组合',
             source: require('../src/js/math/combination/README.md')
           },
@@ -151,6 +155,10 @@ export const menu = [
           {
             label: '常用css效果汇总',
             source: require('../src/experience/html/css/README.md')
+          },
+          {
+            label: '录音，并下载或上传',
+            source: require('../src/experience/html/recorderjs/README.md')
           },
           {
             label: 'Vue.js页面初始化加载中效果',

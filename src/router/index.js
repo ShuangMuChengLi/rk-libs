@@ -73,6 +73,10 @@ export const routes = [
     component: ()=>import('../views/demo/animate')
   },
   {
+    path: '/demo/recorderjs',
+    component: ()=>import('../experience/html/recorderjs/recorder-test')
+  },
+  {
     path: '/demo/worker-demo',
     component: ()=>import('../views/demo/worker-demo/worker-test')
   },
