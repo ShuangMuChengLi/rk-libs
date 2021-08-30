@@ -81,6 +81,10 @@ export const routes = [
     component: ()=>import('../views/demo/worker-demo/worker-test')
   },
   {
+    path: '/demo/capture-pic',
+    component: ()=>import('../js/html/capture-pic/capture-pic-demo')
+  },
+  {
     path: '/js-test/map/intersectsCoordinate-test',
     component: ()=>import('../views/js-test/map/intersectsCoordinate-test')
   },

@@ -52,3 +52,9 @@ table{
   border-collapse:collapse;
 }
 ```
+## 哀悼日网站全部置灰或部分置灰
+```
+html{
+  filter: grayscale(100%);
+}
+```

@@ -2859,6 +2859,11 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001219:
   resolved "https://registry.nlark.com/caniuse-lite/download/caniuse-lite-1.0.30001239.tgz#66e8669985bb2cb84ccb10f68c25ce6dd3e4d2b8"
   integrity sha1-ZuhmmYW7LLhMyxD2jCXObdPk0rg=
 
+capture-pic@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.nlark.com/capture-pic/download/capture-pic-2.0.0.tgz#8bbe6a787996dd067dc9e9b75b45698bfde32922"
+  integrity sha1-i75qeHmW3QZ9yem3W0Vpi/3jKSI=
+
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.4.0"
   resolved "https://registry.nlark.com/case-sensitive-paths-webpack-plugin/download/case-sensitive-paths-webpack-plugin-2.4.0.tgz#db64066c6422eed2e08cc14b986ca43796dbc6d4"

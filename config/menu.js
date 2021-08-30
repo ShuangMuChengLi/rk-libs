@@ -106,6 +106,10 @@ export const menu = [
             source: require('../src/js/html/storage-util/README.md')
           },
           {
+            label: '相机抓拍工具类',
+            source: require('../src/js/html/capture-pic/README.md')
+          },
+          {
             label: 'cookie工具类',
             source: require('../src/js/html/cookie-util/README.md')
           },
