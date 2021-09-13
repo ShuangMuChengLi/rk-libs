@@ -62,7 +62,12 @@ export const menu = [
           {
             label: '判断点位在地图几何范围内',
             source: require('../src/js/map/intersectsCoordinate/README.md')
-          }
+          },
+          {
+            label: '计算两经纬度点位的距离',
+            source: require('../src/js/map/point-distance/README.md'),
+            date: '2021-09-13'
+          },
         ]
       },
       {

@@ -3,7 +3,7 @@ function rad(d)
 {
   return d * Math.PI / 180.0;
 }
-export function GetDistance(lon1, lat1, lon2, lat2 )
+export function getDistance(lon1, lat1, lon2, lat2 )
 {
   let radLat1 = rad(lat1);
   let radLat2 = rad(lat2);
@@ -16,4 +16,3 @@ export function GetDistance(lon1, lat1, lon2, lat2 )
   s = Math.round(s * 10000) / 10000;
   return s;
 }
-// const result = GetDistance(116.398232, 39.929004, 116.408203, 39.929405, );
