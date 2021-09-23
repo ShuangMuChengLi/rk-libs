@@ -166,6 +166,11 @@ export const menu = [
             source: require('../src/experience/html/css/README.md')
           },
           {
+            label: '富文本编辑器ueditor',
+            source: require('../src/experience/html/editor/README.md'),
+            date: '2021-09-23'
+          },
+          {
             label: '录音，并下载或上传',
             source: require('../src/experience/html/recorderjs/README.md')
           },
