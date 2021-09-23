@@ -77,6 +77,10 @@ export const routes = [
     component: ()=>import('../experience/html/recorderjs/recorder-test')
   },
   {
+    path: '/demo/editor',
+    component: ()=>import('../experience/html/editor/editor')
+  },
+  {
     path: '/demo/worker-demo',
     component: ()=>import('../views/demo/worker-demo/worker-test')
   },

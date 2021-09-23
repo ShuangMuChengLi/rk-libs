@@ -25,5 +25,15 @@ let configVue = {
       .end();
   },
   outputDir: buildPath,
+  devServer: {
+    liveReload: false,
+    hot: false,
+    proxy: {
+      '/ueditor': {
+        target: 'https://www.linchaoqun.com',
+        changeOrigin: true
+      },
+    }
+  }
 };
 module.exports = configVue;
