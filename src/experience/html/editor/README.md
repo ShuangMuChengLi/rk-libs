@@ -5,11 +5,24 @@
 [预览](./index.html#/demo/editor)
 ## install
 1. 将资源包放置于public目录下
-2. 修改public/ueditor/ueditor.config.js
+2. 修改public/ueditor/ueditor.config.js，设置后端接口名
 ```
 window.UEDITOR_HOME_URL = "/ueditor/"; 
 .....
 serverUrl: "/ueditor/ue" // 后端接口
+```
+3、vue.config.js设置代理
+```
+devServer: {
+    liveReload: false,
+    hot: false,
+    proxy: {
+      '/ueditor': {
+        target: 'https://www.linchaoqun.com',
+        changeOrigin: true
+      },
+    }
+}
 ```
 ## usage
 ```
