@@ -156,6 +156,11 @@ export const menu = [
             label: '常用webpack配置汇总(VueJS环境)',
             source: require('../src/experience/solution/webpack/README.md')
           },
+          {
+            label: '前端读取或生成excel',
+            source: require('../src/experience/solution/excel/README.md'),
+            date: '2021-09-23'
+          },
         ]
       },
       {
