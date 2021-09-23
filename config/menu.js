@@ -161,6 +161,11 @@ export const menu = [
             source: require('../src/experience/solution/excel/README.md'),
             date: '2021-09-23'
           },
+          {
+            label: '前端读取并展示md文件',
+            source: require('../src/experience/solution/md/README.md'),
+            date: '2021-09-23'
+          },
         ]
       },
       {
