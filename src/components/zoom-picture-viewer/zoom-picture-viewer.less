@@ -1,0 +1,64 @@
+.zoom-layer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 99995;
+  text-align: center;
+}
+.holder {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 0;
+  position: relative;
+}
+.main-pic {
+  visibility: visible;
+  cursor: zoom-in;
+  transition-duration: 0.3s;
+  transition: transform .3s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: center;
+  &.origin{
+    cursor: grab;
+  }
+}
+
+.zoom-picture-viewer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .8);
+  z-index: 99995;
+  text-align: center;
+}
+
+.resize-zoom {
+  width: 48px;
+  height: 48px;
+  background: url('./btn_zoom_origin.svg') 0 0 no-repeat;
+  position: absolute;
+  right: 64px;
+  top: 8px;
+  cursor: pointer;
+}
+.small{
+  background-image: url('./btn_zoom_small.svg');
+}
+.close-zoom {
+  width: 48px;
+  height: 48px;
+  background: url('./btn_zoom_close.svg') 0 0 no-repeat;
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  cursor: pointer;
+  z-index: 199995;
+}

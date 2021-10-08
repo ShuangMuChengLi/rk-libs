@@ -21,6 +21,10 @@ export const routes = [
     component: ()=>import('../views/demo/picture-verify-demo.vue')
   },
   {
+    path: '/demo/zoom-picture-viewer-demo',
+    component: ()=>import('../views/demo/zoom-picture-viewer-demo.vue')
+  },
+  {
     path: '/demo/Progress-bar-demo',
     component: ()=>import('../views/demo/Progress-bar-demo')
   },

@@ -48,7 +48,12 @@ export const menu = [
           {
             label: '日历（最简版骨架）',
             source: require('../src/components/rk-calendar/README.md')
-          }
+          },
+          {
+            label: '花瓣网的超高清图片浏览弹窗',
+            source: require('../src/components/zoom-picture-viewer/README.md'),
+            date: '2021-10-05'
+          },
         ]
       }
     ]
