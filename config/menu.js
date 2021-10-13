@@ -158,6 +158,10 @@ export const menu = [
             source: require('../src/experience/solution/regular/README.md')
           },
           {
+            label: 'webpack编译库文件的几种形式',
+            source: require('../src/experience/solution/webpack-build-lib/README.md')
+          },
+          {
             label: '常用webpack配置汇总(VueJS环境)',
             source: require('../src/experience/solution/webpack/README.md')
           },

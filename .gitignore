@@ -2,7 +2,7 @@
 node_modules
 /dist
 /rk-libs
-
+dist.zip
 
 # local env files
 .env.local
