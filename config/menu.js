@@ -73,6 +73,11 @@ export const menu = [
             source: require('../src/js/map/point-distance/README.md'),
             date: '2021-09-13'
           },
+          {
+            label: '对点位列表以一定距离进行聚合分组',
+            source: require('../src/js/map/point-cluster/README.md'),
+            date: '2021-10-13'
+          },
         ]
       },
       {
