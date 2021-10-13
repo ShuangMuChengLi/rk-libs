@@ -180,6 +180,11 @@ export const menu = [
             source: require('../src/experience/solution/md/README.md'),
             date: '2021-09-23'
           },
+          {
+            label: 'Node.js逐行读取文件',
+            source: require('../src/experience/solution/readline/README.md'),
+            date: '2021-10-13'
+          },
         ]
       },
       {
