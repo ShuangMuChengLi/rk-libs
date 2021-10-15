@@ -27,7 +27,7 @@
         class="item"
       >
         <div class="item-inner">
-          <img src="./1.jpg">
+          <img src="../../images/1.jpg">
         </div>
       </div>
     </div>

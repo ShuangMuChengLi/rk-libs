@@ -1,6 +1,7 @@
 # 花瓣网的超高清图片浏览弹窗  
 全屏展示图片。点击图片某个点，1:1原尺寸展示图片，并可以拖动展示图片的细节。
-## preview
+## preview  
+网络慢，建议本地运行  
 [预览](./index.html#/demo/zoom-picture-viewer-demo)
 ## download
 [组件下载](./components/zoom-picture-viewer.zip)

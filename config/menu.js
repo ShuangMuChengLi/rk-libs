@@ -54,6 +54,11 @@ export const menu = [
             source: require('../src/components/zoom-picture-viewer/README.md'),
             date: '2021-10-05'
           },
+          {
+            label: '帷幕效果的幻灯片',
+            source: require('../src/components/purdah-slide/README.md'),
+            date: '2021-10-15'
+          },
         ]
       }
     ]
