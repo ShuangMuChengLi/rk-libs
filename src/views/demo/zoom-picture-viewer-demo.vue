@@ -15,7 +15,7 @@
 
 <script>
 import ZoomPictureViewer from '@/components/zoom-picture-viewer/zoom-picture-viewer';
-import imgURL from '../../../public/2.jpg';
+import imgURL from '../../images/2.jpg';
 
 export default {
   name: 'ZoomPictureViewerDemo',
