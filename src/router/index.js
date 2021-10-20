@@ -21,6 +21,10 @@ export const routes = [
     component: ()=>import('../views/demo/ol-demo.vue')
   },
   {
+    path: '/demo/ol-load-img-demo',
+    component: ()=>import('../views/demo/ol-load-img-demo.vue')
+  },
+  {
     path: '/demo/purdah-slide',
     component: ()=>import('../components/purdah-slide/purdah-slide-test')
   },

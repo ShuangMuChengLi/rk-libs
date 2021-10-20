@@ -97,7 +97,7 @@ export default {
       let tY = - this.height / 3 / this.scaleY;
       let path = new Path2D(this.path);
       this.fragmentCtx.clip(path);
-      this.fragmentCtx.strokeStyle = '#fff';
+      this.fragmentCtx.strokeStyle = '#000';
       this.fragmentCtx.lineWidth = 1.5;
       this.fragmentCtx.drawImage(img, tX, tY, this.width / this.scaleX, this.height / this.scaleY );
       this.fragmentCtx.stroke(path);
