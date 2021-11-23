@@ -1,0 +1,28 @@
+ul{
+  padding:0;
+  margin:0;
+  list-style:none
+}
+.remote-search-input-wrapper{
+  position: relative;
+  .select-box{
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background-color: #fff;
+    z-index: 999;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 0 5px #aaa;
+    box-sizing: border-box;
+    li{
+      padding: 0 5px;
+      line-height: 30px;
+      cursor: pointer;
+      &:hover{
+        background-color: #eee;
+      }
+    }
+  }
+}

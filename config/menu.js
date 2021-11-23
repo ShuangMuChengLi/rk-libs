@@ -30,6 +30,12 @@ export const menu = [
           {
             label: '图片base64拖拽上传控件',
             source: require('../src/components/upLoad-files/README.md')
+          },
+          {
+            label: '可自定义输入的远程搜索输入框',
+            source: require('../src/components/remote-search-input/README.md'),
+            date: '2021-11-23'
+
           }
         ]
       },
