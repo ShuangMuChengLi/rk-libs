@@ -25,6 +25,10 @@ export const routes = [
     component: ()=>import('../components/purdah-slide/purdah-slide-test')
   },
   {
+    path: '/demo/remote-img',
+    component: ()=>import('../components/remote-img/remote-img-demo.vue')
+  },
+  {
     path: '/demo/remote-search-input',
     component: ()=>import('../components/remote-search-input/remote-search-input-demo.vue')
   },

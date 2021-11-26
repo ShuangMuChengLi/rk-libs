@@ -65,6 +65,11 @@ export const menu = [
             source: require('../src/components/purdah-slide/README.md'),
             date: '2021-10-15'
           },
+          {
+            label: '带请求头的图片组件',
+            source: require('../src/components/remote-img/README.md'),
+            date: '2021-11-26'
+          },
         ]
       }
     ]

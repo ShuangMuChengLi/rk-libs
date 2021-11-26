@@ -27,7 +27,7 @@
         class="item"
       >
         <div class="item-inner">
-          <img src="../../images/1.jpg">
+          <img src="https://hbfile.huabanimg.com/img/home/banner/1a6ad3b820b1246aa6340a1a64546c58a735fc8520679e">
         </div>
       </div>
     </div>
