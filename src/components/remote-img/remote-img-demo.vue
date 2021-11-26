@@ -1,8 +1,9 @@
 <template>
   <remote-img
+    class="img"
     width="500"
-    height="500"
-    src="/huabanimg/img/home/banner/1a6ad3b820b1246aa6340a1a64546c58a735fc8520679e"
+    :height="500 * (677/ 1205)"
+    src="https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg"
     :headers="{Authorization: 123}"
   />
 </template>
@@ -15,6 +16,13 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+.img{
+  margin: 50px;
+  transition: transform .5s;
+  &:hover{
+    transform: translate(0, -3px);
+    box-shadow:0 0 3px #333 ;
+  }
+}
 </style>
