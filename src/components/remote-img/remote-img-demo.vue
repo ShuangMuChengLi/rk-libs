@@ -2,8 +2,8 @@
   <remote-img
     class="img"
     width="500"
-    :height="500 * (677/ 1205)"
-    src="https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg"
+    :height="300"
+    src="https://picsum.photos/id/100/500/300"
     :headers="{Authorization: 123}"
   />
 </template>
@@ -17,12 +17,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.img{
-  margin: 50px;
-  transition: transform .5s;
-  &:hover{
-    transform: translate(0, -3px);
-    box-shadow:0 0 3px #333 ;
-  }
+/deep/.el-image__error{
+  display: none;
 }
 </style>
