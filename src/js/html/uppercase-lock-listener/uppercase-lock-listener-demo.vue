@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import UppercaseLockListener from '../../js/html/uppercase-lock-listener/uppercase-lock-listener';
+import UppercaseLockListener from './uppercase-lock-listener';
 
 export default {
-  name: 'VueTest',
+  name: 'UppercaseLockListenerDemo',
   data(){
     return {
       text: '',
@@ -46,8 +46,8 @@ export default {
 </script>
 
 <style scoped>
-  .wrapper{
-    width: 500px;
-    height: 500px;
-  }
+.wrapper{
+  width: 500px;
+  height: 500px;
+}
 </style>

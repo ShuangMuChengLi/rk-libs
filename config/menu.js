@@ -137,6 +137,11 @@ export const menu = [
             source: require('../src/js/html/storage-util/README.md')
           },
           {
+            label: '监听大写锁被锁定的工具类',
+            source: require('../src/js/html/uppercase-lock-listener/README.md'),
+            date: '2021-12-22'
+          },
+          {
             label: '相机抓拍工具类',
             source: require('../src/js/html/capture-pic/README.md')
           },

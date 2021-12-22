@@ -1,15 +1,15 @@
-
+const upperCaseLetterList = 'ABCDEFGHIGKLMNOPQRSTUVWXYZ';
+const lowerCaseLetterList = 'abcdefghigklmnopqrstuvwxyz';
 export default class UppercaseLockListener{
   constructor(options) {
     this.eventFn = function (e){
-      let charCode = e.key.charCodeAt(0);
-      console.log(charCode);
-      if(charCode >= 65 && charCode <= 90 ){
+      let key = e.key;
+      if(upperCaseLetterList.includes(key)){
         if(options && options.upCallback){
           options.upCallback();
         }
       }
-      if(charCode >= 97 && charCode <= 122 ){
+      if(lowerCaseLetterList.includes(key)){
         if(options && options.lowCallback){
           options.lowCallback();
         }
