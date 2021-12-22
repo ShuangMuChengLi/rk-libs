@@ -221,6 +221,11 @@ export const menu = [
             date: '2021-09-23'
           },
           {
+            label: '文字转语音',
+            source: require('../src/experience/html/speech/README.md'),
+            date: '2021-12-22'
+          },
+          {
             label: '录音，并下载或上传',
             source: require('../src/experience/html/recorderjs/README.md')
           },

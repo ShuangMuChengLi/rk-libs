@@ -105,6 +105,10 @@ export const routes = [
     component: ()=>import('../experience/html/editor/editor')
   },
   {
+    path: '/experience/html/speech/speech-demo',
+    component: ()=>import('../experience/html/speech/speech-demo')
+  },
+  {
     path: '/demo/worker-demo',
     component: ()=>import('../views/demo/worker-demo/worker-test')
   },
