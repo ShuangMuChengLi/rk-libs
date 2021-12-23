@@ -1,8 +1,5 @@
-<template>
-  <div class="wrapper" />
-</template>
-
-<script>
+# Vue.js防抖函数的使用方法
+```
 import _ from 'lodash';
 export default {
   name: 'VueTest',
@@ -24,10 +21,4 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-  .wrapper{
-    width: 500px;
-    height: 500px;
-  }
-</style>
+```

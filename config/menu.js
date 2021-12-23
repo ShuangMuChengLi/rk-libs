@@ -226,6 +226,16 @@ export const menu = [
             date: '2021-12-22'
           },
           {
+            label: 'Vue.js防抖函数的使用',
+            source: require('../src/experience/html/debounce/README.md'),
+            date: '2021-12-22'
+          },
+          {
+            label: '解决渲染巨型树卡顿的方案',
+            source: require('../src/experience/html/tree/README.md'),
+            date: '2021-12-23'
+          },
+          {
             label: '录音，并下载或上传',
             source: require('../src/experience/html/recorderjs/README.md')
           },
