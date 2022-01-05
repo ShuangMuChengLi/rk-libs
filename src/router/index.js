@@ -54,7 +54,7 @@ export const routes = [
   },
   {
     path: '/demo/watermark-demo',
-    component: ()=>import('../views/demo/watermark-demo')
+    component: ()=>import('../js/html/watermark/watermark-demo')
   },
   {
     path: '/demo/three-slide-demo',

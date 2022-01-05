@@ -1,4 +1,24 @@
 let waterEle;
+let observerList = [];
+let timer = null;
+function fn(el, disableChangeCallback){
+  const options = {
+    childList: true,
+    attributes: true,
+    subtree: true,
+    attributesOldValue: true,
+    characterData: true,
+    characterDataOldValue: true,
+  };
+
+  const callback = (records) => {
+    disableChangeCallback();
+  };
+
+  const observer = new MutationObserver(callback);
+  observer.observe(el, options);
+  observerList.push(observer);
+}
 function addWatermark(settings) {
   //默认设置
   let defaultSettings = {
@@ -15,7 +35,8 @@ function addWatermark(settings) {
     watermark_font: '微软雅黑', //水印字体
     watermark_width: 210, //水印宽度
     watermark_height: 80, //水印长度
-    watermark_angle: 20 //水印倾斜度数
+    watermark_angle: 20, //水印倾斜度数
+    disableChangeCallback: null
   };
   if (arguments.length === 1 && typeof arguments[0] === 'object') {
     let src = arguments[0] || {};
@@ -55,13 +76,15 @@ function addWatermark(settings) {
   }
   let x;
   let y;
+  let k = 0;
   for (let i = 0; i < defaultSettings.watermark_rows - 1; i++) {
     y = defaultSettings.watermark_y + (defaultSettings.watermark_y_space + defaultSettings.watermark_height) * i;
     for (let j = 0; j < defaultSettings.watermark_cols - 1; j++) {
+      k++;
       x = defaultSettings.watermark_x + (defaultSettings.watermark_width + defaultSettings.watermark_x_space) * j;
       let mask_div = document.createElement('div');
       mask_div.id = 'mask_div' + i + j;
-      mask_div.className = 'mask_div';
+      mask_div.className = 'mask_div water-mark-div';
       mask_div.appendChild(document.createTextNode(defaultSettings.watermark_txt));
       //设置水印div倾斜显示
       mask_div.style.MozTransform = 'rotate(-' + defaultSettings.watermark_angle + 'deg)';
@@ -85,11 +108,35 @@ function addWatermark(settings) {
       mask_div.style.height = defaultSettings.watermark_height + 'px';
       mask_div.style.display = 'block';
       waterEle.appendChild(mask_div);
+      if(settings.disableChangeCallback){
+        fn(mask_div, settings.disableChangeCallback);
+      }
     }
   }
   document.body.appendChild(waterEle);
+  if(settings.disableChangeCallback){
+    fn(waterEle, settings.disableChangeCallback);
+  }
+  if(settings.disableChangeCallback){
+    timer = setInterval(()=>{
+      let allElement = document.getElementsByClassName('water-mark-div');
+      if(allElement.length !== Math.floor(defaultSettings.watermark_rows) * Math.floor(defaultSettings.watermark_cols)){
+        settings.disableChangeCallback();
+      }
+    }, 2000);
+  }
 }
 function removeWatermark(){
+  if(timer){
+    clearInterval(timer);
+  }
+  if(observerList && observerList.length){
+    for(let observer of observerList){
+      observer.disconnect();
+    }
+  }
+  observerList = [];
+  timer = null;
   document.body.removeChild(waterEle);
 }
 export { addWatermark, removeWatermark };

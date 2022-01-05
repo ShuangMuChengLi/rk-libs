@@ -16,6 +16,7 @@ null
 | 参数 |	说明 |类型 |可选值	| 默认值 |
 | ---- | ---- |---- | ----   |----  | 
 | watermark_txt | 水印文字 | String | - | '' | 
+| disableChangeCallback | 禁止更改水印时的回调 | Function | - | null | 
 | watermark_x | 水印起始位置x轴坐标 | Number | - | 20 | 
 | watermark_y | 水印起始位置Y轴坐标 | Number | - | 20 | 
 | watermark_rows | 水印行数 | Number | - | 20 | 

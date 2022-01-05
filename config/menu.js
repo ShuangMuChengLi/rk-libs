@@ -155,7 +155,9 @@ export const menu = [
           },
           {
             label: '页面水印',
-            source: require('../src/js/html/watermark/README.md')
+            source: require('../src/js/html/watermark/README.md'),
+            date: '2022-01-05',
+            info: '添加了禁止更改的回调函数'
           },
           {
             label: 'threejs的三维轮盘幻灯片',
