@@ -22,6 +22,11 @@ export const routes = [
     date: '2022-01-09'
   },
   {
+    path: '/demo/iframe-demo',
+    component: ()=>import('../experience/html/iframe/iframe-demo'),
+    date: '2022-01-09'
+  },
+  {
     path: '/demo/ol-demo',
     component: ()=>import('../views/demo/ol-demo.vue')
   },
