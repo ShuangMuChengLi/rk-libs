@@ -17,6 +17,11 @@ export const routes = [
     component: ()=>import('../views/Home.vue')
   },
   {
+    path: '/demo/tamper-protector',
+    component: ()=>import('../js/html/tamper-protector/tamper-protector-demo.vue'),
+    date: '2022-01-09'
+  },
+  {
     path: '/demo/ol-demo',
     component: ()=>import('../views/demo/ol-demo.vue')
   },
