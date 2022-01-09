@@ -23,7 +23,7 @@ export const routes = [
   },
   {
     path: '/demo/iframe-demo',
-    component: ()=>import('../experience/html/iframe/iframe-demo'),
+    component: ()=>import('../experience/html/code-preview/iframe-demo'),
     date: '2022-01-09'
   },
   {

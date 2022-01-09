@@ -211,6 +211,11 @@ export const menu = [
             source: require('../src/experience/solution/readline/README.md'),
             date: '2021-10-13'
           },
+          {
+            label: '代码编辑器，及执行效果实时预览的方案',
+            source: require('../src/experience/html/code-preview/README.md'),
+            date: '2022-01-09'
+          },
         ]
       },
       {
