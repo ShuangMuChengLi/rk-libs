@@ -1,3 +1,33 @@
+# 关键元素防篡改工具类
+## preview
+[预览](./index.html#/demo/tamper-protector)
+## download
+[库文件下载](./js/html/tamper-protector.zip)
+
+## Class
+```
+new TamperProtector();
+```
+## methods
+### add(ele)
+添加关键元素
+#### arg
+| 参数 |	说明 |类型 |是否必填	| 默认值 |
+| ---- | ---- |---- | ----   |----  | 
+| ele | 待监听html元素 | dom或者css选择器 | true | -  |
+#### return
+null
+
+### destroy()
+取消监听所有关键元素
+#### arg
+null
+#### return
+null
+
+
+## usage
+```
 <template>
   <div>
     <p id="ele1">
@@ -28,7 +58,4 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>
+```
