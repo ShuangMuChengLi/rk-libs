@@ -30,6 +30,12 @@ export const menu = [
           {
             label: '图片base64拖拽上传控件',
             source: require('../src/components/upLoad-files/README.md')
+          },
+          {
+            label: '可自定义输入的远程搜索输入框',
+            source: require('../src/components/remote-search-input/README.md'),
+            date: '2021-11-23'
+
           }
         ]
       },
@@ -58,6 +64,11 @@ export const menu = [
             label: '帷幕效果的幻灯片',
             source: require('../src/components/purdah-slide/README.md'),
             date: '2021-10-15'
+          },
+          {
+            label: '带请求头的图片组件',
+            source: require('../src/components/remote-img/README.md'),
+            date: '2021-11-26'
           },
         ]
       }
@@ -124,6 +135,11 @@ export const menu = [
           {
             label: '会话存储和本地存储',
             source: require('../src/js/html/storage-util/README.md')
+          },
+          {
+            label: '监听大写锁被锁定的工具类',
+            source: require('../src/js/html/uppercase-lock-listener/README.md'),
+            date: '2021-12-22'
           },
           {
             label: '相机抓拍工具类',
@@ -203,6 +219,21 @@ export const menu = [
             label: '富文本编辑器ueditor',
             source: require('../src/experience/html/editor/README.md'),
             date: '2021-09-23'
+          },
+          {
+            label: '文字转语音',
+            source: require('../src/experience/html/speech/README.md'),
+            date: '2021-12-22'
+          },
+          {
+            label: 'Vue.js防抖函数的使用',
+            source: require('../src/experience/html/debounce/README.md'),
+            date: '2021-12-22'
+          },
+          {
+            label: '解决渲染巨型树卡顿的方案',
+            source: require('../src/experience/html/tree/README.md'),
+            date: '2021-12-23'
           },
           {
             label: '录音，并下载或上传',

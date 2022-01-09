@@ -15,7 +15,6 @@
 
 <script>
 import ZoomPictureViewer from '@/components/zoom-picture-viewer/zoom-picture-viewer';
-import imgURL from '../../images/2.jpg';
 
 export default {
   name: 'ZoomPictureViewerDemo',
@@ -28,7 +27,7 @@ export default {
   },
   methods: {
     show(){
-      this.pic = imgURL;
+      this.pic = 'https://hbfile.huabanimg.com/img/home/banner/1a6ad3b820b1246aa6340a1a64546c58a735fc8520679e';
       this.visible = true;
     }
   }

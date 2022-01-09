@@ -33,6 +33,13 @@ let configVue = {
         target: 'https://www.linchaoqun.com',
         changeOrigin: true
       },
+      '/huabanimg': {
+        target: 'https://hbimg.huabanimg.com/',
+        changeOrigin: true,
+        pathRewrite:{
+          '/huabanimg': ''
+        }
+      },
     }
   }
 };

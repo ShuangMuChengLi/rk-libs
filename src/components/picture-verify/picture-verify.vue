@@ -16,7 +16,6 @@
   </div>
 </template>
 <script>
-import imgUrl from './default.jpg';
 export default {
   name: 'PictureVerify',
   props:{
@@ -30,7 +29,7 @@ export default {
     },
     src: {
       type: String,
-      default: imgUrl
+      default: 'https://picsum.photos/id/1003/500/300'
     }
   },
   data(){
