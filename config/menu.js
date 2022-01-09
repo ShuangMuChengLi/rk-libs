@@ -133,6 +133,11 @@ export const menu = [
         label: 'html',
         children: [
           {
+            label: '关键html元素防篡改工具类',
+            source: require('../src/js/html/tamper-protector/README.md'),
+            date: '2022-01-09'
+          },
+          {
             label: '会话存储和本地存储',
             source: require('../src/js/html/storage-util/README.md')
           },
