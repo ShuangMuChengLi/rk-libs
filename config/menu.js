@@ -133,7 +133,7 @@ export const menu = [
         label: 'html',
         children: [
           {
-            label: '关键html元素防篡改工具类',
+            label: 'html关键元素防篡改工具类',
             source: require('../src/js/html/tamper-protector/README.md'),
             date: '2022-01-09'
           },
