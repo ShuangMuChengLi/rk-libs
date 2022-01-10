@@ -133,6 +133,11 @@ export const menu = [
         label: 'html',
         children: [
           {
+            label: '关键html元素防篡改工具类',
+            source: require('../src/js/html/tamper-protector/README.md'),
+            date: '2022-01-09'
+          },
+          {
             label: '会话存储和本地存储',
             source: require('../src/js/html/storage-util/README.md')
           },
@@ -207,6 +212,11 @@ export const menu = [
             label: 'Node.js逐行读取文件',
             source: require('../src/experience/solution/readline/README.md'),
             date: '2021-10-13'
+          },
+          {
+            label: '代码编辑器，及执行效果实时预览的方案',
+            source: require('../src/experience/html/code-preview/README.md'),
+            date: '2022-01-09'
           },
         ]
       },

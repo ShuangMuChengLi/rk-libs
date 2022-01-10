@@ -30,8 +30,9 @@ export default {
 
     const aerial = new TileLayer({
       source: new XYZ({
-        url: 'https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=8af93e179c7846049f1a716c9c0a48a0',
+        url: 'https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=Em2forfI5ZPT8NaJic3f',
         maxZoom: 20,
+        tileSize: 512,
       }),
     });
 

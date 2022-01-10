@@ -17,8 +17,22 @@ export const routes = [
     component: ()=>import('../views/Home.vue')
   },
   {
+    path: '/demo/tamper-protector',
+    component: ()=>import('../js/html/tamper-protector/tamper-protector-demo.vue'),
+    date: '2022-01-09'
+  },
+  {
+    path: '/demo/iframe-demo',
+    component: ()=>import('../experience/html/code-preview/iframe-demo'),
+    date: '2022-01-09'
+  },
+  {
     path: '/demo/ol-demo',
     component: ()=>import('../views/demo/ol-demo.vue')
+  },
+  {
+    path: '/demo/ol-load-img-demo',
+    component: ()=>import('../views/demo/ol-load-img-demo.vue')
   },
   {
     path: '/demo/purdah-slide',
