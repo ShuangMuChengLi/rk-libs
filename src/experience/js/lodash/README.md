@@ -56,3 +56,61 @@ _.filter的反向方法;
 通过 predicate（断言函数） 检查collection（集合）中的元素是否存在 任意 truthy（真值）的元素，一旦 predicate（断言函数） 返回 truthy（真值），遍历就停止。
 ### _.sortBy
 排序
+
+## 函数
+### _.debounce
+防抖动
+### _.negate
+创建一个针对断言函数 func 结果取反的函数。
+### _.once
+创建一个只能调用 func 一次的函数。
+### _.throttle
+节流函数
+### _.unary
+创建一个最多接受一个参数的函数，忽略多余的参数。
+
+## 语言
+### _.clone、_.cloneWith
+创建一个 value 的浅拷贝。
+### _.cloneDeep、_.cloneDeepWith
+深拷贝
+### _.eq
+执行SameValueZero 比较两者的值，来确定它们是否相等。
+### _.isArray
+检查 value 是否是 Array 类对象。
+### _.isArrayLike
+检查 value 是否是类数组。
+### _.isElement
+检查 value 是否是可能是 DOM 元素。
+### _.isEmpty
+检查 value 是否为一个空对象，集合，映射或者set。
+### _.isEqual、_.isEqualWith
+执行深比较来确定两者的值是否相等。
+### _.isNaN
+检查 value 是否是 NaN。
+### _.isNil
+检查 value 是否是 null 或者 undefined。
+### _.isString
+检查 value 是否是原始字符串String或者对象。
+### _.toArray
+转换 value 为一个数组。
+
+## 数学
+### _.max、_.maxBy
+计算 array 中的最大值。
+### _.mean、_.meanBy
+计算 array 的平均值。
+### _.min、_.minBy
+计算 array 中的最小值。
+### _.round
+四舍五入
+### _.sum、_.sumBy
+求总和
+### _.random
+返回区间内随机数
+
+## 对象
+### _.defaults、_.defaultsDeep
+对象设置属性默认值
+
+
