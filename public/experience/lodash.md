@@ -1,9 +1,4 @@
 # lodash实用方法汇总
-## homepage
-[lodashjs官网](https://www.lodashjs.com/)
-## download
-[该文档下载](https://www.linchaoqun.com/rk-libs/experience/lodash.md)
-
 ## 数组
 ### _.findIndex、_.findLastIndex
 寻找目标项的下标

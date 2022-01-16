@@ -221,6 +221,15 @@ export const menu = [
         ]
       },
       {
+        label: 'js',
+        children: [
+          {
+            label: 'lodash实用方法汇总',
+            source: require('../src/experience/js/lodash/README.md')
+          },
+        ]
+      },
+      {
         label: 'html',
         children: [
           {
