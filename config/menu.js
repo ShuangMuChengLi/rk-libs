@@ -225,7 +225,8 @@ export const menu = [
         children: [
           {
             label: 'lodash实用方法汇总',
-            source: require('../src/experience/js/lodash/README.md')
+            source: require('../src/experience/js/lodash/README.md'),
+            date: '2022-01-17'
           },
         ]
       },
