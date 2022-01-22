@@ -238,6 +238,11 @@ export const menu = [
             source: require('../src/experience/html/css/README.md')
           },
           {
+            label: '大文件分片上传与断点续传的解决方案',
+            source: require('../src/experience/html/chunk-upload/README.md'),
+            date: '2022-01-22'
+          },
+          {
             label: '富文本编辑器ueditor',
             source: require('../src/experience/html/editor/README.md'),
             date: '2021-09-23'
