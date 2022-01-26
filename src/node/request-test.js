@@ -4,7 +4,10 @@ const path = require('path');
 let buffers = [];
 request(
   { method: 'GET'
-    , uri: 'https://cms.cnc.blzstatic.cn/cms/gallery/FVX53VDQ0LX31637104896367.mp4'
+    , uri: 'https://cms.cnc.blzstatic.cn/cms/gallery/FVX53VDQ0LX31637104896367.mp4',
+    headers: {
+      'User-Agent': 'request'
+    }
     // , gzip: true
   }
   , function (error, response, body) {
