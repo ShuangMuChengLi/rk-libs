@@ -40,7 +40,7 @@ arrays（数组）的并集
 ### _.filter
 过滤出目标项
 ### _.find、_.findLast
-寻找出目标相
+寻找出目标项
 ### _.groupBy
 分组
 ### _.keyBy
