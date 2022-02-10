@@ -83,6 +83,10 @@ export const routes = [
     component: ()=>import('../views/demo/vue-test')
   },
   {
+    path: '/canvas-test',
+    component: ()=>import('../views/demo/canvas-test/canvas-test')
+  },
+  {
     path: '/wow-demo',
     component: ()=>import('../views/demo/wow-demo.vue')
   },
