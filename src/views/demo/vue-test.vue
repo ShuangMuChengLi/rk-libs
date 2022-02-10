@@ -30,9 +30,11 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="click(scope.row.id)">编辑</el-button>
+            @click="click(scope.row.id)"
+          >
+            编辑
+          </el-button>
         </template>
-
       </el-table-column>
     </el-table>
   </div>

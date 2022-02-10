@@ -32,6 +32,7 @@
     "three": "0.125.2",
     "tween": "^0.9.0",
     "vue": "^2.6.11",
+    "vue-image-crop-upload": "^3.0.3",
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0",

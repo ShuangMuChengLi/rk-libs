@@ -5,7 +5,10 @@
     :style="getStyle"
     :src="localSrc"
   >
-    <div slot="placeholder" class="image-slot">
+    <div
+      slot="placeholder"
+      class="image-slot"
+    >
       加载中<span class="dot">...</span>
     </div>
   </el-image>

@@ -19,4 +19,8 @@ export const testRoutes = [
     path: '/canvas-test',
     component: ()=>import('../views/demo/canvas-test/canvas-test')
   },
+  {
+    path: '/photo-uploader-demo',
+    component: ()=>import('../components/photo-uploader/photo-uploader-demo')
+  },
 ];

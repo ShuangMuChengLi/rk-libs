@@ -52,6 +52,10 @@ export const menu = [
         label: '其他',
         children: [
           {
+            label: '头像裁剪上传组件',
+            source: require('../src/components/photo-uploader/README.md')
+          },
+          {
             label: '日历（最简版骨架）',
             source: require('../src/components/rk-calendar/README.md')
           },
