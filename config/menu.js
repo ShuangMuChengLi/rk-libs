@@ -233,7 +233,12 @@ export const menu = [
             date: '2022-01-17'
           },
           {
-            label: '地理行政划分的JSON文件',
+            label: '汉字笔画、拼音排序',
+            source: require('../src/experience/js/cnchar/README.md'),
+            date: '2022-02-10'
+          },
+          {
+            label: '获取GeoJSON文件',
             source: require('../src/experience/js/map/json/README.md'),
             date: '2022-02-10'
           },
