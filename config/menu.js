@@ -228,6 +228,11 @@ export const menu = [
             source: require('../src/experience/js/lodash/README.md'),
             date: '2022-01-17'
           },
+          {
+            label: '地理行政划分的JSON文件',
+            source: require('../src/experience/js/map/json/README.md'),
+            date: '2022-02-10'
+          },
         ]
       },
       {

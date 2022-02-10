@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import { testRoutes } from './test-routes';
 
 Vue.use(VueRouter);
 
@@ -25,14 +26,6 @@ export const routes = [
     path: '/demo/iframe-demo',
     component: ()=>import('../experience/html/code-preview/iframe-demo'),
     date: '2022-01-09'
-  },
-  {
-    path: '/demo/ol-demo',
-    component: ()=>import('../views/demo/ol-demo.vue')
-  },
-  {
-    path: '/demo/ol-load-img-demo',
-    component: ()=>import('../views/demo/ol-load-img-demo.vue')
   },
   {
     path: '/demo/purdah-slide',
@@ -78,14 +71,7 @@ export const routes = [
     path: '/demo/h5s-player-dialog-demo',
     component: ()=>import('../views/demo/h5s-player-dialog-demo')
   },
-  {
-    path: '/vue-test',
-    component: ()=>import('../views/demo/vue-test')
-  },
-  {
-    path: '/canvas-test',
-    component: ()=>import('../views/demo/canvas-test/canvas-test')
-  },
+
   {
     path: '/wow-demo',
     component: ()=>import('../views/demo/wow-demo.vue')
@@ -123,6 +109,10 @@ export const routes = [
     component: ()=>import('../experience/html/editor/editor')
   },
   {
+    path: '/demo/ol-load-json',
+    component: ()=>import('../experience/js/map/json/ol-load-json')
+  },
+  {
     path: '/experience/html/speech/speech-demo',
     component: ()=>import('../experience/html/speech/speech-demo')
   },
@@ -134,10 +124,7 @@ export const routes = [
     path: '/demo/capture-pic',
     component: ()=>import('../js/html/capture-pic/capture-pic-demo')
   },
-  {
-    path: '/js-test/map/intersectsCoordinate-test',
-    component: ()=>import('../views/js-test/map/intersectsCoordinate-test')
-  },
+  ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
 if(ENV === 'production'){
