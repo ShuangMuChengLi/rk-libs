@@ -183,6 +183,11 @@ export const menu = [
         label: '方案',
         children: [
           {
+            label: '前端学习路径',
+            source: require('../src/experience/solution/learning-path/README.md'),
+            date: '2022-02-11'
+          },
+          {
             label: '前端发布平台',
             source: require('../src/experience/solution/publish-system/README.md')
           },
