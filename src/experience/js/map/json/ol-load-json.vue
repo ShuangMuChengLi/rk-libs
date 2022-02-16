@@ -14,12 +14,14 @@ import Feature from 'ol/Feature';
 import GeoJSON from 'ol/format/GeoJSON';
 import Map from 'ol/Map';
 import View from 'ol/View';
-import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
+import {Circle as CircleStyle, Fill, Stroke, Style, Text} from 'ol/style';
 import {OSM, Vector as VectorSource} from 'ol/source';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import mapJSON from './100000_full.json';
 import XYZ from 'ol/source/XYZ';
 import {fromLonLat} from 'ol/proj';
+import Point from 'ol/geom/Point';
+import img from '../../../../views/demo/icon.png';
 export default {
   name: 'OlLoadJson',
   mounted () {
@@ -39,7 +41,7 @@ export default {
       target: 'map',
       view: new View({
         center: [118.144153, 24.498298],
-        zoom: 13,
+        zoom: 5,
         projection: 'EPSG:4326'
       }),
     });
@@ -51,9 +53,27 @@ export default {
     });
 
     const styles = {
-      'Point': new Style({
-        image: image,
-      }),
+      'Point'(feature){
+        return new Style({
+          // image: new Icon({
+          //   anchor: [0.5, 0.96],
+          //   crossOrigin: 'anonymous',
+          //   src: src,
+          // }),
+          text: new Text({
+            text: feature.getProperties().text,
+            font: '12px sans-serif',
+            textAlign: 'center',
+            textBaseline: 'middle',
+            backgroundFill: new Fill({
+              color: '#3399cc'
+            }),
+            fill: new Fill({
+              color: '#fff'
+            })
+          })
+        });
+      },
       'LineString': new Style({
         stroke: new Stroke({
           color: 'green',
@@ -115,7 +135,12 @@ export default {
     };
 
     const styleFunction = function (feature) {
-      return styles[feature.getGeometry().getType()];
+      if(feature.getGeometry().getType() !== 'Point'){
+        return styles[feature.getGeometry().getType()];
+      }else{
+        return styles[feature.getGeometry().getType()](feature);
+      }
+
     };
 
     const geojsonObject = mapJSON;
@@ -124,8 +149,16 @@ export default {
       features: new GeoJSON().readFeatures(geojsonObject),
     });
 
-    vectorSource.addFeature(new Feature(new Circle([5e6, 7e6], 1e6)));
-
+    for(let item of mapJSON.features){
+      if(!item || !item.properties || !item.properties.center){
+        continue;
+      }
+      const iconFeature = new Feature(new Point(item.properties.center));
+      iconFeature.setProperties({
+        text: item.properties.name
+      });
+      vectorSource.addFeature(iconFeature);
+    }
     const vectorLayer = new VectorLayer({
       source: vectorSource,
       style: styleFunction,

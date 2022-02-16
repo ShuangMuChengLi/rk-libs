@@ -160,7 +160,9 @@ export const menu = [
           },
           {
             label: 'url工具类',
-            source: require('../src/js/html/rk-url/README.md')
+            source: require('../src/js/html/rk-url/README.md'),
+            date: '2022-02-16',
+            info: '添加了URL的查询字符串与JSON互转的方法'
           },
           {
             label: '页面水印',

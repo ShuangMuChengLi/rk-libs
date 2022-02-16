@@ -17,6 +17,28 @@ null
 | ---- | ---- |
 | String | 添加searchParams后的的url |
 
+### parameterToJson(paramsString)
+URL的查询字符串转JSON
+#### arg
+| 参数 |	说明 |类型 |可选值	| 必填 | 默认值 |
+| ---- | ---- |---- | ----   | ----  |  ----  | 
+| paramsString | URL的查询字符串 | String | - | true  |  -  | 
+#### return
+| 类型 |	说明 |
+| ---- | ---- |
+| Object | 转换后的JSON对象 |
+
+### jsonToParameter(json)
+JSON转URL的查询字符串
+#### arg
+| 参数 |	说明 |类型 |可选值	| 必填 | 默认值 |
+| ---- | ---- |---- | ----   | ----  |  ----  | 
+| json | 待转换的json对象 | Object | - | true  |  -  | 
+#### return
+| 类型 |	说明 |
+| ---- | ---- |
+| String | 转换后的URL的查询字符串 |
+
 
 ## unit test
 ```
@@ -30,4 +52,16 @@ test('addParameter', () => {
   const result = rkUrl.addParameter(url, searchParamsSet);
   expect(result).toBe('https://www.linchaoqun.com/cms.html?token=token&page=1&size=10#/list');
 });
+
+test('parameterToJson', () => {
+  const result = rkUrl.parameterToJson('token=token');
+  expect(result.token).toBe('token');
+});
+
+
+test('jsonToParameter', () => {
+  const result = rkUrl.jsonToParameter({token: 'token'});
+  expect(result).toBe('token=token');
+});
+
 ```

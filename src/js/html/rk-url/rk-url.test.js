@@ -8,3 +8,14 @@ test('addParameter', () => {
   const result = rkUrl.addParameter(url, searchParamsSet);
   expect(result).toBe('https://www.linchaoqun.com/cms.html?token=token&page=1&size=10#/list');
 });
+
+test('parameterToJson', () => {
+  const result = rkUrl.parameterToJson('token=token');
+  expect(result.token).toBe('token');
+});
+
+
+test('jsonToParameter', () => {
+  const result = rkUrl.jsonToParameter({token: 'token'});
+  expect(result).toBe('token=token');
+});

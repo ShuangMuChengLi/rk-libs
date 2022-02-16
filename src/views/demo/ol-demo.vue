@@ -4,29 +4,32 @@
       id="map"
       class="map"
     />
-    <input
-      id="swipe"
-      type="range"
-      style="width: 100%"
-    >
   </div>
 </template>
 
 <script>
 import 'ol/ol.css';
+import ImageLayer from 'ol/layer/Image';
 import Map from 'ol/Map';
-import TileLayer from 'ol/layer/Tile';
+import Projection from 'ol/proj/Projection';
+import Static from 'ol/source/ImageStatic';
 import View from 'ol/View';
+import {getCenter} from 'ol/extent';
+import pictureMap from '../../images/online_communities.png';
+import imgIcon from '../../images/track-car.png';
+import imgActiveIcon from '../../images/track-car-active.png';
+import {Fill, Icon, Style, Text} from 'ol/style';
+import Point from 'ol/geom/Point';
+import Feature from 'ol/Feature';
+import VectorSource from 'ol/source/Vector';
+import VectorLayer from 'ol/layer/Vector';
+import Heatmap from 'ol/layer/Heatmap';
+import img from './icon.png';
+import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
-import {getRenderPixel} from 'ol/render';
-import { fromLonLat } from 'ol/proj';
-
 export default {
-  name: 'OlDemo',
-  mounted () {
-    // const osm = new TileLayer({
-    //   source: new OSM(),
-    // });
+  name: 'OlLoadJson',
+  mounted() {
 
     const aerial = new TileLayer({
       source: new XYZ({
@@ -35,54 +38,50 @@ export default {
         tileSize: 512,
       }),
     });
-
-
-    const aerial2 = new TileLayer({
-      source: new XYZ({
-        url: 'https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=8af93e179c7846049f1a716c9c0a48a0',
-        maxZoom: 20,
-      }),
-    });
-
     const map = new Map({
-      layers: [ aerial, aerial2],
+      layers: [aerial],
       target: 'map',
       view: new View({
-        center: fromLonLat([118.144153, 24.498298]),
+        center: [118.144153, 24.498298],
         zoom: 13,
+        projection: 'EPSG:4326'
       }),
     });
-
-    const swipe = document.getElementById('swipe');
-
-    aerial2.on('prerender', function (event) {
-      const ctx = event.context;
-      const mapSize = map.getSize();
-      const width = mapSize[0] * (swipe.value / 100);
-      const tl = getRenderPixel(event, [width, 0]);
-      const tr = getRenderPixel(event, [mapSize[0], 0]);
-      const bl = getRenderPixel(event, [width, mapSize[1]]);
-      const br = getRenderPixel(event, mapSize);
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(tl[0], tl[1]);
-      ctx.lineTo(bl[0], bl[1]);
-      ctx.lineTo(br[0], br[1]);
-      ctx.lineTo(tr[0], tr[1]);
-      ctx.closePath();
-      ctx.clip();
+    const layer = new VectorLayer({
+      style: function (feature) {
+        return feature.get('style');
+      },
+      source: new VectorSource(),
     });
+    map.addLayer(layer);
+    function createStyle(src, img) {
+      return new Style({
+        // image: new Icon({
+        //   anchor: [0.5, 0.96],
+        //   crossOrigin: 'anonymous',
+        //   src: src,
+        // }),
+        text: new Text({
+          text: '11111111',
+          font: '20px sans-serif',
+          textAlign: 'center',
+          textBaseline: 'bottom',
+          backgroundFill: new Fill({
+            color: '#3399cc'
+          }),
+          fill: new Fill({
+            color: '#fff'
+          })
+        })
+      });
+    }
 
-    aerial2.on('postrender', function (event) {
-      const ctx = event.context;
-      ctx.restore();
+    const iconFeature = new Feature(new Point([118.144153, 24.498298],));
+    iconFeature.set('style', createStyle(img, undefined));
+    iconFeature.setProperties({
+      test: 1
     });
-
-    const listener = function () {
-      map.render();
-    };
-    swipe.addEventListener('input', listener);
-    swipe.addEventListener('change', listener);
+    layer.getSource().addFeature(iconFeature);
   }
 };
 </script>
