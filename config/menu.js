@@ -200,7 +200,12 @@ export const menu = [
           },
           {
             label: '语义识别、关键词提取',
-            source: require('../src/experience/solution/get-keyword/README.md')
+            source: require('../src/experience/solution/get-keyword/README.md'),
+          },
+          {
+            label: '视频工具类ffmpeg（转码、水印等），及其node工具包ffmpeg-static',
+            source: require('../src/experience/solution/ffmpeg-test/README.md'),
+            date: '2022-02-24'
           },
           {
             label: '正则表达式汇总',

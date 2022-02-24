@@ -1,4 +1,11 @@
-let result = ['张三', '李四', '王五'].sort(function(a, b){
-  return a.localeCompare(b, 'cn');
+let p = function (){
+  return new Promise((resolve, reject)=>{
+    reject('reject');
+  });
+};
+p().catch((data)=>{
+  console.log(1, data);
+  return 2;
+}).catch((data)=>{
+  console.log(2, data);
 });
-console.log(result);
