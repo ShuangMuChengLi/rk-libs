@@ -255,7 +255,7 @@ export const menu = [
             date: '2022-02-10'
           },
           {
-            label: '获取GeoJSON文件',
+            label: '获取GeoJSON文件，及其加载方法',
             source: require('../src/experience/js/map/json/README.md'),
             date: '2022-02-10'
           },

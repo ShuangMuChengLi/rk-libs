@@ -1,94 +1,74 @@
 <template>
-  <div>
+  <div class="map-wrapper">
     <div
       id="map"
       class="map"
     />
+    <div ref="dialog" class="dialog">test<i class="el-icon-close" @click="closeDialog"/> </div>
   </div>
 </template>
 
 <script>
-import 'ol/ol.css';
-import ImageLayer from 'ol/layer/Image';
-import Map from 'ol/Map';
-import Projection from 'ol/proj/Projection';
-import Static from 'ol/source/ImageStatic';
-import View from 'ol/View';
-import {getCenter} from 'ol/extent';
-import pictureMap from '../../images/online_communities.png';
-import imgIcon from '../../images/track-car.png';
-import imgActiveIcon from '../../images/track-car-active.png';
-import {Fill, Icon, Style, Text} from 'ol/style';
-import Point from 'ol/geom/Point';
-import Feature from 'ol/Feature';
-import VectorSource from 'ol/source/Vector';
-import VectorLayer from 'ol/layer/Vector';
-import Heatmap from 'ol/layer/Heatmap';
-import img from './icon.png';
-import TileLayer from 'ol/layer/Tile';
-import XYZ from 'ol/source/XYZ';
+import {mapCommonMixin} from '../../experience/js/map/map-mixin/map-common-mixin';
+import icon from './icon.png';
+import startIcon from './start.png';
+import endIcon from './end.png';
 export default {
-  name: 'OlLoadJson',
+  name: 'OlDemo',
+  mixins: [mapCommonMixin],
   mounted() {
-
-    const aerial = new TileLayer({
-      source: new XYZ({
-        url: 'https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=Em2forfI5ZPT8NaJic3f',
-        maxZoom: 20,
-        tileSize: 512,
-      }),
-    });
-    const map = new Map({
-      layers: [aerial],
+    this.initMap({
       target: 'map',
-      view: new View({
-        center: [118.144153, 24.498298],
-        zoom: 13,
-        projection: 'EPSG:4326'
-      }),
+      center: [118.12, 24.4869],
+      url: 'https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=Em2forfI5ZPT8NaJic3f'
     });
-    const layer = new VectorLayer({
-      style: function (feature) {
-        return feature.get('style');
-      },
-      source: new VectorSource(),
-    });
-    map.addLayer(layer);
-    function createStyle(src, img) {
-      return new Style({
-        // image: new Icon({
-        //   anchor: [0.5, 0.96],
-        //   crossOrigin: 'anonymous',
-        //   src: src,
-        // }),
-        text: new Text({
-          text: '11111111',
-          font: '20px sans-serif',
-          textAlign: 'center',
-          textBaseline: 'bottom',
-          backgroundFill: new Fill({
-            color: '#3399cc'
-          }),
-          fill: new Fill({
-            color: '#fff'
-          })
-        })
+    this.initLayers();
+  },
+  methods:{
+    initLayers(){
+      this.iconLayerStart = this.getVectorLayer({icon: startIcon});
+      // this.createSelect({icon: startIcon, layers: [this.iconLayer], callback(e){
+      //   console.log(e);
+      // }});
+      this.showPoint(this.iconLayerStart, {
+        lon: 118.12,
+        lat: 24.48,
+        icon: startIcon,
       });
-    }
 
-    const iconFeature = new Feature(new Point([118.144153, 24.498298],));
-    iconFeature.set('style', createStyle(img, undefined));
-    iconFeature.setProperties({
-      test: 1
-    });
-    layer.getSource().addFeature(iconFeature);
+      this.iconLayerEnd = this.getVectorLayer({icon: endIcon});
+      this.createSelect({icon: endIcon, layers: [this.iconLayerEnd], callback(feature, info){
+        console.log(feature, info);
+      }});
+      let list = [
+        {
+          lonLat: [118.15364562988282, 24.507671026611323]
+        },
+        {
+          lonLat: [118.14368927001954, 24.456172613525386]
+        },
+      ];
+      this.showPoints(this.iconLayerEnd, list);
+      this.dialog = this.createOverLayer(this.$refs.dialog, [0, 50]);
+      this.dialog.setPosition([118.15364562988282, 24.507671026611323]);
+    },
+    closeDialog(){
+      this.dialog.setPosition(null);
+    }
   }
 };
 </script>
 
 <style scoped lang="less">
+.map-wrapper{
+  position: relative;
+}
 .map {
   width: 100%;
-  height: 90vh;
+  height: 100vh;
+}
+.dialog{
+  color: #fff;
+  background-color: #000;
 }
 </style>
