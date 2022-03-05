@@ -1,54 +1,53 @@
-
 import 'ol/ol.css';
 
 // const View = ol.View;
-import {Overlay, View} from 'ol';
 // const Map = ol.Map;
-import { Map } from 'ol';
-// const controlDefault = ol.control.defaults;
-import { defaults as controlDefault} from 'ol/control';
-// const Tile = ol.layer.Tile;
-import { Tile } from 'ol/layer';
-// const VectorLayer = ol.layer.Vector;
-import { Vector as VectorLayer} from 'ol/layer';
-// const VectorSource = ol.source.Vector;
-import { Vector as VectorSource} from 'ol/source';
-// const XYZ = ol.source.XYZ;
-import { XYZ } from 'ol/source';
 // const Feature = ol.Feature;
-import { Feature } from 'ol';
+import {Feature, Map, Overlay, View} from 'ol';
+// const controlDefault = ol.control.defaults;
+import {defaults as controlDefault} from 'ol/control';
+// const Tile = ol.layer.Tile;
+// const VectorLayer = ol.layer.Vector;
+import {Tile, Vector as VectorLayer} from 'ol/layer';
+// const VectorSource = ol.source.Vector;
+// const XYZ = ol.source.XYZ;
+import {Vector as VectorSource, XYZ} from 'ol/source';
 // const Point = ol.geom.Point;
-import { Point } from 'ol/geom';
 // const MultiLineString = ol.geom.MultiLineString;
-import { MultiLineString } from 'ol/geom';
+import {MultiLineString, Point} from 'ol/geom';
 // const Icon = ol.style.Icon;
-import { Icon } from 'ol/style';
 // const Circle = ol.style.Circle;
-import { Circle } from 'ol/style';
 // const Fill = ol.style.Fill;
-import { Fill } from 'ol/style';
 // const Stroke = ol.style.Stroke;
-import { Stroke } from 'ol/style';
 // const Text = ol.style.Text;
-import { Text } from 'ol/style';
 // const Style = ol.style.Style;
-import { Style } from 'ol/style';
+import {Circle, Fill, Icon, Stroke, Style, Text} from 'ol/style';
 // const Select = ol.interaction.Select;
-import { Select } from 'ol/interaction';
+import {Select} from 'ol/interaction';
 // const boundingExtent = ol.extent.boundingExtent;
-import { boundingExtent } from 'ol/extent';
+import {boundingExtent} from 'ol/extent';
 import arrowImg from './images/mapLineArrow.png';
 import startImg from './images/start.png';
 import endImg from './images/end.png';
 import {getDistance} from '../../../../js/map/point-distance/point-distance';
 import _ from 'lodash';
-import {click} from 'ol/events/condition';
+import GeoJSON from 'ol/format/GeoJSON';
+
 export const mapCommonMixin = {
   data(){
     return {
       mapObj: null,
       mapView: null,
-      coors: []
+      coors: [],
+      PolygonStyle: new Style({
+        stroke: new Stroke({
+          color: 'yellow',
+          width: 1,
+        }),
+        fill: new Fill({
+          color: 'rgba(255, 255, 0, 0.1)',
+        }),
+      })
     };
   },
   mounted(){
@@ -234,32 +233,38 @@ export const mapCommonMixin = {
       layer?.getSource().clear();
     },
     /**
-     * 移动到地图中心
+     *
+     * @param option
+     * {
+     *   zoom,
+     *   lonLat
+     * }
      */
-    loadCenter(coor) {
-      this.mapView.animate(
-        {
-          center: coor,
-          duration: 500,
-          zoom: 12
-        },
-        {
-          center: coor,
-          duration: 500,
-          zoom: 15
-        }
-      );
-    },
-    setMapCenter(coor, hasAnimate) {
-      let lonLat = [Number(coor[0]), Number(coor[1])];
-      if(hasAnimate){
-        this.mapView.animate({
-          center: lonLat,
+    setMapCenter(option) {
+      if(!option || !option.lonLat && !option.zoom)return;
+
+      if(option.hasAnimate){
+        let animateOption = {
           duration: 800,
-          zoom: 15
-        });
-      }else{
+        };
+        if(option.lonLat){
+          animateOption.center = [Number(option.lonLat[0]), Number(option.lonLat[1])];
+        }
+
+        if(option.zoom){
+          animateOption.center = option.zoom;
+        }
+        this.mapView.animate(animateOption);
+        return;
+      }
+
+      if(option.lonLat){
+        let lonLat = [Number(option.lonLat[0]), Number(option.lonLat[1])];
         this.mapView.setCenter(lonLat);
+      }
+
+      if(option.zoom){
+        this.mapView.setZoom(option.zoom);
       }
     },
     getVectorLayer(styleOption){
@@ -272,10 +277,6 @@ export const mapCommonMixin = {
         if(featureStyle){
           vector.setStyle(featureStyle);
         }
-      }else{
-        vector.setStyle((feature)=>{
-          return feature.get('style');
-        });
       }
       return vector;
     },
@@ -415,5 +416,31 @@ export const mapCommonMixin = {
       this.mapObj.addOverlay(overlay);
       return overlay;
     },
+    showPolygon(options){
+      let layer = options.layer;
+      let list = options.list;
+      const geojsonObject = {
+        'type': 'FeatureCollection',
+        'crs': {
+          'type': 'name',
+          'properties': {
+            'name': 'EPSG:4326',
+          },
+        },
+        'features': [
+          {
+            'type': 'Feature',
+            'geometry': {
+              'type': 'Polygon',
+              'coordinates': [
+                list
+              ],
+            },
+          },
+        ],
+      };
+      layer.getSource().addFeatures(new GeoJSON().readFeatures(geojsonObject));
+      layer.setStyle(this.PolygonStyle);
+    }
   }
 };

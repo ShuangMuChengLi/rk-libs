@@ -51,6 +51,15 @@ export default {
       this.showPoints(this.iconLayerEnd, list);
       this.dialog = this.createOverLayer(this.$refs.dialog, [0, 50]);
       this.dialog.setPosition([118.15364562988282, 24.507671026611323]);
+      this.polygonLayer = this.getVectorLayer();
+      this.showPolygon({
+        layer: this.polygonLayer,
+        list:[
+          [118.15364562988282, 24.507671026611323],
+          [118.14368927001954, 24.456172613525386],
+          [118.12, 24.48]
+        ]
+      });
     },
     closeDialog(){
       this.dialog.setPosition(null);
