@@ -39,7 +39,6 @@ export const mapCommonMixin = {
     return {
       mapObj: null,
       mapView: null,
-      coors: [],
       PolygonStyle: new Style({
         stroke: new Stroke({
           color: 'yellow',
