@@ -136,7 +136,7 @@ export default {
           text: feature.get('features')[0].getProperties().text
         };
       });
-      this.showClusterPoints(clusterLayer, clusterList);
+      this.showClusterPoints({layer: clusterLayer, list: clusterList});
       this.createSelect({
         style:(feature)=> {
           return {

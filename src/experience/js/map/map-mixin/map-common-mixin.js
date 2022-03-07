@@ -61,7 +61,7 @@ export const mapCommonMixin = {
   },
   methods: {
     /**
-     *
+     * 初始化地图
      * @param options
      * {
         target: 'map',
@@ -109,117 +109,26 @@ export const mapCommonMixin = {
       return this.mapObj;
     },
     /**
-     * 加工事件数据
-     * @return :
-     * {
-        features,
-        coors,
-        flag,
-        properties
-      }
-     * */
-    getEventData(evt){
-      let mapObject = this.mapObj;
-      let features = mapObject.getFeaturesAtPixel(evt.pixel);
-      let coors = mapObject.getCoordinateFromPixel(evt.pixel);
-      let hasFeature = mapObject.hasFeatureAtPixel(evt.pixel);
-      let properties = null;
-      if (features && features.length) {
-        properties = features[0].getProperties();
-      }
-      return {
-        features,
-        coors,
-        hasFeature,
-        properties
-      };
-    },
-    getLonLat(item){
-      let lonLat;
-      if(item.lonLat){
-        lonLat = item.lonLat;
-      }else if(item.lon){
-        lonLat = [item.lon, item.lat];
-      }else if(item.longitude){
-        lonLat = [item.longitude, item.latitude];
-      }else if(item.Longitude){
-        lonLat = [item.Longitude, item.Latitude];
-      }else if(item.x){
-        lonLat = [item.x, item.y];
-      }
-
-      lonLat = [Number(lonLat[0]), Number(lonLat[1])];
-      if(_.isNaN(lonLat[0]) || _.isNaN(lonLat[1]))return null;
-
-      return lonLat;
-    },
-    getFeaturesStyle(option, feature){
-      let item;
-      if(_.isFunction(option)){
-        item = option(feature);
-      }else{
-        item = option;
-      }
-      // console.log(item);
-      if(!item.icon && !item.text && !item.zIndex)return null;
-
-      let styleOption = {};
-      if(item.icon){
-        styleOption.image = new Icon({
-          src: item.icon,
-          anchor: [0.5, 0.5],
-        });
-      }
-      if(item.text){
-        let text = item.text;
-        styleOption.text = new Text({
-          text: text || '',
-          offsetY: 25,
-          font: '13px sans-serif',
-          textAlign: 'center',
-          fill: new Fill({ color: 'orange'}),
-        });
-      }
-      if(item.zIndex){
-        styleOption.zIndex = item.zIndex;
-      }
-      return new Style(styleOption);
-    },
-    /**
-     *
-     * @param item
-     * @param style
-     * @returns {*}
-     */
-    getFeature(item, style){
-      let coor = this.getLonLat(item);
-      if(!coor)return;
-
-      let feature = new Feature({
-        geometry: new Point(coor),
-      });
-      if(style){
-        feature.setStyle((feature) => {
-          return this.getFeaturesStyle(style, feature);
-        });
-      }
-      feature.setProperties(item);
-      if(item.id){
-        feature.setId(item.id);
-      }
-      return feature;
-    },
-
-    /**
+     * 显示单个点位
      * @param options
+     * {
+     *   item, // 含经纬度的点位信息
+     *   style, //  style {Function | Object}  {text，zIndex， icon}
+     *   layer  // 图层
+     * }
      */
     showPoint(options){
       let feature = this.getFeature(options.item, options.style);
       options.layer.getSource().addFeature(feature);
     },
     /**
-     *
+     * 显示多个点位
      * @param option
+     * * {
+     *   list, // 含经纬度的点位数组
+     *   style, //  style {Function | Object}  {text，zIndex， icon}
+     *   layer  // 图层
+     * }
      */
     showPoints(option){
       let featureList = [];
@@ -235,13 +144,16 @@ export const mapCommonMixin = {
       option.layer.getSource().addFeatures(featureList);
     },
     /**
-     *
-     * @param layer
-     * @param list
+     * 显示聚合点位
+     * @param options
+     * {
+     *   list, // 含经纬度的点位数组
+     *   layer  // 图层
+     * }
      */
-    showClusterPoints(layer, list){
+    showClusterPoints(options){
       let featureList = [];
-      for(let item of list){
+      for(let item of options.list){
         let feature = this.getFeature(item);
         if(!feature){
           console.error('showPoints item continue:', item);
@@ -254,15 +166,20 @@ export const mapCommonMixin = {
         }
         featureList.push(feature);
       }
-      layer.getSource().getSource().addFeatures(featureList);
+      options.layer.getSource().getSource().addFeatures(featureList);
     },
+    /**
+     * 清空图层
+     * @param layer
+     */
     clearLayer(layer){
       layer?.getSource().clear();
     },
     /**
-     *
+     * 设置中心点、层级
      * @param option
      * {
+     *   hasAnimate,
      *   zoom,
      *   lonLat
      * }
@@ -294,6 +211,12 @@ export const mapCommonMixin = {
         this.mapView.setZoom(option.zoom);
       }
     },
+    /**
+     * 新建图层
+     * @param styleOption （Function|Object)
+     * {text，zIndex， icon}
+     * @returns VectorLayer
+     */
     getVectorLayer(styleOption){
       let vector = new VectorLayer({
         source: new VectorSource()
@@ -306,9 +229,18 @@ export const mapCommonMixin = {
       }
       return vector;
     },
+    /**
+     * 新建聚合图层
+     * @param styleOption
+     * {
+     *   color,
+     *    icon,
+     *    text
+     * }
+     * @returns VectorLayer
+     */
     getClusterLayer(styleOption){
       const source = new VectorSource();
-
       const clusterSource = new Cluster({
         distance: 100,
         source: source,
@@ -331,39 +263,17 @@ export const mapCommonMixin = {
       this.mapObj.addLayer(layer);
       return layer;
     },
-    getClusterStyle(option){
-      return function (feature) {
-        let styleOption;
-        if(_.isFunction(option.styleOption)){
-          styleOption = option.styleOption(feature);
-        }else{
-          styleOption = option.styleOption;
-        }
-        const size = feature.get('features').length;
-        let style = option.styleCache[size];
-        if (!style) {
-          style = new Style({
-            image: new CircleStyle({
-              radius: 10,
-              stroke: new Stroke({
-                color: '#fff',
-              }),
-              fill: new Fill({
-                color: styleOption.color || '#3399CC',
-              }),
-            }),
-            text: new Text({
-              text: size.toString(),
-              fill: new Fill({
-                color: '#fff',
-              }),
-            }),
-          });
-          option.styleCache[size] = style;
-        }
-        return style;
-      };
-    },
+    /**
+     * 新建Select
+     * @param option
+     * {
+     *   layers,
+     *   style,
+     *   isCluster,
+     *   callback
+     * }
+     * @returns Select
+     */
     createSelect(option = {}){
       let select = new Select({
         layers: option.layers,
@@ -402,6 +312,11 @@ export const mapCommonMixin = {
       this.mapObj.addInteraction(select);
       return select;
     },
+    /**
+     * 画箭头
+     * @param linePoints
+     * @param layer
+     */
     drawLine(linePoints, layer){
       layer.getSource().clear();
       let style = this.getLineStyle(linePoints);
@@ -412,6 +327,263 @@ export const mapCommonMixin = {
       layer.getSource().addFeature(feature);
       this.fitViewZoom(linePoints);
     },
+    /**
+     * 根据列表，适配地图层级和范围
+     * @param pointList
+     */
+    fitViewZoom(pointList) {
+      pointList = pointList.filter((item)=>{
+        return item[0] || item[1];
+      });
+      let length = pointList.length;
+      if (length <= 0) {
+        return;
+      }
+      let view = this.mapObj.getView();
+      let extent = boundingExtent(pointList);
+      let size = this.mapObj.getSize();
+      view.fit(extent, size, {
+        constrainResolution: false,
+        nearest: true
+      });
+      let zoom = view.getZoom() || 18;
+      if(zoom < 12){
+        zoom = 12;
+      }
+      zoom -= 0.5;
+      view.setZoom(zoom);
+    },
+    /**
+     * 新建addOverlay弹窗
+     * @param ref
+     * @param offset
+     * @returns addOverlay
+     */
+    createOverLayer(ref, offset){
+      let overlay = new Overlay({
+        element: ref,
+        autoPan: true,
+        offset: offset,
+        positioning: 'center-left',
+        autoPanAnimation: {
+          duration: 250
+        }
+      });
+      this.mapObj.addOverlay(overlay);
+      return overlay;
+    },
+    /**
+     * 显示网格
+     * @param options
+     * {
+     *   layer，
+     *   list
+     * }
+     */
+    showPolygon(options){
+      let layer = options.layer;
+      let list = options.list;
+      const geojsonObject = {
+        'type': 'FeatureCollection',
+        'crs': {
+          'type': 'name',
+          'properties': {
+            'name': 'EPSG:4326',
+          },
+        },
+        'features': [
+          {
+            'type': 'Feature',
+            'geometry': {
+              'type': 'Polygon',
+              'coordinates': [
+                list
+              ],
+            },
+          },
+        ],
+      };
+      layer.getSource().addFeatures(new GeoJSON().readFeatures(geojsonObject));
+      layer.setStyle(this.PolygonStyle);
+    },
+    /**
+     * 获取多边形中心点
+     * @param list
+     * @returns {*}
+     */
+    getPolygonCenter(list){
+      let geometry = new LineString(list);
+      let extent = geometry.getExtent();
+      return getCenter(extent);
+    },
+    /****************************内部函数**************************************/
+    /**
+     * 加工事件数据
+     * @return :
+     * {
+        features,
+        coors,
+        flag,
+        properties
+      }
+     * */
+    getEventData(evt){
+      let mapObject = this.mapObj;
+      let features = mapObject.getFeaturesAtPixel(evt.pixel);
+      let coors = mapObject.getCoordinateFromPixel(evt.pixel);
+      let hasFeature = mapObject.hasFeatureAtPixel(evt.pixel);
+      let properties = null;
+      if (features && features.length) {
+        properties = features[0].getProperties();
+      }
+      return {
+        features,
+        coors,
+        hasFeature,
+        properties
+      };
+    },
+    /**
+     * 获取 item中可能的经纬度数组
+     * @param item
+     * @returns {null|number[]}
+     */
+    getLonLat(item){
+      let lonLat;
+      if(item.lonLat){
+        lonLat = item.lonLat;
+      }else if(item.lon){
+        lonLat = [item.lon, item.lat];
+      }else if(item.longitude){
+        lonLat = [item.longitude, item.latitude];
+      }else if(item.Longitude){
+        lonLat = [item.Longitude, item.Latitude];
+      }else if(item.x){
+        lonLat = [item.x, item.y];
+      }
+
+      lonLat = [Number(lonLat[0]), Number(lonLat[1])];
+      if(_.isNaN(lonLat[0]) || _.isNaN(lonLat[1]))return null;
+
+      return lonLat;
+    },
+    /**
+     *
+     * @param style {Function | Object}
+     * {
+     *   text,
+     *   zIndex,
+     *   icon
+     * }
+     * @param feature
+     * @returns {null|Style}
+     */
+    getFeaturesStyle(style, feature){
+      let item;
+      if(_.isFunction(style)){
+        item = style(feature);
+      }else{
+        item = style;
+      }
+      // console.log(item);
+      if(!item.icon && !item.text && !item.zIndex)return null;
+
+      let styleOption = {};
+      if(item.icon){
+        styleOption.image = new Icon({
+          src: item.icon,
+          anchor: [0.5, 0.5],
+        });
+      }
+      if(item.text){
+        let text = item.text;
+        styleOption.text = new Text({
+          text: text || '',
+          offsetY: 25,
+          font: '13px sans-serif',
+          textAlign: 'center',
+          fill: new Fill({ color: 'orange'}),
+        });
+      }
+      if(item.zIndex){
+        styleOption.zIndex = item.zIndex;
+      }
+      return new Style(styleOption);
+    },
+    /**
+     * 生成Feature
+     * @param item 含经纬度的点位信息
+     * @param style option {Function | Object}
+     * {
+     *   text,
+     *   zIndex,
+     *   icon
+     * }
+     * @returns {*}
+     */
+    getFeature(item, style){
+      let coor = this.getLonLat(item);
+      if(!coor)return;
+
+      let feature = new Feature({
+        geometry: new Point(coor),
+      });
+      if(style){
+        feature.setStyle((feature) => {
+          return this.getFeaturesStyle(style, feature);
+        });
+      }
+      feature.setProperties(item);
+      if(item.id){
+        feature.setId(item.id);
+      }
+      return feature;
+    },
+    /**
+     * 获取聚合样式
+     * @param option
+     * {
+     *   color, // 聚合点位颜色
+     * }
+     * @returns {function(*=): Style}
+     */
+    getClusterStyle(option){
+      return function (feature) {
+        let styleOption;
+        if(_.isFunction(option.styleOption)){
+          styleOption = option.styleOption(feature);
+        }else{
+          styleOption = option.styleOption;
+        }
+        const size = feature.get('features').length;
+        let style = option.styleCache[size];
+        if (!style) {
+          style = new Style({
+            image: new CircleStyle({
+              radius: 10,
+              stroke: new Stroke({
+                color: '#fff',
+              }),
+              fill: new Fill({
+                color: styleOption.color || '#3399CC',
+              }),
+            }),
+            text: new Text({
+              text: size.toString(),
+              fill: new Fill({
+                color: '#fff',
+              }),
+            }),
+          });
+          option.styleCache[size] = style;
+        }
+        return style;
+      };
+    },
+    /**
+     * 箭头样式
+     * @param linePoints
+     */
     getLineStyle(linePoints) {
       let lineStyleArr = [
         new Style({
@@ -489,71 +661,5 @@ export const mapCommonMixin = {
       }
       return lineStyleArr;
     },
-    fitViewZoom(pointList) {
-      pointList = pointList.filter((item)=>{
-        return item[0] || item[1];
-      });
-      let length = pointList.length;
-      if (length <= 0) {
-        return;
-      }
-      let view = this.mapObj.getView();
-      let extent = boundingExtent(pointList);
-      let size = this.mapObj.getSize();
-      view.fit(extent, size, {
-        constrainResolution: false,
-        nearest: true
-      });
-      let zoom = view.getZoom() || 18;
-      if(zoom < 12){
-        zoom = 12;
-      }
-      zoom -= 0.5;
-      view.setZoom(zoom);
-    },
-    createOverLayer(ref, offset){
-      let overlay = new Overlay({
-        element: ref,
-        autoPan: true,
-        offset: offset,
-        positioning: 'center-left',
-        autoPanAnimation: {
-          duration: 250
-        }
-      });
-      this.mapObj.addOverlay(overlay);
-      return overlay;
-    },
-    showPolygon(options){
-      let layer = options.layer;
-      let list = options.list;
-      const geojsonObject = {
-        'type': 'FeatureCollection',
-        'crs': {
-          'type': 'name',
-          'properties': {
-            'name': 'EPSG:4326',
-          },
-        },
-        'features': [
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Polygon',
-              'coordinates': [
-                list
-              ],
-            },
-          },
-        ],
-      };
-      layer.getSource().addFeatures(new GeoJSON().readFeatures(geojsonObject));
-      layer.setStyle(this.PolygonStyle);
-    },
-    getPolygonCenter(list){
-      let geometry = new LineString(list);
-      let extent = geometry.getExtent();
-      return getCenter(extent);
-    }
   }
 };
