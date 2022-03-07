@@ -30,14 +30,30 @@ export default {
       center: [118.12, 24.4869],
       url: 'https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=Em2forfI5ZPT8NaJic3f'
     });
+    this.clickLayer = this.getVectorLayer({
+      icon: icon,
+      anchor: [0.5, 1]
+    });
+    this.addMapEventListener('mapClick', (data, lonLat)=>{
+      this.clearLayer(this.clickLayer);
+      this.showPoint(
+        {
+          layer: this.clickLayer,
+          item: {
+            lon: lonLat[0],
+            lat: lonLat[1],
+          },
+        }
+      );
+    });
     this.initLayers();
   },
   methods: {
     initLayers() {
-      this.iconLayerStart = this.getVectorLayer({icon: startIcon});
+      this.iconLayer = this.getVectorLayer({icon: icon});
       this.createSelect(
         {
-          layers: [this.iconLayerStart],
+          layers: [this.iconLayer],
           callback(e) {
             console.log(e);
           },
@@ -51,7 +67,7 @@ export default {
       );
       this.showPoint(
         {
-          layer: this.iconLayerStart,
+          layer: this.iconLayer,
           item: {
             lon: 118.12,
             lat: 24.48,
@@ -111,10 +127,18 @@ export default {
       this.polygonLayer = this.getVectorLayer();
       this.showPolygon({
         layer: this.polygonLayer,
+        text: ['思明区', '湖里区'],
         list: [
-          [118.15364562988282, 24.507671026611323],
-          [118.14368927001954, 24.456172613525386],
-          [118.12, 24.48]
+          [
+            [118.15364562988282, 24.507671026611323],
+            [118.14368927001954, 24.456172613525386],
+            [118.12, 24.48]
+          ],
+          [
+            [118.15364562988282, 24.507671026611323],
+            [118.14368927001954, 24.456172613525386],
+            [118.18304304071664, 24.47451119964748]
+          ],
         ]
       });
       let clusterList = [

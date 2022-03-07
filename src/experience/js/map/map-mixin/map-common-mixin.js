@@ -39,15 +39,40 @@ export const mapCommonMixin = {
     return {
       mapObj: null,
       mapView: null,
-      PolygonStyle: new Style({
-        stroke: new Stroke({
-          color: 'yellow',
-          width: 1,
-        }),
-        fill: new Fill({
-          color: 'rgba(255, 255, 0, 0.1)',
-        }),
-      })
+      PolygonStyle: function (feature) {
+        return [
+          new Style({
+            stroke: new Stroke({
+              color: 'yellow',
+              width: 1,
+            }),
+            fill: new Fill({
+              color: 'rgba(255, 255, 0, 0.1)',
+            }),
+          }),
+          new Style({
+          // image: new Icon({
+          //   anchor: [0.5, 0.96],
+          //   crossOrigin: 'anonymous',
+          //   src: src,
+          // }),
+            text: new Text({
+              text: feature.getProperties().text,
+              font: 'normal bold 18px/30px sans-serif',
+              textBaseline: 'middle',
+              padding: [0, 5, 0, 5],
+              textAlign: 'center',
+              backgroundFill: new Fill({
+                color: '#3399cc'
+              }),
+              fill: new Fill({
+                color: '#fff'
+              })
+            })
+          })
+        ];
+      },
+      eventSet:{}
     };
   },
   mounted(){
@@ -59,6 +84,19 @@ export const mapCommonMixin = {
     this.bus.$off('map-common:fitViewZoom', this.fitViewZoom);
   },
   methods: {
+    addMapEventListener(eventName, callback){
+      if(!this.eventSet[eventName]){
+        this.eventSet[eventName] = [];
+      }
+      this.eventSet[eventName].push(callback);
+    },
+    triggerEvent(eventName, ...data){
+      if(!_.isEmpty(this.eventSet[eventName])){
+        for(let item of this.eventSet[eventName]){
+          item(...data);
+        }
+      }
+    },
     /**
      * 初始化地图
      * @param options
@@ -103,7 +141,7 @@ export const mapCommonMixin = {
       });
       this.mapObj.on('click', (e)=>{
         let eventData = this.getEventData(e);
-        console.log(eventData.coors);
+        this.triggerEvent('mapClick', eventData, eventData.lonLat);
       });
       return this.mapObj;
     },
@@ -395,14 +433,21 @@ export const mapCommonMixin = {
             'type': 'Feature',
             'geometry': {
               'type': 'Polygon',
-              'coordinates': [
-                list
-              ],
+              'coordinates': list,
             },
           },
         ],
       };
       layer.getSource().addFeatures(new GeoJSON().readFeatures(geojsonObject));
+      for(let i = 0; i < list.length; i++){
+        let center = this.getPolygonCenter(list[i]);
+        const iconFeature = new Feature(new Point(center));
+        iconFeature.setProperties({
+          text: options.text[i]
+        });
+        layer.getSource().addFeature(iconFeature);
+      }
+
       layer.setStyle(this.PolygonStyle);
     },
     /**
@@ -429,7 +474,7 @@ export const mapCommonMixin = {
     getEventData(evt){
       let mapObject = this.mapObj;
       let features = mapObject.getFeaturesAtPixel(evt.pixel);
-      let coors = mapObject.getCoordinateFromPixel(evt.pixel);
+      let lonLat = mapObject.getCoordinateFromPixel(evt.pixel);
       let hasFeature = mapObject.hasFeatureAtPixel(evt.pixel);
       let properties = null;
       if (features && features.length) {
@@ -437,7 +482,7 @@ export const mapCommonMixin = {
       }
       return {
         features,
-        coors,
+        lonLat,
         hasFeature,
         properties
       };
@@ -472,7 +517,8 @@ export const mapCommonMixin = {
      * {
      *   text,
      *   zIndex,
-     *   icon
+     *   icon,
+     *   anchor,
      * }
      * @param feature
      * @returns {null|Style}
@@ -491,7 +537,7 @@ export const mapCommonMixin = {
       if(item.icon){
         styleOption.image = new Icon({
           src: item.icon,
-          anchor: [0.5, 0.5],
+          anchor: item.anchor || [0.5, 0.5],
         });
       }
       if(item.text){
@@ -507,6 +553,7 @@ export const mapCommonMixin = {
       if(item.zIndex){
         styleOption.zIndex = item.zIndex;
       }
+
       return new Style(styleOption);
     },
     /**
