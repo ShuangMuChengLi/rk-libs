@@ -113,6 +113,10 @@ export const routes = [
     component: ()=>import('../experience/js/map/json/ol-load-json')
   },
   {
+    path: '/demo/map-mixin',
+    component: ()=>import('../experience/js/map/map-mixin/map-mixin-demo.vue')
+  },
+  {
     path: '/experience/html/speech/speech-demo',
     component: ()=>import('../experience/html/speech/speech-demo')
   },
