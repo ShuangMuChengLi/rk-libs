@@ -1,37 +1,38 @@
-import 'ol/ol.css';
-
 // const View = ol.View;
 // const Map = ol.Map;
 // const Feature = ol.Feature;
-import {Feature, Map, Overlay, View} from 'ol';
 // const controlDefault = ol.control.defaults;
-import {defaults as controlDefault} from 'ol/control';
 // const Tile = ol.layer.Tile;
 // const VectorLayer = ol.layer.Vector;
-import {Tile, Vector as VectorLayer} from 'ol/layer';
 // const VectorSource = ol.source.Vector;
 // const XYZ = ol.source.XYZ;
-import {Vector as VectorSource, XYZ} from 'ol/source';
 // const Point = ol.geom.Point;
 // const MultiLineString = ol.geom.MultiLineString;
-import {MultiLineString, Point} from 'ol/geom';
 // const Icon = ol.style.Icon;
 // const Circle = ol.style.Circle;
 // const Fill = ol.style.Fill;
 // const Stroke = ol.style.Stroke;
 // const Text = ol.style.Text;
 // const Style = ol.style.Style;
-import {Circle, Fill, Icon, Stroke, Style, Text} from 'ol/style';
 // const Select = ol.interaction.Select;
-import {Select} from 'ol/interaction';
 // const boundingExtent = ol.extent.boundingExtent;
-import {boundingExtent} from 'ol/extent';
+import 'ol/ol.css';
+import {Feature, Map, Overlay, View} from 'ol';
+import {defaults as controlDefault} from 'ol/control';
+import {Tile, Vector as VectorLayer} from 'ol/layer';
+import {Vector as VectorSource, XYZ} from 'ol/source';
+import {Circle, Fill, Icon, Stroke, Style, Text} from 'ol/style';
+import {Select} from 'ol/interaction';
+import {LineString, MultiLineString, Point} from 'ol/geom';
+import {boundingExtent, getCenter} from 'ol/extent';
 import arrowImg from './images/mapLineArrow.png';
 import startImg from './images/start.png';
 import endImg from './images/end.png';
 import {getDistance} from '../../../../js/map/point-distance/point-distance';
 import _ from 'lodash';
 import GeoJSON from 'ol/format/GeoJSON';
+import Cluster from 'ol/source/Cluster';
+import CircleStyle from 'ol/style/Circle';
 
 export const mapCommonMixin = {
   data(){
@@ -103,7 +104,7 @@ export const mapCommonMixin = {
       });
       this.mapObj.on('click', (e)=>{
         let eventData = this.getEventData(e);
-        // console.log(eventData.coors);
+        console.log(eventData.coors);
       });
       return this.mapObj;
     },
@@ -152,7 +153,14 @@ export const mapCommonMixin = {
 
       return lonLat;
     },
-    getFeaturesStyle(item){
+    getFeaturesStyle(option, feature){
+      let item;
+      if(_.isFunction(option)){
+        item = option(feature);
+      }else{
+        item = option;
+      }
+      // console.log(item);
       if(!item.icon && !item.text && !item.zIndex)return null;
 
       let styleOption = {};
@@ -163,13 +171,13 @@ export const mapCommonMixin = {
         });
       }
       if(item.text){
+        let text = item.text;
         styleOption.text = new Text({
+          text: text || '',
+          offsetY: 25,
           font: '13px sans-serif',
-          text: item.text,
           textAlign: 'center',
-          offsetY: 30,
-          // offsetX: 'center',
-          fill: new Fill({ color: '#4a4af5'}),
+          fill: new Fill({ color: 'orange'}),
         });
       }
       if(item.zIndex){
@@ -180,17 +188,21 @@ export const mapCommonMixin = {
     /**
      *
      * @param item
+     * @param style
      * @returns {*}
      */
-    getFeature(item){
+    getFeature(item, style){
       let coor = this.getLonLat(item);
       if(!coor)return;
 
       let feature = new Feature({
         geometry: new Point(coor),
       });
-      let featureStyle = this.getFeaturesStyle(item);
-      feature.setStyle(featureStyle);
+      if(style){
+        feature.setStyle((feature) => {
+          return this.getFeaturesStyle(style, feature);
+        });
+      }
       feature.setProperties(item);
       if(item.id){
         feature.setId(item.id);
@@ -199,24 +211,35 @@ export const mapCommonMixin = {
     },
 
     /**
-     *
-     * @param layer
-     * @param item
-     * {
-     *   icon 可选
-     *   text 可选
-     * }
+     * @param options
      */
-    showPoint(layer, item){
-      let feature = this.getFeature(item);
-      layer.getSource().addFeature(feature);
+    showPoint(options){
+      let feature = this.getFeature(options.item, options.style);
+      options.layer.getSource().addFeature(feature);
+    },
+    /**
+     *
+     * @param option
+     */
+    showPoints(option){
+      let featureList = [];
+      for(let item of option.list){
+        let feature = this.getFeature(item, option.style);
+        if(!feature){
+          console.error('showPoints item continue:', item);
+          continue;
+        }
+
+        featureList.push(feature);
+      }
+      option.layer.getSource().addFeatures(featureList);
     },
     /**
      *
      * @param layer
      * @param list
      */
-    showPoints(layer, list){
+    showClusterPoints(layer, list){
       let featureList = [];
       for(let item of list){
         let feature = this.getFeature(item);
@@ -225,9 +248,13 @@ export const mapCommonMixin = {
           continue;
         }
 
+        feature.setProperties(item);
+        if(item.id){
+          feature.setId(item.id);
+        }
         featureList.push(feature);
       }
-      layer.getSource().addFeatures(featureList);
+      layer.getSource().getSource().addFeatures(featureList);
     },
     clearLayer(layer){
       layer?.getSource().clear();
@@ -273,22 +300,103 @@ export const mapCommonMixin = {
       });
       this.mapObj.addLayer(vector);
       if(styleOption){
-        let featureStyle = this.getFeaturesStyle(styleOption);
-        if(featureStyle){
-          vector.setStyle(featureStyle);
-        }
+        vector.setStyle((feature)=>{
+          return this.getFeaturesStyle(styleOption, feature);
+        });
       }
       return vector;
     },
+    getClusterLayer(styleOption){
+      const source = new VectorSource();
+
+      const clusterSource = new Cluster({
+        distance: 100,
+        source: source,
+      });
+      let layer = new VectorLayer({
+        source: clusterSource,
+        style:(feature)=>{
+          let featureStyle = this.getFeaturesStyle(styleOption, feature);
+          let style;
+          const styleCache = {
+            '1': featureStyle
+          };
+          style = this.getClusterStyle({
+            styleCache: styleCache,
+            styleOption: styleOption
+          })(feature);
+          return style;
+        }
+      });
+      this.mapObj.addLayer(layer);
+      return layer;
+    },
+    getClusterStyle(option){
+      return function (feature) {
+        let styleOption;
+        if(_.isFunction(option.styleOption)){
+          styleOption = option.styleOption(feature);
+        }else{
+          styleOption = option.styleOption;
+        }
+        const size = feature.get('features').length;
+        let style = option.styleCache[size];
+        if (!style) {
+          style = new Style({
+            image: new CircleStyle({
+              radius: 10,
+              stroke: new Stroke({
+                color: '#fff',
+              }),
+              fill: new Fill({
+                color: styleOption.color || '#3399CC',
+              }),
+            }),
+            text: new Text({
+              text: size.toString(),
+              fill: new Fill({
+                color: '#fff',
+              }),
+            }),
+          });
+          option.styleCache[size] = style;
+        }
+        return style;
+      };
+    },
     createSelect(option = {}){
       let select = new Select({
-        ...option,
-        style: this.getFeaturesStyle(option)
+        layers: option.layers,
+        style:(feature)=>{
+          let featureStyle = this.getFeaturesStyle(option.style, feature);
+          let style;
+          if(option.isCluster){
+            const styleCache = {
+              '1': featureStyle
+            };
+            style = this.getClusterStyle({
+              styleCache: styleCache,
+              styleOption: option?.style
+            })(feature);
+          }else{
+            style = featureStyle;
+          }
+          return style;
+        }
       });
       select.on('select', (e) => {
         // console.log(e);
         if(option.callback && e.selected.length){
-          option.callback(e.selected, e.selected[0].getProperties());
+          if(option.isCluster){
+            let infoList = [];
+            for(let item of e.selected[0].get('features')){
+              infoList.push(item.getProperties());
+            }
+            option.callback(e.selected[0], infoList);
+          }else{
+            option.callback(e.selected[0], e.selected[0].getProperties());
+          }
+
         }
       });
       this.mapObj.addInteraction(select);
@@ -441,6 +549,11 @@ export const mapCommonMixin = {
       };
       layer.getSource().addFeatures(new GeoJSON().readFeatures(geojsonObject));
       layer.setStyle(this.PolygonStyle);
+    },
+    getPolygonCenter(list){
+      let geometry = new LineString(list);
+      let extent = geometry.getExtent();
+      return getCenter(extent);
     }
   }
 };
