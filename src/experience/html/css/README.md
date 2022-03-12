@@ -47,14 +47,24 @@ transform: translate(-50%, -50%);
 ```
 
 ## 为表格设置合并边框模型
-```
+```css
 table{
   border-collapse:collapse;
 }
 ```
 ## 哀悼日网站全部置灰或部分置灰
-```
+```css
 html{
   filter: grayscale(100%);
+}
+```
+## 字体渐变
+```css
+.page-title{
+	font-size: 28px;
+	font-weight: 700;
+	background-image:-webkit-linear-gradient(bottom,#00a2ff,#e7e7e7);
+	-webkit-background-clip:text;
+	-webkit-text-fill-color:transparent;
 }
 ```

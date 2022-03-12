@@ -1,5 +1,31 @@
 <template>
   <div class="map-wrapper">
+    <div class="button-wrapper">
+      <el-select
+        v-model="drawType"
+        size="mini"
+        placeholder="请选择"
+      >
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+      <el-button
+        type="primary"
+        @click="startDraw"
+      >
+        绘制
+      </el-button>
+      <el-button
+        type="primary"
+        @click="stopDraw(drawer)"
+      >
+        停止绘制
+      </el-button>
+    </div>
     <div
       id="map"
       class="map"
@@ -24,6 +50,34 @@ import endIcon from './end.png';
 export default {
   name: 'OlDemo',
   mixins: [mapCommonMixin],
+  data(){
+    return {
+      drawType: '',
+      drawer: null,
+      options:[
+        {
+          label: 'Point',
+          value: 'Point',
+        },
+        {
+          label: 'LineString',
+          value: 'LineString',
+        },
+        {
+          label: 'Polygon',
+          value: 'Polygon',
+        },
+        {
+          label: 'Circle',
+          value: 'Circle',
+        },
+        {
+          label: 'None',
+          value: 'None',
+        },
+      ]
+    };
+  },
   mounted() {
     this.initMap({
       target: 'map',
@@ -35,16 +89,17 @@ export default {
       anchor: [0.5, 1]
     });
     this.addMapEventListener('mapClick', (data, lonLat)=>{
-      this.clearLayer(this.clickLayer);
-      this.showPoint(
-        {
-          layer: this.clickLayer,
-          item: {
-            lon: lonLat[0],
-            lat: lonLat[1],
-          },
-        }
-      );
+      console.log(lonLat);
+      // this.clearLayer(this.clickLayer);
+      // this.showPoint(
+      //   {
+      //     layer: this.clickLayer,
+      //     item: {
+      //       lon: lonLat[0],
+      //       lat: lonLat[1],
+      //     },
+      //   }
+      // );
     });
     this.initLayers();
   },
@@ -177,9 +232,22 @@ export default {
           // console.log(feature, info);
         }
       });
+      this.lineLayer = this.getVectorLayer();
+      this.drawLine([
+        [118.2266017150879, 24.560886053466792],
+        [118.24514114379883, 24.439006475830073],
+        [118.16205703735352, 24.402270941162104]
+      ], this.lineLayer);
+      this.drawVector = this.getVectorLayer();
     },
     closeDialog() {
       this.dialog.setPosition(null);
+    },
+    startDraw(){
+      this.drawer = this.draw({
+        layer: this.drawVector,
+        type: this.drawType
+      });
     }
   }
 };
@@ -188,6 +256,12 @@ export default {
 <style scoped lang="less">
 .map-wrapper {
   position: relative;
+  .button-wrapper{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    z-index: 999;
+  }
 }
 
 .map {

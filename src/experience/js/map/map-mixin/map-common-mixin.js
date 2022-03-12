@@ -33,6 +33,7 @@ import _ from 'lodash';
 import GeoJSON from 'ol/format/GeoJSON';
 import Cluster from 'ol/source/Cluster';
 import CircleStyle from 'ol/style/Circle';
+import Draw, {createBox} from 'ol/interaction/Draw';
 
 export const mapCommonMixin = {
   data(){
@@ -707,5 +708,74 @@ export const mapCommonMixin = {
       }
       return lineStyleArr;
     },
+    stopDraw(drawer){
+      if(drawer){
+        this.mapObj.removeInteraction(drawer);
+      }
+    },
+    /**
+     *
+     * @param options
+     * {
+     *   type,
+     *   layer
+     * }
+     * @returns {Draw}
+     */
+    draw(options){
+      let geometryFunction,
+        type = options.type,
+        layer = options.layer,
+        freehand = options.freehand || false;
+      let drawSource = layer.getSource();
+      if(options.type === 'box'){
+        geometryFunction = createBox();
+        type = 'Circle';
+      }
+      let drawer = new Draw({
+        source: drawSource,
+        type,
+        freehand,
+        geometryFunction
+      });
+      drawer.on('drawstart', (e)=> {
+        drawSource.clear();
+      });
+      drawer.on('drawend', (e)=> {
+        let result = this.getDrawResult(e.feature, options.type);
+        this.$emit('showStatistics', {
+          drawerArg: result,
+          drawerType: options.type,
+        });
+      });
+      this.mapObj.addInteraction(drawer);
+      return drawer;
+    },
+    getDrawResult(geoFeature, type) {
+      if (geoFeature) {
+        let geometry = geoFeature.getGeometry();
+        let coordinates = // 根据不同的绘制类型获取不同的坐标值。
+          void 0; // 根据不同的绘制类型获取不同的坐标值。
+        let result = {};
+        result['drawFeatureId'] = geoFeature.id; //绘制元素的id
+        result['drawFeature'] = geoFeature;
+        if (type === 'Circle') {
+          coordinates = geometry.getCenter();
+          let u = this.mapObj.getView().getProjection().getMetersPerUnit();
+          result['radius'] = geometry.getRadius() * u;
+        } else {
+          coordinates = geometry.getCoordinates()[0];
+          let lonLats_1 = [];
+          coordinates.forEach(function (xy) {
+            lonLats_1.push(xy);
+          });
+          coordinates = lonLats_1;
+        }
+        result['coordinates'] = coordinates;
+        result['type'] = 'drawByHandle';
+        return result;
+      }
+    },
+
   }
 };
