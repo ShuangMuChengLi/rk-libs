@@ -1,4 +1,4 @@
-# Openlayers地图Vue.js的混入封装
+# Openlayers地图的Vue.js混入封装
 ## download
 [库文件下载](./js/map/map-mixin.zip)
 ## demo

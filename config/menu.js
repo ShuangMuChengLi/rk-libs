@@ -85,6 +85,10 @@ export const menu = [
         label: '地图',
         children: [
           {
+            label: 'Openlayers地图的Vue.js混入封装',
+            source: require('../src/js/map/map-mixin/README.md')
+          },
+          {
             label: '判断点位在地图几何范围内',
             source: require('../src/js/map/intersectsCoordinate/README.md')
           },
