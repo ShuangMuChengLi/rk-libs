@@ -86,7 +86,8 @@ export const menu = [
         children: [
           {
             label: 'Openlayers地图的Vue.js混入封装',
-            source: require('../src/js/map/map-mixin/README.md')
+            source: require('../src/js/map/map-mixin/README.md'),
+            date: '2022-03-18'
           },
           {
             label: '判断点位在地图几何范围内',
@@ -270,7 +271,14 @@ export const menu = [
         children: [
           {
             label: '常用css效果汇总',
-            source: require('../src/experience/html/css/README.md')
+            source: require('../src/experience/html/css/README.md'),
+            date: '2022-03-18',
+            info: '添加字体渐变'
+          },
+          {
+            label: '大图查看器v-viewer',
+            source: require('../src/experience/html/v-viewer/README.md'),
+            date: '2022-03-18',
           },
           {
             label: '大文件分片上传与断点续传的解决方案',
