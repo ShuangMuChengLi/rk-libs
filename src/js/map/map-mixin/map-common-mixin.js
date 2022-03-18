@@ -28,7 +28,7 @@ import {boundingExtent, getCenter} from 'ol/extent';
 import arrowImg from './images/mapLineArrow.png';
 import startImg from './images/start.png';
 import endImg from './images/end.png';
-import {getDistance} from '../../../../js/map/point-distance/point-distance';
+import {getDistance} from './point-distance/point-distance';
 import _ from 'lodash';
 import GeoJSON from 'ol/format/GeoJSON';
 import Cluster from 'ol/source/Cluster';
@@ -75,14 +75,6 @@ export const mapCommonMixin = {
       },
       eventSet:{}
     };
-  },
-  mounted(){
-    this.bus.$on('map-common:setCenter', this.setMapCenter);
-    this.bus.$on('map-common:fitViewZoom', this.fitViewZoom);
-  },
-  beforeDestroy(){
-    this.bus.$off('map-common:setCenter', this.setMapCenter);
-    this.bus.$off('map-common:fitViewZoom', this.fitViewZoom);
   },
   methods: {
     addMapEventListener(eventName, callback){
@@ -440,15 +432,16 @@ export const mapCommonMixin = {
         ],
       };
       layer.getSource().addFeatures(new GeoJSON().readFeatures(geojsonObject));
-      for(let i = 0; i < list.length; i++){
-        let center = this.getPolygonCenter(list[i]);
-        const iconFeature = new Feature(new Point(center));
-        iconFeature.setProperties({
-          text: options.text[i]
-        });
-        layer.getSource().addFeature(iconFeature);
+      if(!_.isEmpty(options.text)){
+        for(let i = 0; i < list.length; i++){
+          let center = this.getPolygonCenter(list[i]);
+          const iconFeature = new Feature(new Point(center));
+          iconFeature.setProperties({
+            text: options.text[i]
+          });
+          layer.getSource().addFeature(iconFeature);
+        }
       }
-
       layer.setStyle(this.PolygonStyle);
     },
     /**
@@ -460,6 +453,49 @@ export const mapCommonMixin = {
       let geometry = new LineString(list);
       let extent = geometry.getExtent();
       return getCenter(extent);
+    },
+    stopDraw(drawer){
+      if(drawer){
+        this.mapObj.removeInteraction(drawer);
+      }
+    },
+    /**
+     *
+     * @param options
+     * {
+     *   type,
+     *   layer
+     * }
+     * @returns {Draw}
+     */
+    draw(options){
+      let geometryFunction,
+        type = options.type,
+        layer = options.layer,
+        freehand = options.freehand || false;
+      let drawSource = layer.getSource();
+      if(options.type === 'box'){
+        geometryFunction = createBox();
+        type = 'Circle';
+      }
+      let drawer = new Draw({
+        source: drawSource,
+        type,
+        freehand,
+        geometryFunction
+      });
+      drawer.on('drawstart', (e)=> {
+        drawSource.clear();
+      });
+      drawer.on('drawend', (e)=> {
+        let result = this.getDrawResult(e.feature, options.type);
+        this.$emit('showStatistics', {
+          drawerArg: result,
+          drawerType: options.type,
+        });
+      });
+      this.mapObj.addInteraction(drawer);
+      return drawer;
     },
     /****************************内部函数**************************************/
     /**
@@ -707,49 +743,6 @@ export const mapCommonMixin = {
 
       }
       return lineStyleArr;
-    },
-    stopDraw(drawer){
-      if(drawer){
-        this.mapObj.removeInteraction(drawer);
-      }
-    },
-    /**
-     *
-     * @param options
-     * {
-     *   type,
-     *   layer
-     * }
-     * @returns {Draw}
-     */
-    draw(options){
-      let geometryFunction,
-        type = options.type,
-        layer = options.layer,
-        freehand = options.freehand || false;
-      let drawSource = layer.getSource();
-      if(options.type === 'box'){
-        geometryFunction = createBox();
-        type = 'Circle';
-      }
-      let drawer = new Draw({
-        source: drawSource,
-        type,
-        freehand,
-        geometryFunction
-      });
-      drawer.on('drawstart', (e)=> {
-        drawSource.clear();
-      });
-      drawer.on('drawend', (e)=> {
-        let result = this.getDrawResult(e.feature, options.type);
-        this.$emit('showStatistics', {
-          drawerArg: result,
-          drawerType: options.type,
-        });
-      });
-      this.mapObj.addInteraction(drawer);
-      return drawer;
     },
     getDrawResult(geoFeature, type) {
       if (geoFeature) {

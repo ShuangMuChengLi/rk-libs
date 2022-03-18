@@ -26,8 +26,62 @@ let CodeGeneratorConfig = [
     value: null, // 数据节点
   }
 ];
+function getData(config){
+  return new Promise((resolve, reject) => {
+    let data = {};
+    let count = 0;
+    function successCallback(){
+      if(count === config.length){
+        resolve();
+      }
+    }
+    for(let item of config){
+      data[item].key = {};
+      if(item.sourceType === 'db'){
+        (async ()=>{
+          data[item].key = selectByDB(item.DBArg).catch((e)=>{
+            reject(e);
+          });
+          count++;
+        })();
+      }
+      if(item.sourceType === 'api'){
+        (async ()=>{
+          data[item].key = selectByRemoteApi(item.apiArg).catch((e)=>{
+            reject(e);
+          });
+          count++;
+        })();
+      }
+      if(item.sourceType === 'value'){
+        data[item].key = item.value;
+        count++;
+      }
+    }
+  });
+}
 let D =
 {
   '变量1': '数据值',
   '变量2': '数据值',
 };
+let TList = [
+  {
+    id: '', // 模板id
+    name: '', // 模板名
+    TPath: '', // EJS模板文件存储路径
+    SCPath: '', // 数据配置文件文件存储路径
+  }
+];
+let ModelOwnerTable = [
+  {
+    userId: '', // 用户id
+    MId: '' // 模式Id
+  }
+];
+let ModelSharedTable = [
+  {
+    userId: '', // 被分享者用户id
+    MId: '' // 模式Id
+  }
+];

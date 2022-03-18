@@ -114,7 +114,7 @@ export const routes = [
   },
   {
     path: '/demo/map-mixin',
-    component: ()=>import('../experience/js/map/map-mixin/map-mixin-demo.vue')
+    component: ()=>import('../js/map/map-mixin/map-mixin-demo.vue')
   },
   {
     path: '/experience/html/speech/speech-demo',

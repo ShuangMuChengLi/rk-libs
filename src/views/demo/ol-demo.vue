@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import {mapCommonMixin} from '../../experience/js/map/map-mixin/map-common-mixin';
+import {mapCommonMixin} from '../../js/map/map-mixin/map-common-mixin';
 import icon from './icon.png';
 import startIcon from './start.png';
 import endIcon from './end.png';
