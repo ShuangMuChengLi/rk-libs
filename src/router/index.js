@@ -128,6 +128,10 @@ export const routes = [
     path: '/demo/capture-pic',
     component: ()=>import('../js/html/capture-pic/capture-pic-demo')
   },
+  {
+    path: '/components/common-table',
+    component: ()=>import('../components/common-table/common-table-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

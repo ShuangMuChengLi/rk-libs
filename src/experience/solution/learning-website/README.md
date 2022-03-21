@@ -5,3 +5,4 @@
 4. [阿里云矢量图标库iconfont](https://www.iconfont.cn/)
 5. [npm](https://www.npmjs.com/)
 6. [阿里云GeoJSON选择器](http://datav.aliyun.com/portal/school/atlas/area_selector)
+7. [图片占位符](https://picsum.photos/)

@@ -56,4 +56,30 @@ export default {
 </script>
 <style scoped lang="less">
 @import "home";
+.home{
+  /deep/table{
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    font-size: 14px;
+    margin-bottom: 45px;
+    line-height: 1.5em;
+    td{
+      border-bottom: 1px solid #dcdfe6;
+      padding: 15px;
+      max-width: 250px;
+      color: #606266;
+    }
+
+    th {
+      text-align: left;
+      white-space: nowrap;
+      color: #909399;
+      font-weight: 400;
+      border-bottom: 1px solid #dcdfe6;
+      padding: 15px;
+      max-width: 250px;
+    }
+  }
+}
 </style>

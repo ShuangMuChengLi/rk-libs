@@ -49,6 +49,16 @@ export const menu = [
         ]
       },
       {
+        label: '数据',
+        children: [
+          {
+            label: '可配置表格组件common-table',
+            source: require('../src/components/common-table/README.md'),
+            date: '2021-03-21'
+          }
+        ]
+      },
+      {
         label: '其他',
         children: [
           {
@@ -197,7 +207,8 @@ export const menu = [
           {
             label: 'web前端学习资源网站汇总',
             source: require('../src/experience/solution/learning-website/README.md'),
-            date: '2022-02-11'
+            date: '2022-03-21',
+            info: '更新'
           },
           {
             label: '前端发布平台',
