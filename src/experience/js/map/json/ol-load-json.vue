@@ -21,7 +21,7 @@ import mapJSON from './100000_full.json';
 import XYZ from 'ol/source/XYZ';
 import {fromLonLat} from 'ol/proj';
 import Point from 'ol/geom/Point';
-import img from '../../../../views/demo/icon.png';
+import img from '../../../../views/test/icon.png';
 export default {
   name: 'OlLoadJson',
   mounted () {

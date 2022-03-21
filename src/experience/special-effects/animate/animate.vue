@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import 'animate.css';
 export default {
   name: 'AnimateDemo',
   data(){
@@ -38,5 +39,4 @@ export default {
 </script>
 
 <style scoped>
-  @import "~animate.css";
 </style>

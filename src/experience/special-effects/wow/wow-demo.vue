@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import '../../experience/special-effects/wow/animate.css';
+@import './animate.css';
 .wow:first-child {
   visibility: hidden;
 }

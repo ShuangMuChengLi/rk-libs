@@ -45,19 +45,19 @@ export const routes = [
   },
   {
     path: '/demo/picture-verify-demo',
-    component: ()=>import('../views/demo/picture-verify-demo.vue')
+    component: ()=>import('../components/picture-verify/picture-verify-demo.vue')
   },
   {
     path: '/demo/zoom-picture-viewer-demo',
-    component: ()=>import('../views/demo/zoom-picture-viewer-demo.vue')
+    component: ()=>import('../components/zoom-picture-viewer/zoom-picture-viewer-demo.vue')
   },
   {
     path: '/demo/Progress-bar-demo',
-    component: ()=>import('../views/demo/Progress-bar-demo')
+    component: ()=>import('../components/progress-bar/Progress-bar-demo')
   },
   {
     path: '/demo/up-load-files-demo',
-    component: ()=>import('../views/demo/up-load-files-demo')
+    component: ()=>import('../components/upLoad-files/up-load-files-demo')
   },
   {
     path: '/demo/watermark-demo',
@@ -65,32 +65,32 @@ export const routes = [
   },
   {
     path: '/demo/three-slide-demo',
-    component: ()=>import('../views/demo/three-slide-demo.vue')
+    component: ()=>import('../js/html/three-slide/three-slide-demo.vue')
   },
   {
     path: '/demo/h5s-player-dialog-demo',
-    component: ()=>import('../views/demo/h5s-player-dialog-demo')
+    component: ()=>import('../components/h5s-player-dialog/h5s-player-dialog-demo')
   },
 
   {
     path: '/wow-demo',
-    component: ()=>import('../views/demo/wow-demo.vue')
+    component: ()=>import('../experience/special-effects/wow/wow-demo.vue')
   },
   {
     path: '/demo/rk-calendar-demo',
-    component: ()=>import('../views/demo/rk-calendar-demo.vue')
+    component: ()=>import('../components/rk-calendar/rk-calendar-demo.vue')
   },
   {
     path: '/demo/arrow-demo',
-    component: ()=>import('../views/demo/arrow-demo.vue')
+    component: ()=>import('../components/flow-chart/arrow/arrow-demo.vue')
   },
   {
     path: '/demo/animate',
-    component: ()=>import('../views/demo/animate.vue')
+    component: ()=>import('../experience/special-effects/animate/animate.vue')
   },
   {
     path: '/demo/rk-sm2-demo',
-    component: ()=>import('../views/demo/rk-sm2-demo')
+    component: ()=>import('../js/math/rk-sm2/rk-sm2-demo')
   },
   {
     path: '/demo/axios',
@@ -98,7 +98,7 @@ export const routes = [
   },
   {
     path: '/demo/animate',
-    component: ()=>import('../views/demo/animate')
+    component: ()=>import('../experience/special-effects/animate/animate')
   },
   {
     path: '/demo/recorderjs',
@@ -122,7 +122,7 @@ export const routes = [
   },
   {
     path: '/demo/worker-demo',
-    component: ()=>import('../views/demo/worker-demo/worker-test')
+    component: ()=>import('../views/test/worker-demo/worker-test')
   },
   {
     path: '/demo/capture-pic',

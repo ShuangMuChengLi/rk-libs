@@ -5,11 +5,11 @@ export const testRoutes = [
   },
   {
     path: '/test/ol-demo',
-    component: ()=>import('../views/demo/ol-demo.vue')
+    component: ()=>import('../views/test/ol-demo.vue')
   },
   {
     path: '/test/ol-load-img-demo',
-    component: ()=>import('../views/demo/ol-load-img-demo.vue')
+    component: ()=>import('../views/test/ol-load-img-demo.vue')
   },
   {
     path: '/vue-test',
