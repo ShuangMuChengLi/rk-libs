@@ -132,6 +132,10 @@ export const routes = [
     path: '/components/common-table',
     component: ()=>import('../components/common-table/common-table-demo')
   },
+  {
+    path: '/components/common-filter',
+    component: ()=>import('../components/common-filter/common-filter-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

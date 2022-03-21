@@ -1,4 +1,5 @@
 # 可配置表格组件common-table
+比较适用于字符串列较多的表格。
 ## preview
 [预览](./index.html#/components/common-table)
 ## download
@@ -9,7 +10,7 @@ Vue.js、ElementUI
 ## Attributes
 | 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
 | ---- | ---- |---- | ----   |----  |  --- |
-| column | 列信息 | Object | true | -  |  - |
+| column | 列信息 | Array | true | -  |  - |
 | data | 表格数据 | Array | true | -  |  - |
 | pageInfo | 分页信息 | Array | false | -  |  - |
 ### column参数
