@@ -136,6 +136,10 @@ export const routes = [
     path: '/components/common-filter',
     component: ()=>import('../components/common-filter/common-filter-demo')
   },
+  {
+    path: '/components/person-label',
+    component: ()=>import('../components/data/person-label/person-label-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

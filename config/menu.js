@@ -60,7 +60,12 @@ export const menu = [
             label: '可配置筛选栏表单common-filter',
             source: require('../src/components/common-filter/README.md'),
             date: '2021-03-21'
-          }
+          },
+          {
+            label: '人员标签组件',
+            source: require('../src/components/data/person-label/README.md'),
+            date: '2021-03-21'
+          },
         ]
       },
       {
