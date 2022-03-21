@@ -94,6 +94,11 @@ export const menu = [
             source: require('../src/components/remote-img/README.md'),
             date: '2021-11-26'
           },
+          {
+            label: '弹窗外壳（适用地图弹窗）',
+            source: require('../src/components/other/common-dialog/README.md'),
+            date: '2022-03-21'
+          },
         ]
       }
     ]

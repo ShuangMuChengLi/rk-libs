@@ -140,6 +140,10 @@ export const routes = [
     path: '/components/person-label',
     component: ()=>import('../components/data/person-label/person-label-demo')
   },
+  {
+    path: '/components/other/common-dialog',
+    component: ()=>import('../components/other/common-dialog/common-dialog-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

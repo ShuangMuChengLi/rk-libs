@@ -13,7 +13,7 @@ export const testRoutes = [
   },
   {
     path: '/vue-test',
-    component: ()=>import('../views/demo/vue-test')
+    component: ()=>import('../views/test/vue-test')
   },
   {
     path: '/canvas-test',
