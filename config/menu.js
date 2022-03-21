@@ -54,17 +54,17 @@ export const menu = [
           {
             label: '可配置表格组件common-table',
             source: require('../src/components/common-table/README.md'),
-            date: '2021-03-21'
+            date: '2022-03-21'
           },
           {
             label: '可配置筛选栏表单common-filter',
             source: require('../src/components/common-filter/README.md'),
-            date: '2021-03-21'
+            date: '2022-03-21'
           },
           {
             label: '人员标签组件',
             source: require('../src/components/data/person-label/README.md'),
-            date: '2021-03-21'
+            date: '2022-03-21'
           },
         ]
       },
@@ -73,7 +73,8 @@ export const menu = [
         children: [
           {
             label: '头像裁剪上传组件',
-            source: require('../src/components/photo-uploader/README.md')
+            source: require('../src/components/photo-uploader/README.md'),
+            date: '2022-03-21'
           },
           {
             label: '日历（最简版骨架）',
