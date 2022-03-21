@@ -94,7 +94,7 @@ export const routes = [
   },
   {
     path: '/demo/axios',
-    component: ()=>import('../views/demo/axios')
+    component: ()=>import('../views/test/axios')
   },
   {
     path: '/demo/animate',
