@@ -23,4 +23,8 @@ export const testRoutes = [
     path: '/photo-uploader-demo',
     component: ()=>import('../components/photo-uploader/photo-uploader-demo')
   },
+  {
+    path: '/snap-test',
+    component: ()=>import('../experience/js/Snap/snap-test')
+  },
 ];

@@ -282,6 +282,11 @@ export const menu = [
             date: '2022-01-17'
           },
           {
+            label: 'svg开发库Snap-svg',
+            source: require('../src/experience/js/Snap/README.md'),
+            date: '2022-03-22'
+          },
+          {
             label: '汉字笔画、拼音排序',
             source: require('../src/experience/js/cnchar/README.md'),
             date: '2022-02-10'
