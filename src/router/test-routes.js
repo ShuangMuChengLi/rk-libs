@@ -27,4 +27,8 @@ export const testRoutes = [
     path: '/snap-test',
     component: ()=>import('../experience/js/Snap/snap-test')
   },
+  {
+    path: '/leaflet',
+    component: ()=>import('../experience/js/map/leaflet/leaflet')
+  },
 ];
