@@ -3,14 +3,13 @@
     <div
       v-for="(item , index) in projectRoutes"
       :key="index"
+      class="item"
     >
       <router-link
         v-if="!item.children"
         :to="item.path"
       >
-        <div class="item-row">
-          {{ item.path }} --- {{ item.name }}
-        </div>
+        {{ item.path }} --- {{ item.name }}
       </router-link>
       <div v-if="item.children">
         <ul>
