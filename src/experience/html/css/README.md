@@ -1,5 +1,7 @@
 # 常用css效果汇总
+
 ## 滚动条样式优化
+
 ```
 ::-webkit-scrollbar{
   width: 6px;
@@ -14,31 +16,41 @@
   border-radius: 10px;
 }
 ```
+
 ## 文本超出隐藏
+
 ```
 overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
 ```
+
 ## 多行文本超出隐藏
+
 ```
 display: -webkit-box;
 -webkit-box-orient: vertical;
 -webkit-line-clamp: 3;
 overflow: hidden;
 ```
+
 ## 纯数字或字母强制换行
+
 ```
 white-space:normal; 
 word-break:break-all;
 ```
+
 ## 上下左右居中
+
 ```
 display:flex;
 align-items:center;/*垂直居中*/
 justify-content: center;/*水平居中*/
 ```
-或   
+
+或
+
 ```
 position: absolute;
 top: 50%;
@@ -47,24 +59,69 @@ transform: translate(-50%, -50%);
 ```
 
 ## 为表格设置合并边框模型
+
 ```css
-table{
-  border-collapse:collapse;
+table {
+    border-collapse: collapse;
 }
 ```
+
 ## 哀悼日网站全部置灰或部分置灰
+
 ```css
-html{
-  filter: grayscale(100%);
+html {
+    filter: grayscale(100%);
 }
 ```
+
 ## 字体渐变
+
 ```css
-.page-title{
-	font-size: 28px;
-	font-weight: 700;
-	background-image:-webkit-linear-gradient(bottom,#00a2ff,#e7e7e7);
-	-webkit-background-clip:text;
-	-webkit-text-fill-color:transparent;
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    background-image: -webkit-linear-gradient(bottom, #00a2ff, #e7e7e7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+```
+
+## 色相、饱和度设置方法，及其动画
+
+[效果预览](./index.html#/experience/html/css/css-demo)
+
+```html
+
+<div class="hue-rotate">
+    <img src="./logo.png">
+</div>
+```   
+
+```less
+@-webkit-keyframes leafanim {
+  50% {
+    -webkit-filter: hue-rotate(-70deg) saturate(1.2);
+  }
+}
+
+@keyframes leafanim {
+  50% {
+    -webkit-filter: hue-rotate(-70deg) saturate(1.2);
+  }
+}
+
+.hue-rotate {
+  -webkit-transition: 0.8s all;
+  -webkit-animation: leafanim 3s ease 3s 1 normal none;
+  transition: 0.8s all;
+  animation: leafanim 3s ease 3s 1 normal none;
+
+  &:hover, &:focus {
+    -webkit-filter: hue-rotate(-70deg) saturate(1.5);
+  }
+
+  img {
+    width: 300px;
+  }
 }
 ```

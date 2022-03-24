@@ -121,6 +121,10 @@ export const routes = [
     component: ()=>import('../experience/html/speech/speech-demo')
   },
   {
+    path: '/experience/html/css/css-demo',
+    component: ()=>import('../experience/html/css/css-demo')
+  },
+  {
     path: '/demo/worker-demo',
     component: ()=>import('../views/test/worker-demo/worker-test')
   },

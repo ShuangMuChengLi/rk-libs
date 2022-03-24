@@ -1,0 +1,23 @@
+.wrapper{
+  margin: 20px;
+}
+
+@-webkit-keyframes leafanim {
+  50% { -webkit-filter: hue-rotate(-70deg) saturate(1.2); }
+}
+
+@keyframes leafanim {
+  50% { -webkit-filter: hue-rotate(-70deg) saturate(1.2); }
+}
+.hue-rotate{
+  -webkit-transition: 0.8s all;
+  -webkit-animation: leafanim 3s ease 3s 1 normal none;
+  transition: 0.8s all;
+  animation: leafanim 3s ease 3s 1 normal none;
+  &:hover, &:focus {
+    -webkit-filter: hue-rotate(-70deg) saturate(1.5);
+  }
+  img{
+    width: 300px;
+  }
+}

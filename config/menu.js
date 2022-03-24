@@ -304,13 +304,12 @@ export const menu = [
           {
             label: '常用css效果汇总',
             source: require('../src/experience/html/css/README.md'),
-            date: '2022-03-18',
-            info: '添加字体渐变'
+            date: '2022-03-24',
           },
           {
             label: '大图查看器v-viewer',
             source: require('../src/experience/html/v-viewer/README.md'),
-            date: '2022-03-18',
+            date: '2022-03-24',
           },
           {
             label: '大文件分片上传与断点续传的解决方案',
