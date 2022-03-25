@@ -307,6 +307,11 @@ export const menu = [
             date: '2022-03-24',
           },
           {
+            label: 'css兼容性问题及解决方案整理',
+            source: require('../src/experience/html/css/pc-css/README.md'),
+            date: '2022-03-25',
+          },
+          {
             label: '大图查看器v-viewer',
             source: require('../src/experience/html/v-viewer/README.md'),
             date: '2022-03-24',

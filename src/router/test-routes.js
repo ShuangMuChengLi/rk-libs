@@ -20,6 +20,10 @@ export const testRoutes = [
     component: ()=>import('../views/test/canvas-test/canvas-test')
   },
   {
+    path: '/flex-test',
+    component: ()=>import('../views/test/flex-test.vue')
+  },
+  {
     path: '/photo-uploader-demo',
     component: ()=>import('../components/photo-uploader/photo-uploader-demo')
   },

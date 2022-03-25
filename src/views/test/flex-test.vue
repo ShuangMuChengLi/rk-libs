@@ -1,22 +1,15 @@
 <template>
   <div class="wrapper">
-    <header class="header">
-
-    </header>
-    <div class="page-body">
-      <div class="left">
-        <div class="left-inner">
-
-        </div>
+    <div class="inner">
+      <div class="inner-body">
       </div>
-      <div class="right"></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'VideoExample',
+  name: 'FlexTest',
 };
 </script>
 <style scoped lang="less">
@@ -24,31 +17,16 @@ export default {
     border: 1px solid #aaa;
   }
   .wrapper{
+    width: 500px;
+    height: 500px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    .header{
-      height: 200px;
-      flex-shrink: 0;
-      .border;
-    }
-    .page-body{
-      flex: auto;
-      overflow: hidden;
+    .inner {
       display: flex;
-      .left{
-        flex: 1;
-        overflow: auto;
-        .border;
-        .left-inner{
-          width: 1000px;
-          height: 200px;
-          .border;
-        }
-      }
-      .right{
-        flex: 1;
-        .border;
+      flex: auto;
+      .inner-body {
+        flex: auto;
+        background-color: rgba(0, 0, 0, 0.1);
       }
     }
   }
