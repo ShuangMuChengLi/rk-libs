@@ -224,7 +224,6 @@ export const menu = [
             label: 'web前端学习资源网站汇总',
             source: require('../src/experience/solution/learning-website/README.md'),
             date: '2022-03-21',
-            info: '更新'
           },
           {
             label: '前端发布平台',
