@@ -1,179 +1,143 @@
 <template>
   <div class="map-wrapper">
-    <div
-      id="map"
-      class="map"
-    />
-    <div
-      ref="dialog"
-      class="dialog"
-    >
-      test<i
-        class="el-icon-close"
-        @click="closeDialog"
-      />
+    <div id="map" class="map"></div>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapCommonMixin} from '../../js/map/map-mixin/map-common-mixin';
-import icon from './icon.png';
-import startIcon from './start.png';
-import endIcon from './end.png';
-
+import 'ol/ol.css';
+import Map from 'ol/Map';
+import Overlay from 'ol/Overlay';
+import TileLayer from 'ol/layer/Tile';
+import View from 'ol/View';
+import XYZ from 'ol/source/XYZ';
+import {toLonLat} from 'ol/proj';
+import {toStringHDMS} from 'ol/coordinate';
 export default {
   name: 'OlDemo',
-  mixins: [mapCommonMixin],
   mounted() {
-    this.initMap({
-      target: 'map',
-      center: [118.12, 24.4869],
-      url: 'https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=Em2forfI5ZPT8NaJic3f'
-    });
-    this.initLayers();
+    this.init();
   },
   methods: {
-    initLayers() {
-      this.iconLayerStart = this.getVectorLayer({icon: startIcon});
-      this.createSelect(
-        {
-          layers: [this.iconLayerStart],
-          callback(e) {
-            console.log(e);
-          },
-          style(feature){
-            return {
-              icon: startIcon,
-              text: feature.getProperties().text
-            };
-          }
-        },
-      );
-      this.showPoint(
-        {
-          layer: this.iconLayerStart,
-          item: {
-            lon: 118.12,
-            lat: 24.48,
-            text: '111'
-          },
-          style(feature){
-            return {
-              icon: startIcon,
-              text: feature.getProperties().text
-            };
-          }
-        }
-      );
+    init(){
+      /**
+       * Elements that make up the popup.
+       */
+      const container = document.getElementById('popup');
+      const content = document.getElementById('popup-content');
+      const closer = document.getElementById('popup-closer');
 
-      this.iconLayerEnd = this.getVectorLayer(
-        function (feature){
-          return {
-            icon: endIcon,
-            text: feature.getProperties().text
-          };
-        }
-      );
-      this.createSelect({
-        style(feature) {
-          return {
-            icon: icon,
-            text: feature.getProperties().text
-          };
+      /**
+       * Create an overlay to anchor the popup to the map.
+       */
+      const overlay = new Overlay({
+        element: container,
+        autoPan: {
+          animation: {
+            duration: 250,
+          },
         },
-        layers: [this.iconLayerEnd],
-        callback(feature, info) {
-          console.log(feature, info);
-        }
       });
-      this.showPoints({
-        layer: this.iconLayerEnd,
-        list: [
-          {
-            lonLat: [118.15364562988282, 24.507671026611323],
-            text: '100'
-          },
-          {
-            lonLat: [118.14368927001954, 24.456172613525386],
-            text: '222'
-          },
+
+      /**
+       * Add a click handler to hide the popup.
+       * @return {boolean} Don't follow the href.
+       */
+      closer.onclick = function () {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+      };
+
+      const key = 'Get your own API key at https://www.maptiler.com/cloud/';
+      const attributions =
+        '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> ' +
+        '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
+
+      /**
+       * Create the map.
+       */
+      const map = new Map({
+        layers: [
+          new TileLayer({
+            source: new XYZ({
+              attributions: attributions,
+              url: 'https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=Em2forfI5ZPT8NaJic3f',
+              tileSize: 512,
+            }),
+          }),
         ],
-        style(feature) {
-          return {
-            icon: startIcon,
-            text: feature.getProperties().text
-          };
-        },
+        overlays: [overlay],
+        target: 'map',
+        view: new View({
+          center: [0, 0],
+          zoom: 2,
+        }),
       });
 
-      this.dialog = this.createOverLayer(this.$refs.dialog, [0, 50]);
-      this.dialog.setPosition([118.15364562988282, 24.507671026611323]);
-      this.polygonLayer = this.getVectorLayer();
-      this.showPolygon({
-        layer: this.polygonLayer,
-        list: [
-          [118.15364562988282, 24.507671026611323],
-          [118.14368927001954, 24.456172613525386],
-          [118.12, 24.48]
-        ]
-      });
-      let clusterList = [
-        {
-          lonLat: [118.18935119628907, 24.503551153564448],
-          text: '100'
-        },
-        {
-          lonLat: [118.19278442382813, 24.482951788330073],
-          text: '222'
-        },
+      /**
+       * Add a click handler to the map to render the popup.
+       */
+      map.on('singleclick', function (evt) {
+        const coordinate = evt.coordinate;
+        const hdms = toStringHDMS(toLonLat(coordinate));
 
-      ];
-      let clusterLayer = this.getClusterLayer((feature)=> {
-        return {
-          icon: icon,
-          color: '#3399CC',
-          text: feature.get('features')[0].getProperties().text
-        };
+        content.innerHTML = '<p>You clicked here:</p><code>' + hdms + '</code>';
+        overlay.setPosition(coordinate);
       });
-      this.showClusterPoints({layer: clusterLayer, list: clusterList});
-      this.createSelect({
-        style:(feature)=> {
-          return {
-            icon: startIcon,
-            color: 'orange',
-            text: feature.get('features')[0].getProperties().text
-          };
-        },
-        isCluster: true,
-        layers: [clusterLayer],
-        callback(feature, info) {
-          console.log(feature, info);
-          // console.log(feature.get('features'));
-          // if(feature.)
-          // console.log(feature, info);
-        }
-      });
-    },
-    closeDialog() {
-      this.dialog.setPosition(null);
     }
   }
 };
 </script>
 
 <style scoped lang="less">
-.map-wrapper {
-  position: relative;
-}
-
 .map {
   width: 100%;
-  height: 100vh;
+  height:400px;
 }
-
-.dialog {
-  color: #fff;
-  background-color: #000;
+.ol-popup {
+  //position: absolute;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  //bottom: 12px;
+  //left: -50px;
+  min-width: 280px;
+}
+.ol-popup:after, .ol-popup:before {
+  top: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.ol-popup:after {
+  border-top-color: white;
+  border-width: 10px;
+  left: 48px;
+  margin-left: -10px;
+}
+.ol-popup:before {
+  border-top-color: #cccccc;
+  border-width: 11px;
+  left: 48px;
+  margin-left: -11px;
+}
+.ol-popup-closer {
+  text-decoration: none;
+  position: absolute;
+  top: 2px;
+  right: 8px;
+}
+.ol-popup-closer:after {
+  content: "✖";
 }
 </style>

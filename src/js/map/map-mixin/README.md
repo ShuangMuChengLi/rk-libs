@@ -191,6 +191,7 @@ this.clearLayer(this.clickLayer);
 | hasAnimate | 是否有动画 | Boolean | - | false | false |
 | lonLat | 中心点经纬度 | Array | - | true |  - |
 | zoom | 层级 | Number | - | false |  - |
+| offset | 中心点偏移量，以像素单位 | Array[Number] | - | false | [0, 0] |
 #### return
 null
 #### usage
@@ -199,6 +200,7 @@ this.setMapCenter({
     hasAnimate: true,
     lonLat: [118.14368927001954, 24.456172613525386],
     zoom: 10,
+		offset:[0, 0]
 });
 ```
 

@@ -52,11 +52,11 @@ export const mapCommonMixin = {
             }),
           }),
           new Style({
-          // image: new Icon({
-          //   anchor: [0.5, 0.96],
-          //   crossOrigin: 'anonymous',
-          //   src: src,
-          // }),
+            // image: new Icon({
+            //   anchor: [0.5, 0.96],
+            //   crossOrigin: 'anonymous',
+            //   src: src,
+            // }),
             text: new Text({
               text: feature.getProperties().text,
               font: 'normal bold 18px/30px sans-serif',
@@ -234,6 +234,10 @@ export const mapCommonMixin = {
 
       if(option.lonLat){
         let lonLat = [Number(option.lonLat[0]), Number(option.lonLat[1])];
+        if(option.offset){
+          let resolution = this.map.getView().getResolution();
+          lonLat = [option.lonLat[0] + resolution * option.offset[0], option.lonLat[1] + resolution * option.offset[1]];
+        }
         this.mapView.setCenter(lonLat);
       }
 
@@ -384,17 +388,16 @@ export const mapCommonMixin = {
       view.setZoom(zoom);
     },
     /**
-     * 新建addOverlay弹窗
+     * 新建Overlay弹窗
      * @param ref
      * @param offset
-     * @returns addOverlay
+     * @returns Overlay
      */
     createOverLayer(ref, offset){
       let overlay = new Overlay({
         element: ref,
         autoPan: true,
-        offset: offset,
-        positioning: 'center-left',
+        offset: offset || [0, 0],
         autoPanAnimation: {
           duration: 250
         }
@@ -413,6 +416,7 @@ export const mapCommonMixin = {
     showPolygon(options){
       let layer = options.layer;
       let list = options.list;
+      let type = options.type || 'Polygon';
       const geojsonObject = {
         'type': 'FeatureCollection',
         'crs': {
@@ -422,15 +426,26 @@ export const mapCommonMixin = {
           },
         },
         'features': [
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Polygon',
-              'coordinates': list,
-            },
-          },
+
         ],
       };
+      if(type === 'Polygon'){
+        geojsonObject.features[0] = {
+          'type': 'Feature',
+          'geometry': {
+            'type': 'Polygon',
+            'coordinates': list,
+          },
+        };
+      }else if(type === 'LineString'){
+        geojsonObject.features[0] = {
+          'type': 'Feature',
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': list[0],
+          },
+        };
+      }
       layer.getSource().addFeatures(new GeoJSON().readFeatures(geojsonObject));
       if(!_.isEmpty(options.text)){
         for(let i = 0; i < list.length; i++){
@@ -442,6 +457,7 @@ export const mapCommonMixin = {
           layer.getSource().addFeature(iconFeature);
         }
       }
+
       layer.setStyle(this.PolygonStyle);
     },
     /**
@@ -581,10 +597,15 @@ export const mapCommonMixin = {
         let text = item.text;
         styleOption.text = new Text({
           text: text || '',
-          offsetY: 25,
+          offsetY: -30,
           font: '13px sans-serif',
           textAlign: 'center',
-          fill: new Fill({ color: 'orange'}),
+          backgroundFill: new Fill({
+            color: '#10263d'
+          }),
+          fill: new Fill({
+            color: '#fff'
+          }),
         });
       }
       if(item.zIndex){
@@ -757,12 +778,12 @@ export const mapCommonMixin = {
           let u = this.mapObj.getView().getProjection().getMetersPerUnit();
           result['radius'] = geometry.getRadius() * u;
         } else {
-          coordinates = geometry.getCoordinates()[0];
-          let lonLats_1 = [];
-          coordinates.forEach(function (xy) {
-            lonLats_1.push(xy);
-          });
-          coordinates = lonLats_1;
+          if(type === 'Polygon'){
+            coordinates = geometry.getCoordinates()[0];
+          }else{
+            coordinates = geometry.getCoordinates();
+          }
+
         }
         result['coordinates'] = coordinates;
         result['type'] = 'drawByHandle';

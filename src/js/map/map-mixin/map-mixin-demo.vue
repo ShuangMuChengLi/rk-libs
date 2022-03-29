@@ -25,6 +25,12 @@
       >
         停止绘制
       </el-button>
+      <el-button
+        type="primary"
+        @click="showDialogBtn"
+      >
+        弹窗
+      </el-button>
     </div>
     <div
       id="map"
@@ -75,11 +81,12 @@ export default {
           label: 'None',
           value: 'None',
         },
-      ]
+      ],
+      map: null
     };
   },
   mounted() {
-    this.initMap({
+    this.map = this.initMap({
       target: 'map',
       center: [118.12, 24.4869],
       url: 'https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=Em2forfI5ZPT8NaJic3f'
@@ -177,8 +184,6 @@ export default {
         },
       });
 
-      this.dialog = this.createOverLayer(this.$refs.dialog, [0, 50]);
-      this.dialog.setPosition([118.15364562988282, 24.507671026611323]);
       this.polygonLayer = this.getVectorLayer();
       this.showPolygon({
         layer: this.polygonLayer,
@@ -240,6 +245,34 @@ export default {
       ], this.lineLayer);
       this.drawVector = this.getVectorLayer();
     },
+    showDialogBtn(){
+      let center = this.map.getView().getCenter();
+      this.showDialog({
+        lonLat: center,
+        dialogSize: [400, 400]
+      });
+
+    },
+    showDialog(option){
+      this.dialog = this.createOverLayer(this.$refs.dialog, [- option.dialogSize[0] / 2, - option.dialogSize[1]]);
+      this.dialog.setPosition(option.lonLat);
+      this.showPoint(
+        {
+          layer: this.iconLayer,
+          item: {
+            lonLat: option.lonLat,
+            text: '111'
+          },
+          style(feature){
+            return {
+              icon: startIcon,
+              text: feature.getProperties().text
+            };
+          }
+        }
+      );
+      this.setMapCenter({lonLat: option.lonLat, offset:[0, option.dialogSize[1] / 2]});
+    },
     closeDialog() {
       this.dialog.setPosition(null);
     },
@@ -270,7 +303,9 @@ export default {
 }
 
 .dialog {
-  color: #fff;
-  background-color: #000;
+  color: #333;
+  background-color: #fff;
+  width: 400px;
+  height: 400px;
 }
 </style>

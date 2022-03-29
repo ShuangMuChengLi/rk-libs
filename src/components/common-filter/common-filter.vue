@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import _ from 'lodash';
+import moment from 'moment';
 export default {
   name: 'CommonFilter',
   props:{
@@ -94,13 +96,13 @@ export default {
   data() {
     return {
       form: {
-      }
+      },
     };
   },
   mounted() {
     this.form = {};
     for(let item of this.formInfo){
-      if(Array.isArray(item.prop)){
+      if(_.isArray(item.prop)){
         for(let i = 0; i < item.prop.length; i++){
           let prop = item.prop[i];
           this.$set(this.form, prop, item.defaultValue ? item.defaultValue[i] : null);
@@ -116,6 +118,16 @@ export default {
   },
   methods: {
     onSubmit() {
+      for(let item of this.formInfo){
+        if(item.type === 'dateRange'){
+          let beginTime = this.form[item.prop[0]];
+          let endTime = this.form[item.prop[1]];
+          if(beginTime && endTime && moment(beginTime).isAfter(moment(endTime))){
+            this.$message.error(item.label + '的开始时间大于结束时间');
+            return;
+          }
+        }
+      }
       this.$emit('submit', this.form);
     },
     reset() {
