@@ -6,7 +6,7 @@ import {axios} from './js/html/axios/axios';
 Vue.use(axios);
 ```
 ## 依赖
-lodash、axios、Vue
+lodash、axios、Vue、url、querystring
 ## 下载
 [库文件下载](./js/html/axios.zip)
 ## Methods

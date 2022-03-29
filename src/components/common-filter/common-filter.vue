@@ -70,6 +70,7 @@
         >
           重置
         </el-button>
+        <slot></slot>
       </el-form-item>
     </el-form>
   </div>
@@ -79,6 +80,10 @@
 export default {
   name: 'CommonFilter',
   props:{
+    auto: {
+      type: Boolean,
+      default: false
+    },
     formInfo: {
       type: Array,
       default(){
@@ -95,7 +100,18 @@ export default {
   mounted() {
     this.form = {};
     for(let item of this.formInfo){
-      this.$set(this.form, item.prop, item.defaultValue || null);
+      if(Array.isArray(item.prop)){
+        for(let i = 0; i < item.prop.length; i++){
+          let prop = item.prop[i];
+          this.$set(this.form, prop, item.defaultValue ? item.defaultValue[i] : null);
+        }
+      }else{
+        this.$set(this.form, item.prop, item.defaultValue || null);
+      }
+
+    }
+    if(this.auto){
+      this.onSubmit();
     }
   },
   methods: {

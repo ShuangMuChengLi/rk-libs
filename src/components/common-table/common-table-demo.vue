@@ -36,6 +36,17 @@ export default {
           width: null
         },
         {
+          label: '状态',
+          width: null,
+          fn(row){
+            if(row.state === 1){
+              return '在线';
+            }else{
+              return '离线';
+            }
+          }
+        },
+        {
           prop: ['datetime', 'address'],
           label: '时间/地点',
           width: null
@@ -47,6 +58,7 @@ export default {
           name: '张三',
           datetime: '2022-03-21 12:12:12',
           address: '软件园',
+          state: 1
         }
       ]
     };

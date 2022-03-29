@@ -11,12 +11,23 @@
     />
     <template v-for="(item, key) in column">
       <el-table-column
-        v-if="!item.slot && (typeof item.prop === 'string')"
+        v-if="!item.slot && (typeof item.prop === 'string') && !item.fn"
         :key="'tableColumn' + key"
         :prop="item.prop"
         :label="item.label"
         :width="item.width"
       />
+      <el-table-column
+        v-if="!item.slot && item.fn"
+        :key="'tableColumn' + key"
+        :prop="item.prop"
+        :label="item.label"
+        :width="item.width"
+      >
+        <template slot-scope="scope">
+          {{ item.fn(scope.row) }}
+        </template>
+      </el-table-column>
       <el-table-column
         v-if="!item.slot && Array.isArray(item.prop)"
         :key="'tableColumn' + key"

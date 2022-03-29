@@ -3,6 +3,9 @@ import {getCookie} from '../cookie-util/cookie-util';
 import _ from 'lodash';
 import {storageUtil} from '../storage-util/storage-util';
 import {rkUrl} from '../rk-url/rk-url';
+import urlUtil from 'url';
+import querystring from 'querystring';
+const CancelToken = http.CancelToken;
 let cancelTokenSourceMap = {};
 let vue;
 function errorMessage(message){
@@ -106,8 +109,9 @@ function handleError(e, isAlert) {
         this.goto('/login');
       }
     }else{
+      console.log(e.response, isAlert);
       if(isAlert){
-        errorMessage(e.response.data.message);
+        errorMessage(e.response?.data?.message);
       }
     }
   }
@@ -117,7 +121,7 @@ function handleError(e, isAlert) {
 async function httpMethod(originUrl, url, params, type, option, methodType){
   let axiosOption = getOption(option); // 添加token
   let cancelToken = (axiosOption && axiosOption.cancelToken) || originUrl;
-  const source = http.CancelToken.source();
+  const source = CancelToken.source();
   axiosOption['cancelToken'] = source.token; //添加取消请求
   if(option){
     axiosOption['timeout'] = option?.timeout || '';
@@ -166,7 +170,31 @@ async function dataMethod(type, url, data, option) {
   }
   return await httpMethod(originUrl, url, params, type, option, 'dataMethod');
 }
+/**
+ * 往url中添加query参数
+ * @param url
+ * @param query
+ * @returns {*}
+ */
+function addQueryToUrl(url, query){
+  if(typeof url !== 'string')return '';
 
+  let urlObj = urlUtil.parse(url, true);
+  if(typeof query === 'string'){
+    query = querystring.parse(query);
+  }
+  if(!urlObj.query){
+    urlObj.query = query;
+  }else{
+    for(let key in query){
+      urlObj.query[key] = query[key];
+    }
+  }
+  delete urlObj.path;
+  delete urlObj.href;
+  delete urlObj.search;
+  return urlUtil.format(urlObj);
+}
 /**
  * get delete 公用方法。将data格式化后，拼接到url后面
  * @param type  方法：get、delete
@@ -185,7 +213,7 @@ async function urlMethod(type, url, data, option) {
     } else {
       params = noNoneGetParams(data);
     }
-    url = rkUrl.addParameter(url, params);
+    url = addQueryToUrl(url, params);
   }
   return await httpMethod(originUrl, url, null, type, option, 'urlMethod');
 }
@@ -276,7 +304,7 @@ export const axios = {
     });
   },
   /**
-   * 验证数据，返回result字段的值
+   * 验证返回值 200 正常.用于正常情况下的  data数据不为空   对data做验证
    * @param data
    * @param isAlert
    * @returns {null|boolean}
@@ -296,12 +324,13 @@ export const axios = {
     }
   },
   /**
-   * 验证数据
+   * 验证返回值 200 正常 用于正常情况下的  data数据不为空   对data做验证
    * @param data
    * @param isAlert
    * @returns {boolean}
    */
   verifyDataResponse(data, isAlert) {
+    console.log(data, 'verifyDataResponse');
     if (data && data.data) {
       if (data.data.code === 200) {
         return true;
@@ -316,11 +345,12 @@ export const axios = {
     }
   },
   /**
-   * 处理异常
+   * 处理异常  登录过期  跳转登录页
    * @returns {boolean}
    * @param error
    */
   handleResponseError(error) {
+    console.log(error, 'handleResponseError');
     errorMessage(error.message);
     return false;
   },

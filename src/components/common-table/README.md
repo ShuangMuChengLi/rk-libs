@@ -16,8 +16,9 @@ Vue.js、ElementUI
 ### column参数
 | 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
 | ---- | ---- |---- | ----   |----  |  --- |
-| prop | 列字段名，与slot二选一,如果是字符串直接渲染，如果是数组则分行渲染 | String/Array | false | -  |  - |
-| slot | 插槽名，与prop二选一 | String | false | -  |  - |
+| prop | 列字段名，优先级3,如果是字符串直接渲染，如果是数组则分行渲染 | String/Array | false | -  |  - |
+| slot | 插槽名，优先级1 | String | false | -  |  - |
+| fn | 插槽名，优先级2,回调函数参数是该行数据，返回值是列表渲染数据 | Function | false | -  |  - |
 | label | 列标题 | String | true | -  |  - |
 | width | 列宽度 | Number/String | false | -  |  - |
 ### pageInfo

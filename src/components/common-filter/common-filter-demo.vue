@@ -2,7 +2,13 @@
   <common-filter
     :form-info="dangerAreaFilter"
     @submit="query"
-  />
+  >
+    <el-button
+      type="primary"
+    >
+      新增
+    </el-button>
+  </common-filter>
 </template>
 <script>
 import CommonFilter from './common-filter';
