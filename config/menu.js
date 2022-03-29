@@ -117,7 +117,8 @@ export const menu = [
           },
           {
             label: '判断点位在地图几何范围内',
-            source: require('../src/js/map/intersectsCoordinate/README.md')
+            source: require('../src/js/map/intersectsCoordinate/README.md'),
+            date: '2022-03-28'
           },
           {
             label: '计算两经纬度点位的距离',
@@ -167,6 +168,11 @@ export const menu = [
       {
         label: 'html',
         children: [
+          {
+            label: 'axios封装类',
+            source: require('../src/js/html/axios/README.md'),
+            date: '2022-03-29'
+          },
           {
             label: 'html关键元素防篡改工具类',
             source: require('../src/js/html/tamper-protector/README.md'),
@@ -314,6 +320,11 @@ export const menu = [
             label: '大图查看器v-viewer',
             source: require('../src/experience/html/v-viewer/README.md'),
             date: '2022-03-24',
+          },
+          {
+            label: '页面f11全屏api',
+            source: require('../src/experience/html/full-screen/README.md'),
+            date: '2022-03-25',
           },
           {
             label: '大文件分片上传与断点续传的解决方案',

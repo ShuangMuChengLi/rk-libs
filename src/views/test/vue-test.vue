@@ -12,6 +12,16 @@
 <script>
 export default {
   name: 'VideoExample',
+  async mounted() {
+    this.axios.cancelSingleRequest('cancelToken1');
+    let result = await this.axios.post('./test1.json', {name: 'test'}, {
+      ...this.axios.getJsonHeader(),
+      cancelToken: 'cancelToken1'
+    })
+      .then(res=>this.axios.verifyResponse(res, true))
+      .catch(this.axios.handleResponseError);
+
+  }
 };
 </script>
 <style scoped lang="less">
