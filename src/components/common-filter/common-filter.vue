@@ -70,7 +70,7 @@
         >
           重置
         </el-button>
-        <slot></slot>
+        <slot />
       </el-form-item>
     </el-form>
   </div>

@@ -1,9 +1,19 @@
 <template>
   <div class="map-wrapper">
-    <div id="map" class="map"></div>
-    <div id="popup" class="ol-popup">
-      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-      <div id="popup-content"></div>
+    <div
+      id="map"
+      class="map"
+    />
+    <div
+      id="popup"
+      class="ol-popup"
+    >
+      <a
+        id="popup-closer"
+        href="#"
+        class="ol-popup-closer"
+      />
+      <div id="popup-content" />
     </div>
   </div>
 </template>
