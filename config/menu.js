@@ -113,7 +113,7 @@ export const menu = [
           {
             label: 'Openlayers地图的Vue.js混入封装',
             source: require('../src/js/map/map-mixin/README.md'),
-            date: '2022-03-18'
+            date: '2022-04-01'
           },
           {
             label: '判断点位在地图几何范围内',
@@ -137,7 +137,8 @@ export const menu = [
         children: [
           {
             label: '数学函数库',
-            source: require('../src/js/math/rk-math/README.md')
+            source: require('../src/js/math/rk-math/README.md'),
+            date: '2022-04-01'
           },
           {
             label: '二维数组穷尽组合',
@@ -172,6 +173,11 @@ export const menu = [
             label: 'axios封装类',
             source: require('../src/js/html/axios/README.md'),
             date: '2022-03-29'
+          },
+          {
+            label: '带自动重连的websocket类Ws',
+            source: require('../src/js/html/ws/README.md'),
+            date: '2022-04-01'
           },
           {
             label: 'html关键元素防篡改工具类',

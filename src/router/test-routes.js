@@ -35,4 +35,8 @@ export const testRoutes = [
     path: '/leaflet',
     component: ()=>import('../experience/js/map/leaflet/leaflet')
   },
+  {
+    path: '/ws',
+    component: ()=>import('../js/html/ws/ws-demo')
+  },
 ];

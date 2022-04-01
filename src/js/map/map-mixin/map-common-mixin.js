@@ -235,7 +235,7 @@ export const mapCommonMixin = {
       if(option.lonLat){
         let lonLat = [Number(option.lonLat[0]), Number(option.lonLat[1])];
         if(option.offset){
-          let resolution = this.map.getView().getResolution();
+          let resolution = this.mapView.getResolution();
           lonLat = [option.lonLat[0] + resolution * option.offset[0], option.lonLat[1] + resolution * option.offset[1]];
         }
         this.mapView.setCenter(lonLat);
@@ -446,18 +446,47 @@ export const mapCommonMixin = {
           },
         };
       }
-      layer.getSource().addFeatures(new GeoJSON().readFeatures(geojsonObject));
-      if(!_.isEmpty(options.text)){
-        for(let i = 0; i < list.length; i++){
+      let features = new GeoJSON().readFeatures(geojsonObject);
+      let gridColor = ['#00b0ff', '#ffc107', '#2979ff', '#651fff', '#c51162', '#ff1744', '#9c27b0', '#ff3d00', '#00e676', '#94157e'];
+
+      for(let i = 0; i < features.length; i++){
+        let defaultColor = gridColor[_.random(0, gridColor.length - 1)];
+        let color = options?.colors?.[i] || defaultColor;
+        features[0].setStyle(new Style({
+          stroke: new Stroke({
+            color: color,
+            width: 1,
+          }),
+          fill: new Fill({
+            color: this.colorRgba(color, 0.1)
+          }),
+        }));
+
+        if(!_.isEmpty(options.text) && options.text[i]){
           let center = this.getPolygonCenter(list[i]);
           const iconFeature = new Feature(new Point(center));
           iconFeature.setProperties({
             text: options.text[i]
           });
+          iconFeature.setStyle(new Style({
+            text: new Text({
+              text: options.text[i],
+              font: 'normal bold 18px/30px sans-serif',
+              textBaseline: 'middle',
+              padding: [0, 5, 0, 5],
+              textAlign: 'center',
+              backgroundFill: new Fill({
+                color: color
+              }),
+              fill: new Fill({
+                color: '#fff'
+              })
+            })
+          }));
           layer.getSource().addFeature(iconFeature);
         }
       }
-
+      layer.getSource().addFeatures(features);
       layer.setStyle(this.PolygonStyle);
     },
     /**
@@ -505,7 +534,8 @@ export const mapCommonMixin = {
       });
       drawer.on('drawend', (e)=> {
         let result = this.getDrawResult(e.feature, options.type);
-        this.$emit('showStatistics', {
+
+        this.triggerEvent('drawend', {
           drawerArg: result,
           drawerType: options.type,
         });
@@ -790,6 +820,27 @@ export const mapCommonMixin = {
         return result;
       }
     },
-
+    colorRgba(color, a){
+      let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+      let sColor = color.toLowerCase();
+      if(sColor && reg.test(sColor)){
+        if(sColor.length === 4){
+          let sColorNew = '#';
+          for(let i = 1; i < 4; i += 1){
+            sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1));
+          }
+          sColor = sColorNew;
+        }
+        //处理六位的颜色值
+        let sColorChange = [];
+        for(let i = 1; i < 7; i += 2){
+          sColorChange.push(parseInt('0x' + sColor.slice(i, i + 2)));
+        }
+        sColorChange.push(a || 1);
+        return `RGBA(${sColorChange.join(',')})`;
+      }else{
+        return sColor;
+      }
+    },
   }
 };
