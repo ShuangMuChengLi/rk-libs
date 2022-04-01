@@ -1,4 +1,4 @@
-# web前端学习资源网站汇总
+# web前端资源网站汇总
 1. [github](https://github.com/)
 2. [菜鸟教程](https://www.runoob.com/)
 3. [MDN](https://developer.mozilla.org/zh-CN/)
@@ -6,3 +6,5 @@
 5. [npm](https://www.npmjs.com/)
 6. [阿里云GeoJSON选择器](http://datav.aliyun.com/portal/school/atlas/area_selector)
 7. [图片占位符](https://picsum.photos/)
+8. [rpm包下载站](http://www.rpmfind.net/linux/rpm2html/search.php)
+8. [deb包下载站](https://www.debian.org/distrib/packages)

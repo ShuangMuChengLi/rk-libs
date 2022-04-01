@@ -233,13 +233,14 @@ export const menu = [
             date: '2022-02-11'
           },
           {
-            label: 'web前端学习资源网站汇总',
+            label: 'web前端资源网站汇总',
             source: require('../src/experience/solution/learning-website/README.md'),
-            date: '2022-03-21',
+            date: '2022-04-01'
           },
           {
             label: '前端发布平台',
-            source: require('../src/experience/solution/publish-system/README.md')
+            source: require('../src/experience/solution/publish-system/README.md'),
+            date: '2022-04-01'
           },
           {
             label: '语义识别、关键词提取',
