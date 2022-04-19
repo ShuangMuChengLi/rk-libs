@@ -141,6 +141,10 @@ export const routes = [
     component: ()=>import('../components/common-filter/common-filter-demo')
   },
   {
+    path: '/components/image-width-error',
+    component: ()=>import('../components/image-width-error/image-width-error-demo.vue')
+  },
+  {
     path: '/components/person-label',
     component: ()=>import('../components/data/person-label/person-label-demo')
   },

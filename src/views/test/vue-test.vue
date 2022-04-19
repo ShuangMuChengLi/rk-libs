@@ -5,7 +5,6 @@
         本来面目
       </div>
     </div>
-
   </div>
 </template>
 
@@ -13,14 +12,24 @@
 export default {
   name: 'VideoExample',
   async mounted() {
-    this.axios.cancelSingleRequest('cancelToken1');
-    let result = await this.axios.post('./test1.json', {name: 'test'}, {
-      ...this.axios.getJsonHeader(),
-      cancelToken: 'cancelToken1'
-    })
-      .then(res=>this.axios.verifyResponse(res, true))
-      .catch(this.axios.handleResponseError);
-
+    local_ip();
+    function local_ip(){
+      var $mytimeout;
+      if ( window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection ){
+        window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+        var $pc = new RTCPeerConnection({iceServers:[]}),
+          $noop = function(){};
+        $pc.createDataChannel('');
+        $pc.createOffer($pc.setLocalDescription.bind($pc), $noop);
+        $pc.onicecandidate = function($ice){
+          console.log($ice.currentTarget.localDescription.sdp);
+          console.log($ice.currentTarget.pendingLocalDescription.sdp);
+        };
+      }
+      else{
+        document.getElementById('list').innerHTML = '-';
+      }
+    }
   }
 };
 </script>

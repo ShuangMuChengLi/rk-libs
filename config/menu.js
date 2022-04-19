@@ -7,7 +7,7 @@ export const menu = [
         children: [
           {
             label: '图片拼图验证码',
-            source: require('../src/components/picture-verify/README.md')
+            source: require('../src/components/picture-verify/README.md'),
           },
         ]
       },
@@ -75,6 +75,11 @@ export const menu = [
             label: '头像裁剪上传组件',
             source: require('../src/components/photo-uploader/README.md'),
             date: '2022-03-21'
+          },
+          {
+            label: '图片组件',
+            source: require('../src/components/image-width-error/README.md'),
+            date: '2022-04-18'
           },
           {
             label: '日历（最简版骨架）',

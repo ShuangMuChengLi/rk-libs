@@ -1,42 +1,22 @@
-// function getBaseLog(x, y) {
-//   return Math.log(y) / Math.log(x);
-// }
-// console.log(getBaseLog(1.1, 2));
-
-let s = `各位领导，你们好。
-
-    我给大家做一下自我介绍。照片中这个人就是我。
-    我是第一研究院林超群。
-    性别：男。
-    身份证号：350 103 XXXX XXXX 1915。
-    岗位：web前端开发工程师。
-
-    各位领导可能对web前端这个岗位不太了解。
-    公司展厅的大屏界面各位领导应该都有见过。那些就是我带几个伙伴一起开发的。
-    下次各位领导见到公司展厅的大屏，就会想起我。见到我，就会想起展厅的大屏。
-
-    接下来，我给各位领导介绍一下我2021年的工作业绩。
-    我参与了重庆、厦门两地多个项目。累积出差150余天。
-    贡献了两项共享技术。
-    编写了六个进入实审的发明专利。
-    荣登一次公司内刊光荣榜。
-
-    然后我给各位领导介绍一下这两项共享技术给公司创造的价值。
-    第一项共享技术是《web前端项目发布与版本管理平台》
-    这个平台使得单次发布所需时长，从五分钟降低到不到一分钟。
-    大家可能觉得五分钟并不多。如果我一天要发布10个测试版本，那么就能节省四十分钟的工作时间。
-    那么公司一天就可以少给我四十分钟的工资。哦，不。我就可以给公司多做四十分钟的其他工作。
-
-    第二项共享技术是《 web前端组件和函数库》
-    截止今天共封装了56个组件、函数、技术解决方案。
-
-    2021年我共编写了7个发明专利。其中六项进入实审阶段
-    分别是123456
-    今年已经编写了两项发明专利
-    分别一和二。
-
-    今年的工作计划是，好好工作，争取明年这时候，我还能在这里自卖自夸。
-
-    谢谢大家
-`;
-console.log(s.replace(/\s/g, '').length);
+const os = require("os");
+//获取本机ip
+function getIpAddress() {
+  /**os.networkInterfaces() 返回一个对象，该对象包含已分配了网络地址的网络接口 */
+  var interfaces = os.networkInterfaces();
+  console.log(interfaces);
+  for (var devName in interfaces) {
+    var iface = interfaces[devName];
+    for (var i = 0; i < iface.length; i++) {
+      var alias = iface[i];
+      if (
+        alias.family === "IPv4" &&
+        alias.address !== "127.0.0.1" &&
+        !alias.internal
+      ) {
+        return alias.address;
+      }
+    }
+  }
+}
+const myHost = getIpAddress();
+console.log(myHost);

@@ -7,4 +7,5 @@
 6. [阿里云GeoJSON选择器](http://datav.aliyun.com/portal/school/atlas/area_selector)
 7. [图片占位符](https://picsum.photos/)
 8. [rpm包下载站](http://www.rpmfind.net/linux/rpm2html/search.php)
-8. [deb包下载站](https://www.debian.org/distrib/packages)
+9. [deb包下载站](https://www.debian.org/distrib/packages)
+10. [Tailwind CSS 框架](https://www.tailwindcss.cn/)

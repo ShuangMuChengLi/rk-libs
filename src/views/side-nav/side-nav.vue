@@ -5,33 +5,49 @@
       :key="'menu' + key"
       class="nav-item"
     >
-      <span class="label">{{ item.label }}</span>
-      <div
-        v-for="(group, groupKey) in item.children"
-        :key="'group' + groupKey"
-        class="nav-group"
+      <span
+        class="label"
+        @click="shrink(item)"
       >
+        {{ item.label }}
+        <i :class="{'el-icon-arrow-up': !item.isShrink, 'el-icon-arrow-down': item.isShrink}"/>
+      </span>
+      <template v-if="!item.isShrink">
         <div
-          v-if="group.label"
-          class="nav-group__title"
+          v-for="(group, groupKey) in item.children"
+          :key="'group' + groupKey"
+          class="nav-group"
         >
-          {{ group.label }}
-        </div>
-        <ul class="sub-nav">
-          <li
-            v-for="(subItem, subItemKey) in group.children"
-            :key="'subItem' + subItemKey"
-            class="nav-item"
-            :title="subItem.label"
-            @click="tap(subItem)"
+          <div
+            v-if="group.label"
+            class="nav-group__title"
+            @click.stop="shrink(group)"
           >
-            <span
-              class="label"
-              :class="{active: subItem.label === current }"
-            >{{ subItem.label }}</span>
-          </li>
-        </ul>
-      </div>
+            {{ group.label }}
+            <i
+              v-if="false"
+              :class="{'el-icon-arrow-up': !group.isShrink, 'el-icon-arrow-down': group.isShrink}"
+            />
+          </div>
+          <ul
+            v-show="!group.isShrink"
+            class="sub-nav"
+          >
+            <li
+              v-for="(subItem, subItemKey) in group.children"
+              :key="'subItem' + subItemKey"
+              class="nav-item"
+              :title="subItem.label"
+              @click="tap(subItem)"
+            >
+              <span
+                class="label"
+                :class="{isShrink: subItem.label === current }"
+              >{{ subItem.label }}</span>
+            </li>
+          </ul>
+        </div>
+      </template>
     </li>
   </ul>
 </template>
@@ -84,6 +100,9 @@ export default {
     },
     tap(item){
       this.$router.push('/detail/' + item.label);
+    },
+    shrink(item){
+      this.$set(item, 'isShrink', !item.isShrink);
     }
   }
 };
