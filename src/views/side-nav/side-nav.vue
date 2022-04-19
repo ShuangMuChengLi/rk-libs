@@ -1,55 +1,69 @@
 <template>
-  <ul class="side-nav">
-    <li
-      v-for="(item, key) in menu"
-      :key="'menu' + key"
-      class="nav-item"
-    >
-      <span
-        class="label"
-        @click="shrink(item)"
+  <div>
+    <div class="search-bar">
+      <el-input
+        v-model="keyword"
+        placeholder="请输入内容"
+        @input="change"
       >
-        {{ item.label }}
-        <i :class="{'el-icon-arrow-up': !item.isShrink, 'el-icon-arrow-down': item.isShrink}"/>
-      </span>
-      <template v-if="!item.isShrink">
-        <div
-          v-for="(group, groupKey) in item.children"
-          :key="'group' + groupKey"
-          class="nav-group"
+        <i
+          slot="suffix"
+          class="el-input__icon el-icon-search"
+        />
+      </el-input>
+    </div>
+    <ul class="side-nav">
+      <li
+        v-for="(item, key) in menu"
+        :key="'menu' + key"
+        class="nav-item"
+      >
+        <span
+          class="label"
+          @click="shrink(item)"
         >
+          {{ item.label }}
+          <i :class="{'el-icon-arrow-up': !item.isShrink, 'el-icon-arrow-down': item.isShrink}" />
+        </span>
+        <template v-if="!item.isShrink">
           <div
-            v-if="group.label"
-            class="nav-group__title"
-            @click.stop="shrink(group)"
+            v-for="(group, groupKey) in item.children"
+            :key="'group' + groupKey"
+            class="nav-group"
           >
-            {{ group.label }}
-            <i
-              v-if="false"
-              :class="{'el-icon-arrow-up': !group.isShrink, 'el-icon-arrow-down': group.isShrink}"
-            />
-          </div>
-          <ul
-            v-show="!group.isShrink"
-            class="sub-nav"
-          >
-            <li
-              v-for="(subItem, subItemKey) in group.children"
-              :key="'subItem' + subItemKey"
-              class="nav-item"
-              :title="subItem.label"
-              @click="tap(subItem)"
+            <div
+              v-if="group.label"
+              class="nav-group__title"
+              @click.stop="shrink(group)"
             >
-              <span
-                class="label"
-                :class="{isShrink: subItem.label === current }"
-              >{{ subItem.label }}</span>
-            </li>
-          </ul>
-        </div>
-      </template>
-    </li>
-  </ul>
+              {{ group.label }}
+              <i
+                v-if="false"
+                :class="{'el-icon-arrow-up': !group.isShrink, 'el-icon-arrow-down': group.isShrink}"
+              />
+            </div>
+            <ul
+              v-show="!group.isShrink"
+              class="sub-nav"
+            >
+              <li
+                v-for="(subItem, subItemKey) in group.children"
+                :key="'subItem' + subItemKey"
+                class="nav-item"
+                :title="subItem.label"
+                @click="tap(subItem)"
+              >
+                <span
+                  class="label"
+                  :class="{isShrink: subItem.label === current }"
+                >{{ subItem.label }}</span>
+              </li>
+            </ul>
+          </div>
+        </template>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -61,7 +75,8 @@ export default {
     return {
       current: '时间轴选择器',
       menu: menu,
-      menuList: []
+      menuList: [],
+      keyword: ''
     };
   },
   watch:{
@@ -77,7 +92,7 @@ export default {
   },
   methods:{
     init(){
-      this.rebuildMenu(this.menu);
+      this.getMenuList(this.menu);
       if(this.$route.params.type){
         let item = _.find(this.menuList, {label: this.$route.params.type});
         this.$emit('change', item.source);
@@ -87,14 +102,14 @@ export default {
         this.current = this.menuList[0].label;
       }
     },
-    rebuildMenu(menu){
+    getMenuList(menu){
       for(let item of menu){
         if(item.source){
           this.menuList.push(item);
         }
 
         if(item.children){
-          this.rebuildMenu(item.children);
+          this.getMenuList(item.children);
         }
       }
     },
@@ -103,6 +118,24 @@ export default {
     },
     shrink(item){
       this.$set(item, 'isShrink', !item.isShrink);
+    },
+    rebuildMenu(menu, keyword){
+      let list = [];
+      for(let item of menu){
+        if(item.label.includes(keyword)){
+          list.push(item);
+        }else if(item.children){
+          let result = this.rebuildMenu(item.children, keyword);
+          if(!_.isEmpty(result)){
+            item.children = result;
+            list.push(item);
+          }
+        }
+      }
+      return list;
+    },
+    change(val){
+      this.menu = this.rebuildMenu(menu, val);
     }
   }
 };
