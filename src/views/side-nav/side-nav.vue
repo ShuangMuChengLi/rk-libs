@@ -55,7 +55,7 @@
               >
                 <span
                   class="label"
-                  :class="{isShrink: subItem.label === current }"
+                  :class="{active: subItem.label === current }"
                 >{{ subItem.label }}</span>
               </li>
             </ul>
@@ -74,7 +74,7 @@ export default {
   data(){
     return {
       current: '时间轴选择器',
-      menu: menu,
+      menu: _.cloneDeep(menu),
       menuList: [],
       keyword: ''
     };
@@ -101,6 +101,7 @@ export default {
         this.$emit('change', this.menuList[0].source);
         this.current = this.menuList[0].label;
       }
+      console.log(this.current);
     },
     getMenuList(menu){
       for(let item of menu){
@@ -134,9 +135,9 @@ export default {
       }
       return list;
     },
-    change(val){
-      this.menu = this.rebuildMenu(menu, val);
-    }
+    change: _.debounce(function (val){
+      this.menu = this.rebuildMenu(_.cloneDeep(menu), val);
+    }, 500)
   }
 };
 </script>

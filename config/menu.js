@@ -224,6 +224,16 @@ export const menu = [
           },
         ]
       },
+      {
+        label: 'tools',
+        children: [
+          {
+            label: '项目工具包systemUtil',
+            source: require('../src/js/tools/system-util/README.md'),
+            date: '2022-04-20'
+          },
+        ]
+      },
     ]
   },
   {
