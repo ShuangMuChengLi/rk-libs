@@ -101,7 +101,6 @@ export default {
         this.$emit('change', this.menuList[0].source);
         this.current = this.menuList[0].label;
       }
-      console.log(this.current);
     },
     getMenuList(menu){
       for(let item of menu){

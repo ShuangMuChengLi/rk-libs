@@ -99,21 +99,14 @@ let getOption = (inputOptions) => {
  * @returns {boolean}
  */
 function handleError(e, isAlert) {
-  if (e.response && e.response.status) {
-    if (e.response.status === 401) {
-      if (window.location.href.indexOf('/#/login') === -1) {
-        if(isAlert){
-          errorMessage('登录过期');
-        }
-        storageUtil.setSession('historyUrl', window.location.href);
-        this.goto('/login');
-      }
-    }else{
-      console.log(e.response, isAlert);
-      if(isAlert){
-        errorMessage(e.response?.data?.message);
-      }
+  if(isAlert){
+    if(e.response){
+      errorMessage(e.response?.data?.message || e.response?.data);
     }
+  }
+  if (e.response?.status === 401 && window.location.href.indexOf('/#/login') === -1) {
+    storageUtil.setSession('historyUrl', window.location.href);
+    this.goto('/login');
   }
   // console.error(e);
   return false;
@@ -330,7 +323,6 @@ export const axios = {
    * @returns {boolean}
    */
   verifyDataResponse(data, isAlert) {
-    console.log(data, 'verifyDataResponse');
     if (data && data.data) {
       if (data.data.code === 200) {
         return true;
@@ -350,7 +342,6 @@ export const axios = {
    * @param error
    */
   handleResponseError(error) {
-    console.log(error, 'handleResponseError');
     errorMessage(error.message);
     return false;
   },
