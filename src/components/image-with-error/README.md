@@ -1,9 +1,9 @@
 # 图片组件
 图片加载错误时可定时重载，可设置错误图片
 ## preview
-[预览](./index.html#/components/image-width-error)
+[预览](./index.html#/components/image-with-error)
 ## download
-[组件下载](./components/image-width-error.zip)
+[组件下载](./components/image-with-error.zip)
 ## dependence
 Vue.js、elementUi
 
@@ -19,8 +19,8 @@ Vue.js、elementUi
 ```
 <template>
   <div class="photo-wrapper">
-    <image-width-error src="./photo.png" />
-    <image-width-error
+    <image-with-error src="./photo.png" />
+    <image-with-error
       src="./photo1.png"
       :enable-reload="true"
     />
@@ -28,10 +28,10 @@ Vue.js、elementUi
 </template>
 
 <script>
-import ImageWidthError from './image-width-error';
+import ImageWidthError from './image-with-error';
 export default {
-  name: 'ImageWidthErrorDemo',
-  components: {ImageWidthError}
+  name: 'ImageWithErrorDemo',
+  components: {ImageWithError}
 };
 </script>
 

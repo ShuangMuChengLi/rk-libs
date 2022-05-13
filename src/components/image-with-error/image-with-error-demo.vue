@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import ImageWidthError from './image-width-error';
+import ImageWidthError from './image-with-error';
 export default {
-  name: 'ImageWidthErrorDemo',
+  name: 'ImageWithErrorDemo',
   components: {ImageWidthError}
 };
 </script>

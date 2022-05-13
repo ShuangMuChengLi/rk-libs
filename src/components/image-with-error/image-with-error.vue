@@ -29,7 +29,7 @@
 import emptyImg from './empty.png';
 import emptyBlackImg from './empty-black.png';
 export default {
-  name: 'ImageWidthError',
+  name: 'ImageWithError',
   props:{
     src:{
       type: String,

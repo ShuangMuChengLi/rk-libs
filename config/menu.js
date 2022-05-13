@@ -78,7 +78,7 @@ export const menu = [
           },
           {
             label: '图片组件',
-            source: require('../src/components/image-width-error/README.md'),
+            source: require('../src/components/image-with-error/README.md'),
             date: '2022-04-18'
           },
           {
