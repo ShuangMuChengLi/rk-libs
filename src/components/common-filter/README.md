@@ -25,92 +25,163 @@ Vue.js、ElementUI
 ## usage
 ```
 <template>
-  <common-filter
-    :form-info="dangerAreaFilter"
-    @submit="query"
-  >
-    <el-button
-      type="primary"
+  <div class="filter-wrapper">
+    <el-form
+      :inline="true"
+      :model="form"
+      class="demo-form-inline"
+      size="mini"
     >
-      新增
-    </el-button>
-  </common-filter>
+      <template v-for="(item, key) in formInfo">
+        <el-form-item
+          v-if="item.type === 'dateRange'"
+          :key="'formInfoItem' + key"
+          :label="item.label"
+        >
+          <el-date-picker
+            v-model="form[item.prop[0]]"
+            type="datetime"
+            placeholder="选择日期时间"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            clearable
+          />
+          <span> - </span>
+          <el-date-picker
+            v-model="form[item.prop[1]]"
+            type="datetime"
+            placeholder="选择日期时间"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            clearable
+          />
+        </el-form-item>
+
+        <el-form-item
+          v-if="item.type === 'select'"
+          :key="'formInfoItem' + key"
+          :label="item.label"
+        >
+          <el-select
+            v-model="form[item.prop]"
+            clearable
+          >
+            <el-option
+              v-for="(option, index) in item.options"
+              v-show="!option.hidden"
+              :key="Math.random() + index"
+              :label="option.label"
+              :value="option.value"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          v-if="item.type === 'input'"
+          :key="'formInfoItem' + key"
+          :label="item.label"
+        >
+          <el-input
+            v-model="form[item.prop]"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+          v-if="item.slot"
+          :key="'formInfoItem' + key"
+          :label="item.label"
+        >
+          <slot
+            :name="item.slot"
+            :form="form"
+          />
+        </el-form-item>
+      </template>
+      <el-form-item>
+        <el-button
+          type="primary"
+          @click="onSubmit"
+        >
+          查询
+        </el-button>
+        <el-button
+          type="info"
+          @click="reset"
+        >
+          重置
+        </el-button>
+      </el-form-item>
+      <el-form-item>
+        <slot></slot>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
+
 <script>
-import CommonFilter from './common-filter';
+import _ from 'lodash';
+import moment from 'moment';
 export default {
-  name: 'CommonFilterDemo',
-  components: {CommonFilter},
-  data(){
+  name: 'CommonFilter',
+  props:{
+    auto: {
+      type: Boolean,
+      default: false
+    },
+    formInfo: {
+      type: Array,
+      default(){
+        return [];
+      }
+    }
+  },
+  data() {
     return {
-      dangerAreaFilter: [
-        {
-          label: '漫入日期',
-          prop: ['mrqssj', 'mrjssj'],
-          type: 'dateRange'
-        },
-        {
-          label: '人员状态',
-          prop: 'ryzt',
-          type: 'select',
-          options: [
-            {
-              label: '14天以内',
-              value: '1014'
-            },
-            {
-              label: '14天以上',
-              value: '2014'
-            }
-          ]
-        },
-        {
-          label: '中高风险地',
-          prop: 'fxdj',
-          type: 'select',
-          options: [
-            {
-              label: '高风险',
-              value: '1'
-            },
-            {
-              label: '中风险',
-              value: '2'
-            },
-            {
-              label: '低风险',
-              value: '3'
-            },
-          ]
-        },
-        {
-          label: '浸入地',
-          prop: 'mrd',
-          type: 'input',
-        },
-        {
-          label: '关键字',
-          prop: 'keyword',
-          type: 'input',
-        }
-      ],
-      form: {}
+      form: {
+      },
     };
   },
-  methods:{
-    query(form){
-      this.form = form;
-      this.getList();
-    },
-    getList(){
+  mounted() {
+    this.form = {};
+    for(let item of this.formInfo){
+      if(_.isArray(item.prop)){
+        for(let i = 0; i < item.prop.length; i++){
+          let prop = item.prop[i];
+          this.$set(this.form, prop, item.defaultValue ? item.defaultValue[i] : null);
+        }
+      }else{
+        this.$set(this.form, item.prop, item.defaultValue || null);
+      }
 
+    }
+    if(this.auto){
+      this.onSubmit();
+    }
+  },
+  methods: {
+    onSubmit() {
+      for(let item of this.formInfo){
+        if(item.type === 'dateRange'){
+          let beginTime = this.form[item.prop[0]];
+          let endTime = this.form[item.prop[1]];
+          if(beginTime && endTime && moment(beginTime).isAfter(moment(endTime))){
+            this.$message.error(item.label + '的开始时间大于结束时间');
+            return;
+          }
+        }
+      }
+      this.$emit('submit', this.form);
+    },
+    reset() {
+      this.form = {};
+      for(let item of this.formInfo){
+        this.$set(this.form, item.prop, item.defaultValue || null);
+      }
+      this.$emit('submit', this.form);
     }
   }
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+@import "filter";
 </style>
 
 ```
