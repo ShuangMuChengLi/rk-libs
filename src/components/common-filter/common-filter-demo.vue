@@ -3,6 +3,12 @@
     :form-info="dangerAreaFilter"
     @submit="query"
   >
+    <template v-slot:info="form">
+      <el-input
+        v-model="form.info"
+        placeholder="自定义插槽"
+      />
+    </template>
     <el-button
       type="primary"
     >
@@ -66,6 +72,12 @@ export default {
           label: '关键字',
           prop: 'keyword',
           type: 'input',
+        },
+        {
+          label: '自定义插槽',
+          prop: 'info',
+          type: 'slot',
+          slot: 'info'
         }
       ],
       form: {}

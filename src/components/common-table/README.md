@@ -16,7 +16,7 @@ Vue.js、ElementUI
 ### column参数
 | 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
 | ---- | ---- |---- | ----   |----  |  --- |
-| prop | 列字段名，优先级3,如果是字符串直接渲染，如果是数组则分行渲染 | String/Array | false | -  |  - |
+| prop | 列字段名，优先级3,如果是数组则分行渲染，如果是字符串直接渲染 | String/Array | false | -  |  - |
 | slot | 插槽名，优先级1 | String | false | -  |  - |
 | fn | 插槽名，优先级2,回调函数参数是该行数据，返回值是列表渲染数据 | Function | false | -  |  - |
 | label | 列标题 | String | true | -  |  - |
@@ -67,6 +67,22 @@ export default {
           width: null
         },
         {
+          prop: 'hobby',
+          label: '爱好',
+          width: null
+        },
+        {
+          label: '状态',
+          width: null,
+          fn(row){
+            if(row.state === 1){
+              return '在线';
+            }else{
+              return '离线';
+            }
+          }
+        },
+        {
           prop: ['datetime', 'address'],
           label: '时间/地点',
           width: null
@@ -76,8 +92,10 @@ export default {
         {
           img: 'https://picsum.photos/200/300',
           name: '张三',
+          hobby: ['打球', '爬山'], // 分行渲染
           datetime: '2022-03-21 12:12:12',
           address: '软件园',
+          state: 1
         }
       ]
     };
@@ -91,5 +109,6 @@ export default {
     height: 600px;
   }
 </style>
+
 
 ```

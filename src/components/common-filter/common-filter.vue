@@ -40,6 +40,7 @@
           >
             <el-option
               v-for="(option, index) in item.options"
+              v-show="!option.hidden"
               :key="Math.random() + index"
               :label="option.label"
               :value="option.value"
@@ -56,6 +57,16 @@
             clearable
           />
         </el-form-item>
+        <el-form-item
+          v-if="item.slot"
+          :key="'formInfoItem' + key"
+          :label="item.label"
+        >
+          <slot
+            :name="item.slot"
+            :form="form"
+          />
+        </el-form-item>
       </template>
       <el-form-item>
         <el-button
@@ -70,7 +81,9 @@
         >
           重置
         </el-button>
-        <slot />
+      </el-form-item>
+      <el-form-item>
+        <slot></slot>
       </el-form-item>
     </el-form>
   </div>
@@ -142,5 +155,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import "./filter";
+@import "filter";
 </style>

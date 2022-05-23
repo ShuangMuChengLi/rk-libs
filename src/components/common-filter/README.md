@@ -15,7 +15,8 @@ Vue.js、ElementUI
 | ---- | ---- |---- | ----   |----  |  --- |
 | prop | 字段名 | String/Array | true | -  |  - |
 | label | 字段标题 | String | true | -  |  - |
-| type | 字段类型 | String | true | 'dateRange'、'select'、'input'  |  - |
+| type | 字段类型 | String | true | 'dateRange'、'select'、'input'、'slot'  |  - |
+| slot | 插槽名 | String | false | -  |  - |
 | options | 下拉框的选项列表 | Array | false | -  |  - |
 ## event
 | 事件名称 |	说明 |回调参数 |

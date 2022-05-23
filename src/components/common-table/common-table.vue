@@ -3,7 +3,7 @@
     class="table"
     :data="data"
     style="width: 100%"
-    height="100%"
+    :height="height"
   >
     <el-table-column
       type="index"
@@ -11,14 +11,7 @@
     />
     <template v-for="(item, key) in column">
       <el-table-column
-        v-if="!item.slot && (typeof item.prop === 'string') && !item.fn"
-        :key="'tableColumn' + key"
-        :prop="item.prop"
-        :label="item.label"
-        :width="item.width"
-      />
-      <el-table-column
-        v-if="!item.slot && item.fn"
+        v-if="item.fn"
         :key="'tableColumn' + key"
         :prop="item.prop"
         :label="item.label"
@@ -29,7 +22,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        v-if="!item.slot && Array.isArray(item.prop)"
+        v-else-if="Array.isArray(item.prop)"
         :key="'tableColumn' + key"
         :label="item.label"
         :width="item.width"
@@ -44,7 +37,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        v-if="item.slot"
+        v-else-if="item.slot"
         :key="'tableColumn' + key"
         :prop="item.prop"
         :label="item.label"
@@ -57,6 +50,29 @@
           />
         </template>
       </el-table-column>
+      <el-table-column
+        v-else-if="item.type === 'array'"
+        :key="'tableColumn' + key"
+        :prop="item.prop"
+        :label="item.label"
+        :width="item.width"
+      >
+        <template slot-scope="scope">
+          <p
+            v-for="(subItem, subKey) in scope.row[item.prop]"
+            :key="Math.random() + subKey"
+          >
+            {{ subItem }}
+          </p>
+        </template>
+      </el-table-column>
+      <el-table-column
+        v-else
+        :key="'tableColumn' + key"
+        :prop="item.prop"
+        :label="item.label"
+        :width="item.width"
+      />
     </template>
     <slot />
   </el-table>
@@ -68,6 +84,10 @@ export default {
   name: 'CommonTable',
   mixins:[ tableIndexMixin ],
   props:{
+    height:{
+      default: '100%',
+      type: String
+    },
     column:{
       default(){
         return [];

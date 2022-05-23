@@ -36,6 +36,11 @@ export default {
           width: null
         },
         {
+          prop: 'hobby',
+          label: '爱好',
+          width: null
+        },
+        {
           label: '状态',
           width: null,
           fn(row){
@@ -56,6 +61,7 @@ export default {
         {
           img: 'https://picsum.photos/200/300',
           name: '张三',
+          hobby: ['打球', '爬山'],
           datetime: '2022-03-21 12:12:12',
           address: '软件园',
           state: 1

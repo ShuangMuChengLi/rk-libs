@@ -28,3 +28,15 @@ let reg = /(?<=\[)((?!]).*?)(?=])/g;
 let result = s.match(reg);
 // let result = s.replace(reg, '##$1##');
 console.log(result);
+let _ = require('lodash');
+let list = [
+  {
+    name: 1,
+    value: 2
+  },
+  {
+    name: 1,
+    value: 3
+  }
+]
+console.log(_.filter(list, {name: 1}))
