@@ -7,8 +7,9 @@ import axios from 'axios';
 export default {
   name: 'Axios',
   mounted () {
-    axios.post('http://www.jianshu.com/p/3e08e0e60a29', 'test').then(()=>{
-
+    console.log(1);
+    axios.post('/url', 'test').then((res)=>{
+      console.log(res);
     });
   }
 };

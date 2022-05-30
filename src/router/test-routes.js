@@ -39,4 +39,8 @@ export const testRoutes = [
     path: '/ws',
     component: ()=>import('../js/html/ws/ws-demo')
   },
+  {
+    path: '/tree-demo',
+    component: ()=>import('../experience/html/tree/tree-demo')
+  },
 ];

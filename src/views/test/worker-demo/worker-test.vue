@@ -10,7 +10,8 @@
 </template>
 
 <script>
-import TestWorker from './test.worker.js';
+import TestWorker from 'worker-loader!./test.worker.js';
+// import TestWorker from './test.worker.js';
 export default {
   name: 'VueTest',
   data () {
