@@ -53,6 +53,7 @@ import {mapCommonMixin} from './map-common-mixin';
 import icon from './icon.png';
 import startIcon from './start.png';
 import endIcon from './end.png';
+import t from './t.json';
 export default {
   name: 'OlDemo',
   mixins: [mapCommonMixin],
@@ -112,6 +113,16 @@ export default {
   },
   methods: {
     initLayers() {
+      this.polygonLayer = this.getVectorLayer();
+      this.showPolygon({
+        layer: this.polygonLayer,
+        text: [''],
+        list: [
+          t
+        ]
+      });
+      console.log(t);
+      return;
       this.iconLayer = this.getVectorLayer({icon: icon});
       this.createSelect(
         {
@@ -184,23 +195,7 @@ export default {
         },
       });
 
-      this.polygonLayer = this.getVectorLayer();
-      this.showPolygon({
-        layer: this.polygonLayer,
-        text: ['思明区', '湖里区'],
-        list: [
-          [
-            [118.15364562988282, 24.507671026611323],
-            [118.14368927001954, 24.456172613525386],
-            [118.12, 24.48]
-          ],
-          [
-            [118.15364562988282, 24.507671026611323],
-            [118.14368927001954, 24.456172613525386],
-            [118.18304304071664, 24.47451119964748]
-          ],
-        ]
-      });
+
       let clusterList = [
         {
           lonLat: [118.18935119628907, 24.503551153564448],
