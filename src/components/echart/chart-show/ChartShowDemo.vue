@@ -216,8 +216,8 @@ export default {
               {
                 name: '水果类型',
                 type: 'pie', // 饼图
-                radius: ['40%', '70%'], // 饼图大小
-                center: ['40%', '50%'],
+                radius: ['35%', '65%'], // 饼图大小
+                center: ['45%', '50%'],
                 roseType: 'area',
                 // itemStyle: {
                 //   borderColor: 'rgba(0, 28, 55, 0.55)', // '#23333a',
@@ -247,7 +247,7 @@ export default {
                   },
                   color: 'inherit',
                   fontStyle: 'normal',
-                  fontSize: 18,
+                  fontSize: 14,
                   fontWeight: 'bold',
                   borderWidth: 0,
                   edgeDistance: 0
@@ -841,6 +841,109 @@ export default {
               }
             ]
           }
+        },
+        {
+          title: '对比柱状图',
+          chartData: {
+            legend: {
+              show: true,
+              // data: ['苹果', '橘子'],
+              icon: 'rect',
+              itemWidth: 8,
+              itemHeight: 6,
+              right: 0
+            },
+            xAxis: {
+              type: 'category',
+              // data: ['今日', '昨日'],
+              lineStyle: {
+                color: '#ffffff'
+              }
+            },
+            yAxis: {
+              name: '频次',
+              top: 10,
+              nameTextStyle: {
+                color: '#ffffff',
+                fontSize: 12
+              }
+            },
+            axisPointer: {
+              type: 'line',
+              axis: 'y',
+              lineStyle: {
+                type: 'line',
+                color: '#ffffff'
+              },
+              snap: true,
+              handle: {
+                show: false
+              }
+            },
+            dataset: {
+              dimensions: ['product', '今日', '昨日'],
+              source: [
+                {
+                  product: '今日',
+                  '今日': 1.8,
+                  '昨日': 1.3
+                },
+                {
+                  product: '昨日',
+                  '今日': 1.0,
+                  '昨日': 0.9
+                }
+              ]
+            },
+            series: [
+              {
+                name: '苹果',
+                type: 'bar',
+                // data: [1.2, 1.6],
+                barWidth: '12%',
+                color: {
+                  type: 'linear',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 1,
+                      color: ['#1E9BFB'] // 0% 处的颜色
+                    }, {
+                      offset: 0,
+                      color: ['#3CFFFD'] // 100% 处的颜色
+                    }
+                  ],
+                  global: false // 缺省为 false
+                }
+              },
+              {
+                name: '橘子',
+                type: 'bar',
+                // data: [0.8, 1.1],
+                barWidth: '12%',
+                color: {
+                  type: 'linear',
+                  x: 0,
+                  y: 1,
+                  x2: 0,
+                  y2: 0,
+                  colorStops: [
+                    {
+                      offset: 1,
+                      color: ['#FFFD72'] // 0% 处的颜色
+                    }, {
+                      offset: 0,
+                      color: ['#FFA201'] // 100% 处的颜色
+                    }
+                  ],
+                  global: false // 缺省为 false
+                }
+              }
+            ]
+          }
         }
       ]
     };
@@ -862,7 +965,7 @@ export default {
     overflow: hidden;
     .chart-list {
       display: flex;
-      width: 22%;
+      width: calc(20% - 15px);
       height: 300px;
       flex-flow: column;
       border: solid 1px #dedede;
