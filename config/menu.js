@@ -22,6 +22,10 @@ export const menu = [
             label: 'h5s播放弹窗',
             source: require('../src/components/h5s-player-dialog/README.md')
           },
+          {
+            label: '海康播放器（插件）',
+            source: require('../src/components/hikvision-video-player-plugin/README.md')
+          },
         ]
       },
       {

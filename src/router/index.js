@@ -160,6 +160,10 @@ export const routes = [
     path: '/components/Zoomer',
     component: ()=>import('../components/Zoomer/ZoomerDemo')
   },
+  {
+    path: '/components/video-player-plugin',
+    component: ()=>import('../components/hikvision-video-player-plugin/video-player-plugin-preview')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
