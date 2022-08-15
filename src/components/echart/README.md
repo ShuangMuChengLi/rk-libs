@@ -2,9 +2,9 @@
 ## preview
 [预览](./index.html#/components/echart/chart-show)
 ## download
-[组件下载](./components/echart/chart-show.zip)
+[组件下载](./components/echart.zip)
 ## dependence
-Vue.js、chart
+Vue.js、echarts、echarts-liquidfill、element-resize-detector、lodash
 
 ## Attributes
 | 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |

@@ -66,6 +66,11 @@ export const menu = [
             source: require('../src/components/data/person-label/README.md'),
             date: '2022-03-21'
           },
+          {
+            label: 'echart封装',
+            source: require('../src/components/echart/README.md'),
+            date: '2022-08-15'
+          },
         ]
       },
       {
@@ -104,6 +109,11 @@ export const menu = [
             label: '弹窗外壳（适用地图弹窗）',
             source: require('../src/components/other/common-dialog/README.md'),
             date: '2022-03-21'
+          },
+          {
+            label: '图片放大镜组件',
+            source: require('../src/components/Zoomer/README.md'),
+            date: '2022-08-15'
           },
         ]
       }

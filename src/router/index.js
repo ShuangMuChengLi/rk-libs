@@ -152,6 +152,14 @@ export const routes = [
     path: '/components/other/common-dialog',
     component: ()=>import('../components/other/common-dialog/common-dialog-demo')
   },
+  {
+    path: '/components/echart/chart-show',
+    component: ()=>import('../components/echart/chart-show/ChartShowDemo')
+  },
+  {
+    path: '/components/Zoomer',
+    component: ()=>import('../components/Zoomer/ZoomerDemo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

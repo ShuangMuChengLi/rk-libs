@@ -15,7 +15,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import ChartBase from '../ChartBase'; // 引入Echart组件
 export default {
