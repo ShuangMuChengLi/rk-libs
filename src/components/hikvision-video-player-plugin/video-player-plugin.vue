@@ -219,9 +219,9 @@ export default {
     **/
     setPlayerOption() {
       const argument = {
-        appkey: '28115721', //综合安防管理平台提供的appkey，必填
-        secret: this.setEncrypt('kRpqKRHyo5s7TAJXTK6h'), //综合安防管理平台提供的secret，必填
-        ip: '10.1.0.215:443', //综合安防管理平台IP地址，必填
+        appkey: '12345678', //综合安防管理平台提供的appkey，必填
+        secret: this.setEncrypt('hTjKabcRpqskyo7h5J'), //综合安防管理平台提供的secret，必填
+        ip: '10.0.0.1:443', //综合安防管理平台IP地址，必填
         playMode: 0, //初始播放模式：0-预览，1-回放
         port: 443, //综合安防管理平台端口，若启用HTTPS协议，默认443
         snapDir: 'D:\\SnapDir', //抓图存储路径

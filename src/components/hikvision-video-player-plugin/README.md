@@ -12,6 +12,7 @@ jsencrypt
 | option | 播放器配置 | Object | false | -  |  { iWidth: 500,iHeight: 300 } |
 | channelCode | 通道号 | String or Array | true | -  |  - |
 ## usage
+在使用视频播放器之前，需要安装[VideoWebPlugin.exe](https://open.hikvision.com/fileserver/filesonline/%E8%A7%86%E9%A2%91WEB%E6%8F%92%E4%BB%B6_Win32_V1.5.2_build202109161510_20210916161718.rar)插件。(如当前链接无法下载，请在[参考文档及SDK](#document-and-sdk)中下载)
 ```vue
 <template>
   <div>
@@ -63,6 +64,6 @@ export default {
 </style>
 
 ```
-## 参考文档及SDK
+## <span id="document-and-sdk">参考文档及SDK</span>
 [海康综合安防管理平台-H5视频播放器开发包 V2.1.2](https://open.hikvision.com/download/5c67f1e2f05948198c909700?type=10)  
 [海康官方文档及SDK下载](https://open.hikvision.com/fileserver/filesonline/%E8%A7%86%E9%A2%91WEB%E6%8F%92%E4%BB%B6_Win32_V1.5.2_build202109161510_20210916161718.rar)
