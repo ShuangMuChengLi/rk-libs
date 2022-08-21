@@ -164,6 +164,22 @@ export const routes = [
     path: '/components/video-player-plugin',
     component: ()=>import('../components/hikvision-video-player-plugin/video-player-plugin-preview')
   },
+  {
+    path: '/components/select-more/SelectMoreDemo',
+    component: ()=>import('../components/select-more/SelectMoreDemo')
+  },
+  {
+    path: '/components/virtual-list/VirtualListDemo',
+    component: ()=>import('../components/virtual-list/VirtualListDemo')
+  },
+  {
+    path: '/components/full-screen/FullScreenDemo',
+    component: ()=>import('../components/full-screen/FullScreenDemo')
+  },
+  {
+    path: '/demo/font',
+    component: ()=>import('../experience/html/font/Font')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

@@ -119,6 +119,26 @@ export const menu = [
             source: require('../src/components/Zoomer/README.md'),
             date: '2022-08-15'
           },
+          {
+            label: '下拉多选',
+            source: require('../src/components/select-more/README.md'),
+            date: '2022-08-20'
+          },
+          {
+            label: '虚拟列表',
+            source: require('../src/components/virtual-list/README.md'),
+            date: '2022-08-20'
+          },
+          {
+            label: '全屏',
+            source: require('../src/components/full-screen/README.md'),
+            date: '2022-08-20'
+          },
+          {
+            label: '浏览器拍照+人脸识别',
+            source: require('../src/components/camera-capture/README.md'),
+            date: '2022-08-20'
+          },
         ]
       }
     ]
@@ -402,6 +422,10 @@ export const menu = [
           {
             label: 'css动画库animate.js',
             source: require('../src/experience/special-effects/animate/README.md')
+          },
+          {
+            label: '字体资源下载',
+            source: require('../src/experience/html/font/README.md')
           }
         ]
       },
