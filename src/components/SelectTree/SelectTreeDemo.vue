@@ -1,14 +1,16 @@
 <template>
-  <select-tree
-    v-model="value"
-    :treeData="treeData"
-    :onlyLeaf="false"
-    placeholder="请选择节点"
-    treeKey="value"
-    :treeProps="{
-      label: 'name'
-    }"
-  />
+  <div class="wrapper">
+    <select-tree
+      v-model="value"
+      :tree-data="treeData"
+      :only-leaf="false"
+      placeholder="请选择节点"
+      tree-key="value"
+      :tree-props="{
+        label: 'name'
+      }"
+    />
+  </div>
 </template>
 
 <script>
@@ -51,3 +53,8 @@ export default {
   }
 };
 </script>
+<style lang="less" scoped>
+  .wrapper{
+    margin: 30px;
+  }
+</style>
