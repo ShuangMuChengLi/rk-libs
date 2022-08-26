@@ -125,6 +125,11 @@ export const menu = [
             date: '2022-08-20'
           },
           {
+            label: '下拉选择树',
+            source: require('../src/components/SelectTree/README.md'),
+            date: '2022-08-26'
+          },
+          {
             label: '虚拟列表',
             source: require('../src/components/virtual-list/README.md'),
             date: '2022-08-20'

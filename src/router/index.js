@@ -169,6 +169,10 @@ export const routes = [
     component: ()=>import('../components/select-more/SelectMoreDemo')
   },
   {
+    path: '/components/SelectTree/SelectMoreDemo',
+    component: ()=>import('../components/SelectTree/SelectTreeDemo')
+  },
+  {
     path: '/components/virtual-list/VirtualListDemo',
     component: ()=>import('../components/virtual-list/VirtualListDemo')
   },
