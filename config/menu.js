@@ -139,6 +139,16 @@ export const menu = [
             source: require('../src/components/camera-capture/README.md'),
             date: '2022-08-20'
           },
+          {
+            label: '图片裁剪上传',
+            source: require('../src/components/ImageUpload/README.md'),
+            date: '2022-08-28'
+          },
+          {
+            label: '文件上传',
+            source: require('../src/components/FileUpload/README.md'),
+            date: '2022-08-28'
+          },
         ]
       }
     ]
