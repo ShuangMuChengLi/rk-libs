@@ -1,12 +1,19 @@
 <template>
-  <div class="select-tree" ref="select-tree">
-    <el-popover :width="popoverWidth" placement="bottom" trigger="click">
+  <div
+    ref="select-tree"
+    class="select-tree"
+  >
+    <el-popover
+      :width="popoverWidth"
+      placement="bottom"
+      trigger="click"
+    >
       <el-tree
+        ref="tree"
         class="tree"
         :data="treeData"
         :show-checkbox="multiple"
         :node-key="treeKey"
-        ref="tree"
         :load="loadNode"
         :lazy="lazy"
         highlight-current
@@ -17,25 +24,30 @@
         }"
         @check="handleCheckChange"
         @current-change="handleClickChange"
-      >
-      </el-tree>
+      />
       <template v-slot:reference>
-        <div class="el-input" :class="`el-input--${size}`">
+        <div
+          class="el-input"
+          :class="`el-input--${size}`"
+        >
           <div class="el-input__inner">
-            <div v-if="!value || !value.length" class="placeholder">
+            <div
+              v-if="!value || !value.length"
+              class="placeholder"
+            >
               {{ placeholder }}
             </div>
             <template v-else-if="multiple">
               <div
-                class="tag el-tag el-tag--info el-tag--small el-tag--light"
                 v-for="item in checkList"
                 :key="item[treeKey]"
+                class="tag el-tag el-tag--info el-tag--small el-tag--light"
               >
                 <span class="el-select__tags-text">{{ item[labelKey] }}</span>
                 <i
                   class="el-tag__close el-icon-close"
                   @click.stop="handleRemove(item[treeKey])"
-                ></i>
+                />
               </div>
             </template>
             <template v-else-if="!multiple">
@@ -51,15 +63,6 @@
 import _ from 'lodash';
 export default {
   name: 'SelectTree',
-  data() {
-    return {
-      checkNode: [],
-      selectNode: '',
-      checkList: [],
-      selectObj: {},
-      popoverWidth: ''
-    };
-  },
   props: {
     value: {
       type: [Array, String, Number],
@@ -102,6 +105,15 @@ export default {
       default: 'medium'
     }
   },
+  data() {
+    return {
+      checkNode: [],
+      selectNode: '',
+      checkList: [],
+      selectObj: {},
+      popoverWidth: ''
+    };
+  },
   computed: {
     labelKey() {
       return this.treeProps?.label || 'label';
@@ -114,6 +126,10 @@ export default {
         this.handleUpdateValue();
       }
     }
+  },
+  mounted() {
+    this.handleUpdateValue();
+    this.popoverWidth = this.$refs['select-tree'].clientWidth;
   },
   methods: {
     handleRemove(value) {
@@ -154,10 +170,6 @@ export default {
         }
       }
     }
-  },
-  mounted() {
-    this.handleUpdateValue();
-    this.popoverWidth = this.$refs['select-tree'].clientWidth;
   }
 };
 </script>

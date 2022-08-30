@@ -4,7 +4,12 @@
       id="treeDemo"
       class="ztree"
     />
-    <el-button type="primary" @click="getCheckedNodes">测试</el-button>
+    <el-button
+      type="primary"
+      @click="getCheckedNodes"
+    >
+      测试
+    </el-button>
   </div>
 </template>
 

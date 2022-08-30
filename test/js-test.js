@@ -38,5 +38,5 @@ let list = [
     name: 1,
     value: 3
   }
-]
-console.log(_.filter(list, {name: 1}))
+];
+console.log(_.filter(list, {name: 1}));

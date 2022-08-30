@@ -3,12 +3,6 @@
     :form-info="dangerAreaFilter"
     @submit="query"
   >
-    <template v-slot:info="form">
-      <el-input
-        v-model="form.info"
-        placeholder="自定义插槽"
-      />
-    </template>
     <el-button
       type="primary"
     >
@@ -64,6 +58,27 @@ export default {
           ]
         },
         {
+          label: '是否可见',
+          prop: 'visible',
+          type: 'select',
+	        optionsFn: async ()=>{
+          	return [
+		          {
+			          label: '高风险',
+			          value: '1'
+		          },
+		          {
+			          label: '中风险',
+			          value: '2'
+		          },
+		          {
+			          label: '低风险',
+			          value: '3'
+		          },
+	          ];
+          }
+        },
+        {
           label: '浸入地',
           prop: 'mrd',
           type: 'input',
@@ -72,12 +87,6 @@ export default {
           label: '关键字',
           prop: 'keyword',
           type: 'input',
-        },
-        {
-          label: '自定义插槽',
-          prop: 'info',
-          type: 'slot',
-          slot: 'info'
         }
       ],
       form: {}

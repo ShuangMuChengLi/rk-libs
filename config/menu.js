@@ -271,6 +271,11 @@ export const menu = [
             label: 'threejs的三维轮盘幻灯片',
             source: require('../src/js/html/three-slide/README.md')
           },
+          {
+            label: '中间层弹窗的混入',
+            source: require('../src/js/html/inner-dialog-mixin/README.md'),
+            date: '2022-08-30',
+          },
         ]
       },
       {

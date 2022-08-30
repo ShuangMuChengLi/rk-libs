@@ -1,12 +1,24 @@
 <template>
   <div class="demo-wrapper">
     <common-table
-      :column="faceColumn"
-      :data="faceList"
-      :page-info="pageInfo"
+      :column="columnConfig"
+      :data="list"
+      :total="total"
+      :page-info.sync="pageInfo"
+      :has-selection="true"
+      @imgClick="imgClick"
+      @rowClick="rowClick"
+      @pageChange="pageChange"
+      @selectionChange="selectionChange"
     >
-      <template v-slot:img="scope">
-        <el-image :src="scope.row.img" />
+      <template v-slot:handler="scope">
+        <el-button
+          type="primary"
+          size="mini"
+          @click="view(scope.row)"
+        >
+          查看
+        </el-button>
       </template>
     </common-table>
   </div>
@@ -23,21 +35,17 @@ export default {
         pageId: 1,
         pageSize: 10,
       },
-      faceColumn:[
+	    total: 100,
+	    columnConfig:[
         {
-          prop: '',
+          prop: 'img',
           label: '抓拍照',
           width: null,
-          slot: 'img'
+          type: 'img'
         },
         {
           prop: 'name',
           label: '名字',
-          width: null
-        },
-        {
-          prop: 'hobby',
-          label: '爱好',
           width: null
         },
         {
@@ -56,18 +64,40 @@ export default {
           label: '时间/地点',
           width: null
         },
-      ],
-      faceList:[
         {
-          img: 'https://picsum.photos/200/300',
+          prop: 'handler',
+          label: '操作',
+          width: null,
+          slot: 'handler'
+        },
+      ],
+      list:[
+        {
+          img: './photo.png',
           name: '张三',
-          hobby: ['打球', '爬山'],
           datetime: '2022-03-21 12:12:12',
           address: '软件园',
           state: 1
         }
       ]
     };
+  },
+  methods:{
+	  selectionChange(val){
+		  console.log(val);
+	  },
+	  rowClick(row){
+	  	console.log(row);
+	  },
+	  imgClick(row, index, prop){
+	  	console.log(row, index, prop);
+	  },
+	  pageChange(){
+	  	console.log('pageChange');
+    },
+	  view(row){
+	  	console.log(row);
+    }
   }
 };
 </script>

@@ -1,8 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="inner">
-      <div class="inner-body">
-      </div>
+      <div class="inner-body" />
     </div>
   </div>
 </template>

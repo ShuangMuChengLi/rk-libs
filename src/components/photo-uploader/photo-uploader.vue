@@ -76,8 +76,8 @@
               @wheel.prevent="handleMouseWheel"
             >
               <img
-                :src="sourceImgUrl"
                 ref="img"
+                :src="sourceImgUrl"
                 :style="sourceImgStyle"
                 class="vicp-img"
                 draggable="false"

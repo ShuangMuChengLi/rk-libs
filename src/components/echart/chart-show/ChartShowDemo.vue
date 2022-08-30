@@ -6,12 +6,17 @@
 <template>
   <div class="chart-show-demo-page">
     <div
-      class="chart-list"
       v-for="(item, index) in chartList"
       :key="'chart-list' + index"
+      class="chart-list"
     >
-      <div class="title">{{ item.title }}</div>
-      <chart-base class="chart" :optionData="item.chartData" />
+      <div class="title">
+        {{ item.title }}
+      </div>
+      <chart-base
+        class="chart"
+        :option-data="item.chartData"
+      />
     </div>
   </div>
 </template>

@@ -7,7 +7,7 @@ export const tableIndexMixin = {
   },
   methods:{
     indexMethod(index){
-      if(!this.pageInfo) return index + 1;
+      if(!this.pageInfo) return index;
 
       return (this.pageInfo.pageId - 1) * this.pageInfo.pageSize + index + 1;
     }

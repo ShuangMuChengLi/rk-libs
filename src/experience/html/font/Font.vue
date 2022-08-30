@@ -1,5 +1,7 @@
 <template>
-  <div class="font">21 : 14 : 15</div>
+  <div class="font">
+    21 : 14 : 15
+  </div>
 </template>
 
 <script>

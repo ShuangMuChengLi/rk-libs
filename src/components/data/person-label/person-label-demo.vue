@@ -17,9 +17,7 @@
         :is-row="true"
       />
     </div>
-
   </div>
-
 </template>
 
 <script>
