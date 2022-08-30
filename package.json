@@ -46,6 +46,7 @@
     "tween": "^0.9.0",
     "video.js": "^7.17.0",
     "vue": "^2.6.11",
+    "vue-cropper": "^0.5.8",
     "vue-image-crop-upload": "^3.0.3",
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.2.0",

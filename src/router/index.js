@@ -184,6 +184,14 @@ export const routes = [
     path: '/demo/font',
     component: ()=>import('../experience/html/font/Font')
   },
+  {
+    path: '/components/ImageUpload/ImageUploadDemo',
+    component: ()=>import('../components/ImageUpload/ImageUploadDemo')
+  },
+  {
+    path: '/components/FileUpload/FileUploadDemo',
+    component: ()=>import('../components/FileUpload/FileUploadDemo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
