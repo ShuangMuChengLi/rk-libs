@@ -192,6 +192,10 @@ export const routes = [
     path: '/components/FileUpload/FileUploadDemo',
     component: ()=>import('../components/FileUpload/FileUploadDemo')
   },
+  {
+    path: '/demo/dialogDrag',
+    component: ()=>import('../components/dialog-drag/DialogDrag')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
