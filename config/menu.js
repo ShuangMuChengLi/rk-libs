@@ -367,6 +367,11 @@ export const menu = [
             source: require('../src/experience/js/map/json/README.md'),
             date: '2022-02-10'
           },
+          {
+            label: '开启gzip',
+            source: require('../src/experience/solution/gzip/README.md'),
+            date: '2022-09-01'
+          },
         ]
       },
       {
