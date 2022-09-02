@@ -7,7 +7,7 @@ export const systemUtil = {
     this.vue = Vue.prototype;
   },
   /**
-   *
+   *  校验elementUI表单
    * @param formRef
    * @returns {Promise<unknown>}
    */
@@ -23,7 +23,7 @@ export const systemUtil = {
     });
   },
   /**
-   *
+   * 三分法逗号分割数字
    * @param num
    * @returns {string}
    */
