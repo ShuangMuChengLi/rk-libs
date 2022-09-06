@@ -200,6 +200,22 @@ export const routes = [
     path: '/demo/dialogDrag',
     component: ()=>import('../components/dialog-drag/DialogDrag')
   },
+  {
+    path: '/components/com-valid/valid',
+    component: ()=>import('../components/com-valid/valid')
+  },
+  {
+    path: '/components/com-signWrite/signWrite',
+    component: ()=>import('../components/com-signWrite/signWrite')
+  },
+  {
+    path: '/components/com-codeRotate/codeRotate',
+    component: ()=>import('../components/com-codeRotate/codeRotate')
+  },
+  {
+    path: '/components/com-codeImg/codeImg',
+    component: ()=>import('../components/com-codeImg/codeImg')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
