@@ -2,7 +2,9 @@
   <div 
     class="sign-write-box"
   >
-    <div class="dialog">
+    <div 
+      :class="{'dialog':(isRem === false),'rem-dialog':(isRem === true)}"
+    >
       <el-dialog 
         title="签名板"
         :visible.sync="passwordShow"
@@ -51,6 +53,10 @@ export default {
     contentHeight: { // 容器高度
       type: Number,
       default: 300
+    },
+    isRem: { // 是否使用rem
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -78,6 +84,14 @@ export default {
   mounted() {
   },
   methods: {
+    classFun() {
+      if(this.isRem === true) {
+        return('rem-dialog');
+      }
+      if(this.isRem === false) {
+        return('dialog');
+      }
+    },
     closeFun() {
       this.$emit('update:show', false);
     },
@@ -92,12 +106,23 @@ export default {
     onmousedown(ev) {
       this.start = true;
       var ev = ev || window.event;
-      this.context.moveTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 11, ev.clientY - this.canvas.offsetTop - 100 - 5);  
+      if(this.isRem === true) {
+        this.context.moveTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 11, ev.clientY - this.canvas.offsetTop - 100 - 5);
+      }
+      if(this.isRem === false) {
+        this.context.moveTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 31, ev.clientY - this.canvas.offsetTop - 100 - 10);
+      }
+        
     },
     onmousemove(ev) {
       var ev = ev || window.event;
       if(this.start === true) {
-        this.context.lineTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 11, ev.clientY - this.canvas.offsetTop - 100 - 5);
+        if(this.isRem === true) {
+          this.context.lineTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 11, ev.clientY - this.canvas.offsetTop - 100 - 5);
+        }
+        if(this.isRem === false) {
+          this.context.lineTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 31, ev.clientY - this.canvas.offsetTop - 100 - 10);
+        }
         this.context.stroke();
       }
     },
@@ -147,6 +172,20 @@ export default {
     border: 1px solid black;
   }
   .dialog {
+    /deep/ .el-dialog{
+      width: 600px;
+      height: 500px;
+    }
+    /deep/ .el-dialog__body {
+      text-align: center;
+    }
+    .export-button {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+    }
+  }
+  .rem-dialog {
     /deep/ .el-dialog{
       width: 700px;
       height: 550px;

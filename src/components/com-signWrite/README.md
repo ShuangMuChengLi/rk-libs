@@ -10,6 +10,7 @@ Vue.js ie8以上浏览器
 | 参数 |	说明 |类型 |可选值	| 默认值 |
 | ---- | ---- |---- | ----   |----  | 
 | show | 弹窗是否显示 | Boolean | - | false  | 
+| isRem | 是否使用rem | Boolean | - | false  | 
 ## usage
 ```
 <template>
