@@ -110,9 +110,14 @@ export const menu = [
             date: '2021-11-26'
           },
           {
-            label: '弹窗外壳（适用地图弹窗）',
-            source: require('../src/components/other/common-dialog/README.md'),
-            date: '2022-03-21'
+            label: '弹窗外壳',
+            source: require('../src/components/common-dialog/README.md'),
+            date: '2022-09-06'
+          },
+          {
+            label: '公用表单',
+            source: require('../src/components/common-form/README.md'),
+            date: '2022-09-06'
           },
           {
             label: '图片放大镜组件',

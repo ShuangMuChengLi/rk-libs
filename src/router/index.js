@@ -149,8 +149,12 @@ export const routes = [
     component: ()=>import('../components/data/person-label/person-label-demo')
   },
   {
-    path: '/components/other/common-dialog',
-    component: ()=>import('../components/other/common-dialog/common-dialog-demo')
+    path: '/components/common-dialog',
+    component: ()=>import('../components/common-dialog/common-dialog-demo')
+  },
+  {
+    path: '/components/common-form',
+    component: ()=>import('../components/common-form/common-form-demo')
   },
   {
     path: '/components/echart/chart-show',

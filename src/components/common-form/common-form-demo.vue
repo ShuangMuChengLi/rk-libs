@@ -1,0 +1,123 @@
+<template>
+  <div class="demo">
+    <common-form
+      ref="form"
+      v-model="form"
+      :form-info="formInfoConfig"
+      :double-column="doubleColumn"
+      label-width="130px"
+    />
+    <footer>
+      <el-button
+        type="primary"
+        @click="submit"
+      >
+        提交
+      </el-button>
+    </footer>
+  </div>
+</template>
+
+<script>
+import CommonForm from './common-form';
+export default {
+  name: 'CommonFormDemo',
+  components: {CommonForm},
+  data(){
+  	return {
+		  form: {},
+		  formInfoConfig: [
+			  {
+				  label: '角色组名称',
+				  type: 'input',
+				  prop: 'groupName',
+          defaultValue: '角色组名称',
+				  rules: [
+					  {
+						  required: true,
+						  message: '请填写角色组名称!'
+					  },
+				  ]
+			  },
+			  {
+				  label: '角色组权限',
+				  type: 'checkbox',
+				  prop: 'right',
+				  defaultValue: ['1'],
+          options:[
+            {
+	            value: '1',
+              label: '新增'
+            },
+            {
+	            value: '2',
+              label: '编辑'
+            },
+          ],
+				  rules: [
+					  {
+						  required: true,
+						  message: '请填写角色组权限!'
+					  },
+				  ]
+			  },
+			  {
+				  label: '备注',
+				  type: 'textarea',
+				  prop: 'groupDesc',
+				  rules: [
+					  {
+						  max: 128,
+						  message: '字数不能超过128个!'
+					  }
+				  ]
+			  },
+			  {
+				  label: '角色组类型',
+				  type: 'select',
+				  prop: 'groupType',
+				  options:[
+					  {
+						  value: '1',
+						  label: '管理员'
+					  },
+					  {
+						  value: '2',
+						  label: '民警'
+					  },
+				  ],
+				  rules: [
+					  {
+						  required: true,
+						  message: '请填写角色组类型!'
+					  },
+				  ]
+			  },
+      ],
+		  doubleColumn: true
+    };
+  },
+  methods:{
+	  async submit(){
+	  	let validateResult = await this.$refs.form.validate();
+	  	if(!validateResult)return;
+	  	
+	  	this.$message.success('提交表单');
+    }
+  }
+};
+</script>
+
+<style scoped lang="less">
+  .demo{
+    width: 800px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #333;
+  }
+  footer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+</style>
