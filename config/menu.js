@@ -159,11 +159,11 @@ export const menu = [
             source: require('../src/components/FileUpload/README.md'),
             date: '2022-08-28'
           },
-          {
-            label: '弹窗可拖拽并改变大小',
-            source: require('../src/components/dialog-drag/README.md'),
-            date: '2022-08-31'
-          },
+          // {
+          //   label: '弹窗可拖拽并改变大小',
+          //   source: require('../src/components/dialog-drag/README.md'),
+          //   date: '2022-08-31'
+          // },
         ]
       }
     ]
