@@ -13,6 +13,7 @@
       >
         <canvas
           id="s-canvas"
+          ref="canvas"
           class="canvas-box"
           :width="contentWidth"
           :height="contentHeight"
@@ -106,22 +107,24 @@ export default {
     onmousedown(ev) {
       this.start = true;
       var ev = ev || window.event;
+      var rect = this.$refs.canvas.getBoundingClientRect();
       if(this.isRem === true) {
         this.context.moveTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 11, ev.clientY - this.canvas.offsetTop - 100 - 5);
       }
       if(this.isRem === false) {
-        this.context.moveTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 31, ev.clientY - this.canvas.offsetTop - 100 - 10);
+        this.context.moveTo(ev.clientX - rect.left, ev.clientY - rect.top);
       }
         
     },
     onmousemove(ev) {
       var ev = ev || window.event;
+      var rect = this.$refs.canvas.getBoundingClientRect();
       if(this.start === true) {
         if(this.isRem === true) {
           this.context.lineTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 11, ev.clientY - this.canvas.offsetTop - 100 - 5);
         }
         if(this.isRem === false) {
-          this.context.lineTo(ev.clientX - this.canvas.offsetLeft - this.contentWidth + 31, ev.clientY - this.canvas.offsetTop - 100 - 10);
+          this.context.lineTo(ev.clientX - rect.left, ev.clientY - rect.top);
         }
         this.context.stroke();
       }

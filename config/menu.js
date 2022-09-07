@@ -9,6 +9,14 @@ export const menu = [
             label: '图片拼图验证码',
             source: require('../src/components/picture-verify/README.md'),
           },
+          {
+            label: '图片验证码',
+            source: require('../src/components/com-codeImg/README.md'),
+          },
+          {
+            label: '旋转图片验证码',
+            source: require('../src/components/com-codeRotate/README.md'),
+          },
         ]
       },
       {
@@ -159,6 +167,11 @@ export const menu = [
             source: require('../src/components/FileUpload/README.md'),
             date: '2022-08-28'
           },
+          {
+            label: '签名板',
+            source: require('../src/components/com-signWrite/README.md'),
+            date: '2022-09-07'
+          }
           // {
           //   label: '弹窗可拖拽并改变大小',
           //   source: require('../src/components/dialog-drag/README.md'),
@@ -286,6 +299,11 @@ export const menu = [
             source: require('../src/js/html/inner-dialog-mixin/README.md'),
             date: '2022-08-30',
           },
+          {
+            label: '表单校验、限制输入',
+            source: require('../src/js/html/com-valid/README.md'),
+            date: '2022-09-07',
+          }
         ]
       },
       {

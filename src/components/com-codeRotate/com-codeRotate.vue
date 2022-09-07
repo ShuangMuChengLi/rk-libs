@@ -45,8 +45,6 @@
 export default {
   name: 'SIdentify', 
   props: {
-  },
-  props: {
     show: {
       type: Boolean,
       default: false

@@ -201,8 +201,8 @@ export const routes = [
     component: ()=>import('../components/dialog-drag/DialogDrag')
   },
   {
-    path: '/components/com-valid/valid',
-    component: ()=>import('../components/com-valid/valid')
+    path: '/demo/valid',
+    component: ()=>import('../js/html/com-valid/valid')
   },
   {
     path: '/components/com-signWrite/signWrite',
