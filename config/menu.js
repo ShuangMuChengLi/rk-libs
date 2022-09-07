@@ -358,6 +358,11 @@ export const menu = [
             date: '2021-10-13'
           },
           {
+            label: '通过adm-zip读取docx文档的数据',
+            source: require('../src/experience/solution/read-doc/README.md'),
+            date: '2022-09-07'
+          },
+          {
             label: '代码编辑器，及执行效果实时预览的方案',
             source: require('../src/experience/html/code-preview/README.md'),
             date: '2022-01-09'
