@@ -11,6 +11,7 @@
     "zip": "node bin/zip.js"
   },
   "dependencies": {
+    "adm-zip": "^0.5.9",
     "animate.css": "^4.1.1",
     "any-shell-escape": "^0.1.1",
     "archiver": "^5.3.0",
