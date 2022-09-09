@@ -121,8 +121,6 @@ export default {
           t
         ]
       });
-      console.log(t);
-      return;
       this.iconLayer = this.getVectorLayer({icon: icon});
       this.createSelect(
         {
@@ -142,8 +140,8 @@ export default {
         {
           layer: this.iconLayer,
           item: {
-            lon: 118.12,
-            lat: 24.48,
+            lon: 118.085,
+            lat: 24.457,
             text: '111'
           },
           style(feature){
