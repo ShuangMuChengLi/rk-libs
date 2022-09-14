@@ -171,6 +171,11 @@ export const menu = [
             label: '签名板',
             source: require('../src/components/com-signWrite/README.md'),
             date: '2022-09-07'
+          },
+          {
+            label: '可拖拽下拉框',
+            source: require('../src/components/select-drag/README.md'),
+            date: '2022-09-14'
           }
           // {
           //   label: '弹窗可拖拽并改变大小',

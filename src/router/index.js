@@ -216,6 +216,10 @@ export const routes = [
     path: '/components/com-codeImg/codeImg',
     component: ()=>import('../components/com-codeImg/codeImg')
   },
+  {
+    path: '/components/select-drag/select-drag-demo',
+    component: ()=>import('../components/select-drag/select-drag-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
