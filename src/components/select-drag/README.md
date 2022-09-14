@@ -1,4 +1,4 @@
-# 签名板组件
+# 拖拽下拉框组件
 ## preview
 [预览](./index.html#/components/select-drag/select-drag-demo)
 ## download
