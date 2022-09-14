@@ -2,9 +2,9 @@
 ## preview
 [预览](./index.html#/components/select-drag/select-drag-demo)
 ## download
-[组件下载](./components/select-drag/select-drag-demo.zip)
+[组件下载](./components/select-drag.zip)
 ## dependence
-Vue.js ie8以上浏览器
+Vue.js ie8以上浏览器、sortablejs
 
 ## Attributes
 | 参数 |	说明 |类型 | 是否必填 |可选值	| 默认值 |
