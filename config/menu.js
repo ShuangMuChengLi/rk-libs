@@ -186,6 +186,11 @@ export const menu = [
             label: '鸟瞰图',
             source: require('../src/components/rk-aerial-view/README.md'),
             date: '2022-09-15'
+          },
+          {
+            label: '添加文件',
+            source: require('../src/components/rk-add-file/README.md'),
+            date: '2022-09-15'
           }
           // {
           //   label: '弹窗可拖拽并改变大小',

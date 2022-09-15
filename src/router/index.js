@@ -228,6 +228,10 @@ export const routes = [
     path: '/components/rk-aerial-view/rk-aerial-view-demo',
     component: ()=>import('../components/rk-aerial-view/rk-aerial-view-demo')
   },
+  {
+    path: '/components/rk-add-file/rk-add-file-demo',
+    component: ()=>import('../components/rk-add-file/rk-add-file-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
