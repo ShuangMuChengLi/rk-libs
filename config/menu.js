@@ -11,7 +11,7 @@ export const menu = [
           },
           {
             label: '图片验证码',
-            source: require('../src/components/com-codeImg/README.md'),
+            source: require('../src/components/rk-ruler/README.md'),
           },
           {
             label: '旋转图片验证码',
@@ -176,6 +176,11 @@ export const menu = [
             label: '可拖拽下拉框',
             source: require('../src/components/select-drag/README.md'),
             date: '2022-09-14'
+          },
+          {
+            label: '标尺',
+            source: require('../src/components/rk-ruler/README.md'),
+            date: '2022-09-15'
           }
           // {
           //   label: '弹窗可拖拽并改变大小',

@@ -220,6 +220,10 @@ export const routes = [
     path: '/components/select-drag/select-drag-demo',
     component: ()=>import('../components/select-drag/select-drag-demo')
   },
+  {
+    path: '/components/rk-ruler/rk-ruler-demo',
+    component: ()=>import('../components/rk-ruler/rk-ruler-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
