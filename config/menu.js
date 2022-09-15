@@ -181,6 +181,11 @@ export const menu = [
             label: '标尺',
             source: require('../src/components/rk-ruler/README.md'),
             date: '2022-09-15'
+          },
+          {
+            label: '鸟瞰图',
+            source: require('../src/components/rk-aerial-view/README.md'),
+            date: '2022-09-15'
           }
           // {
           //   label: '弹窗可拖拽并改变大小',

@@ -224,6 +224,10 @@ export const routes = [
     path: '/components/rk-ruler/rk-ruler-demo',
     component: ()=>import('../components/rk-ruler/rk-ruler-demo')
   },
+  {
+    path: '/components/rk-aerial-view/rk-aerial-view-demo',
+    component: ()=>import('../components/rk-aerial-view/rk-aerial-view-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
