@@ -328,6 +328,11 @@ export const menu = [
             label: '视频第一帧图片',
             source: require('../src/js/html/video-first-frame/README.md'),
             date: '2022-09-15',
+          },
+          {
+            label: '音频时长',
+            source: require('../src/js/html/audio-duration/README.md'),
+            date: '2022-09-15',
           }
         ]
       },

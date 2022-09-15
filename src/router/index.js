@@ -236,6 +236,10 @@ export const routes = [
     path: '/demo/video-first-frame-demo',
     component: ()=>import('../js/html/video-first-frame/video-first-frame-demo')
   },
+  {
+    path: '/demo/audio-duration-demo',
+    component: ()=>import('../js/html/audio-duration/audio-duration-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
