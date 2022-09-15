@@ -323,6 +323,11 @@ export const menu = [
             label: '表单校验、限制输入',
             source: require('../src/js/html/com-valid/README.md'),
             date: '2022-09-07',
+          },
+          {
+            label: '视频第一帧图片',
+            source: require('../src/js/html/video-first-frame/README.md'),
+            date: '2022-09-15',
           }
         ]
       },

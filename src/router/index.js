@@ -232,6 +232,10 @@ export const routes = [
     path: '/components/rk-add-file/rk-add-file-demo',
     component: ()=>import('../components/rk-add-file/rk-add-file-demo')
   },
+  {
+    path: '/demo/video-first-frame-demo',
+    component: ()=>import('../js/html/video-first-frame/video-first-frame-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;
