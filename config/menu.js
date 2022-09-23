@@ -11,7 +11,7 @@ export const menu = [
           },
           {
             label: '图片验证码',
-            source: require('../src/components/rk-ruler/README.md'),
+            source: require('../src/components/com-codeImg/README.md'),
           },
           {
             label: '旋转图片验证码',
