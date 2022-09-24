@@ -8,7 +8,7 @@
     />
     <img
       :src="videoImg"
-    />
+    >
   </div>
 </template>
 
