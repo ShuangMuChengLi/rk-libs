@@ -56,6 +56,13 @@ Vue.js、openlayers
 | fillColor | 填充颜色 | Number | 非必须 | - |  rgba(0,0,0,0.8) |
 | radius | 圆半径 | Number | 非必须 | - |  100 |
 
+## 覆盖物组件 Attributes
+| 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
+| ---- | ---- |---- | ----   |----  |  --- |
+| position | 经纬度 | Array | 必须 | -  | [] |
+| className | 图层的class | String | 非必须 | - | map-overlay |
+| offset | 偏移量 | Array[number] | 非必须 | - |  [0, 0] |
+
 
 ## usage
 ```

@@ -88,6 +88,20 @@
           删除圆形
         </el-button>
       </div>
+      <div class="row">
+        <el-button
+          size="mini"
+          @click="addOverlay(true)"
+        >
+          添加覆盖物
+        </el-button>
+        <el-button
+          size="mini"
+          @click="addOverlay(false)"
+        >
+          删除覆盖物
+        </el-button>
+      </div>
     </div>
 
     <!--
@@ -144,6 +158,20 @@
       :class-name="mapCircleData && mapCircleData.className"
     />
 
+    <!-- 自定义覆盖物 -->
+    <MapOverlay
+      :position="mapOverlayData && mapOverlayData.position"
+      :offset="mapOverlayData && mapOverlayData.offset"
+      :class-name="mapOverlayData && mapOverlayData.className"
+    >
+      <div>
+        <img
+          :src="defaultIconImage"
+          alt=""
+        >
+        <h5>自定义覆盖物</h5>
+      </div>
+    </MapOverlay>
   </div>
 </template>
 
@@ -159,7 +187,8 @@ export default {
     MapBrokenLine: () => import('./components/map-broken-line'), // 折线
     MapSmoothLine: () => import('./components/map-smooth-line'), // 曲线
     MapPolygon: () => import('./components/map-polygon'), // 多边形
-    MapCircle: () => import('./components/map-circle') // 圆形
+    MapCircle: () => import('./components/map-circle'), // 圆形
+    MapOverlay: () => import('./components/map-overlay') // 覆盖物
   },
   data() {
     return {
@@ -173,6 +202,7 @@ export default {
       mapSmoothLineData: null, // 曲线
       mapPolygonData: null, // 多边形
       mapCircleData: null, // 圆形
+      mapOverlayData: null, // 自定义覆盖物
     };
   },
   mounted() {
@@ -317,6 +347,21 @@ export default {
         lineWidth: 2, // 圆形线条宽度 Number，非必须，默认为 2
         lineDash: [20, 5], // 圆形虚线 Array[number], 是否使用虚线 ，默认为 null
         className: 'map-circle' // 图层的class String, 非必须，默认为 'map-circle'
+      };
+    },
+    /**
+     * 添加&删除覆盖物
+     * @param type
+     */
+    addOverlay(type) {
+      if (!type) {
+        this.mapOverlayData = null;
+        return false;
+      }
+      this.mapOverlayData = {
+        position: [ 118.14654666428568, 24.46173651490975 ], // 标注中心点 Array, 必须
+        className: 'map-overlay', // 设置自定义图层的class String ，非必须， 默认 'map-overlay'
+        offset: [0, 0] // 设置自定义图层的偏移量 Array[number] ，非必须,默认[0, 0]
       };
     }
   }
