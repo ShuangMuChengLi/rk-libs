@@ -1,4 +1,4 @@
-# echart封装
+# openlayer 点、线、弹窗等常用组件的封装
 ## preview
 [预览](./index.html#/components/map-ol/map-ol-show)
 ## download
@@ -6,10 +6,33 @@
 ## dependence
 Vue.js、openlayers
 
-## Attributes
+## 矢量点组件 Attributes
 | 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
 | ---- | ---- |---- | ----   |----  |  --- |
-| mapIconData | 矢量点组件配置项 | Object | {} | -  |  {} |
+| position | 经纬度 | Array | 必须 | -  | [] |
+| icon | 文件地址 | String[url] | 非必须 | -  | null |
+| label | 标注点文字 | String | 非必须 | -  | null |
+| elementName | 点标识id，可以通过 feature.get('name') 获取到 | String | 非必须 | -  |  null |
+| className | 图层的class | String | 非必须 | - |  map-icon-mark |
+
+## 折线组件 Attributes
+| 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
+| ---- | ---- |---- | ----   |----  |  --- |
+| position | 经纬度 | Array | 必须 | -  | [] |
+| elementName | 弹窗标识别名 | String | 非必须 | -  | null |
+| lineColor | 线条颜色 | String | 非必须 | -  | null |
+| lineWidth | 线条宽度 | String | 非必须 | -  |  null |
+| lineDash | 虚线 | Array[number] | 非必须 | -  |  null |
+| className | 图层的class | String | 非必须 | - |  map-line-string |
+| zIndex | 图层z轴高度 | Number | 非必须 | - |  300 |
+
+## 曲线组件 Attributes
+| 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
+| ---- | ---- |---- | ----   |----  |  --- |
+| position | 经纬度 | Array | 必须 | -  | [] |
+| lineColor | 线条颜色 | String | 非必须 | -  | null |
+| lineWidth | 线条宽度 | String | 非必须 | -  |  null |
+
 ## usage
 ```
 <template>
