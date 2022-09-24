@@ -102,6 +102,20 @@
           删除覆盖物
         </el-button>
       </div>
+      <div class="row">
+        <el-button
+          size="mini"
+          @click="addPopup(true)"
+        >
+          显示窗体
+        </el-button>
+        <el-button
+          size="mini"
+          @click="addPopup(false)"
+        >
+          删除窗体
+        </el-button>
+      </div>
     </div>
 
     <!--
@@ -172,6 +186,17 @@
         <h5>自定义覆盖物</h5>
       </div>
     </MapOverlay>
+
+    <!-- 弹出窗体 -->
+    <MapPopup
+      :position="mapPopupData && mapPopupData.position"
+      :title="mapPopupData && mapPopupData.title"
+      :offset="mapPopupData && mapPopupData.offset"
+      :mapShow="mapPopupData && mapPopupData.show"
+      @close="() => mapPopupData.show = false"
+      :className="mapPopupData && mapPopupData.className">
+      这边是自定义的内容
+    </MapPopup>
   </div>
 </template>
 
@@ -188,7 +213,8 @@ export default {
     MapSmoothLine: () => import('./components/map-smooth-line'), // 曲线
     MapPolygon: () => import('./components/map-polygon'), // 多边形
     MapCircle: () => import('./components/map-circle'), // 圆形
-    MapOverlay: () => import('./components/map-overlay') // 覆盖物
+    MapOverlay: () => import('./components/map-overlay'), // 覆盖物
+    MapPopup: () => import('./components/map-popup') // 弹出窗体
   },
   data() {
     return {
@@ -203,6 +229,7 @@ export default {
       mapPolygonData: null, // 多边形
       mapCircleData: null, // 圆形
       mapOverlayData: null, // 自定义覆盖物
+      mapPopupData: null, // 弹出窗体
     };
   },
   mounted() {
@@ -362,6 +389,23 @@ export default {
         position: [ 118.14654666428568, 24.46173651490975 ], // 标注中心点 Array, 必须
         className: 'map-overlay', // 设置自定义图层的class String ，非必须， 默认 'map-overlay'
         offset: [0, 0] // 设置自定义图层的偏移量 Array[number] ，非必须,默认[0, 0]
+      };
+    },
+    /**
+     * 显示&删除窗体
+     * @param type
+     */
+    addPopup(type) {
+      if (!type) {
+        this.mapPopupData = null;
+        return false;
+      }
+      this.mapPopupData = {
+        position: [ 118.11625111346247, 24.499098345382695 ], // 弹窗中心点 Array[array]， 必须
+        title: '弹窗标题', // 弹窗标题 String，非必须，默认为 ' '
+        show: true, // 弹窗显隐 Boolean，必须，默认为 true
+        offset:[0, 0], // 弹窗偏移 Array[number]，必须，默认为 [0, 0]
+        className: 'map-popup' // 图层的class String，非必须，默认为 'map-popup'
       };
     }
   }

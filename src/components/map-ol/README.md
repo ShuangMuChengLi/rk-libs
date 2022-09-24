@@ -63,6 +63,14 @@ Vue.js、openlayers
 | className | 图层的class | String | 非必须 | - | map-overlay |
 | offset | 偏移量 | Array[number] | 非必须 | - |  [0, 0] |
 
+## 弹出窗体组件 Attributes
+| 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
+| ---- | ---- |---- | ----   |----  |  --- |
+| position | 经纬度 | Array | 必须 | -  | [] |
+| title | 弹窗标题 | String | 非必须 | -  |  |
+| show | 弹窗显隐 | Boolean | 必须 | -  |  false |
+| offset | 偏移量 | Array[number] | 非必须 | - |  [0, 0] |
+| className | 图层的class | String | 非必须 | - | map-popup |
 
 ## usage
 ```
