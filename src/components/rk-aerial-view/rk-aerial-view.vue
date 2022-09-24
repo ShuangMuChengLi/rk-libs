@@ -20,7 +20,7 @@
         ref="imgRef"
         :src="imgUrl"
         :style="imgStyle"
-      />
+      >
       <div
         class="pos"
         :style="posStyle"

@@ -3,7 +3,7 @@
     <rk-aerial-view>
       <div class="rk-aerial-view-in">
         <div>鸟瞰图 slot demo</div>
-        <img :src="deomImg" />
+        <img :src="deomImg">
       </div>
     </rk-aerial-view>
   </div>

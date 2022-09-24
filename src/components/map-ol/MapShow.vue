@@ -7,19 +7,58 @@
   <div class="map-show-page">
     <!-- 地图 -->
     <div
-      class="map"
       ref="MapShowRef"
-    ></div>
+      class="map"
+    />
 
     <!-- 经纬度的显示 -->
     <div class="click-center">
       {{ clickCenter }}
     </div>
 
+    <!-- demo 操作按钮 -->
     <div class="show-btn-block">
       <div class="row">
-        <el-button size="mini" @click="addIconMark(true)">添加一个矢量点</el-button>
-        <el-button size="mini" @click="addIconMark(false)">删除矢量点</el-button>
+        <el-button
+          size="mini"
+          @click="addIconMark(true)"
+        >
+          添加一个矢量点
+        </el-button>
+        <el-button
+          size="mini"
+          @click="addIconMark(false)"
+        >
+          删除矢量点
+        </el-button>
+      </div>
+      <div class="row">
+        <el-button
+          size="mini"
+          @click="addBrokenLine(true)"
+        >
+          添加折线
+        </el-button>
+        <el-button
+          size="mini"
+          @click="addBrokenLine(false)"
+        >
+          删除折线
+        </el-button>
+      </div>
+      <div class="row">
+        <el-button
+          size="mini"
+          @click="addSmoothLine(true)"
+        >
+          添加曲线
+        </el-button>
+        <el-button
+          size="mini"
+          @click="addSmoothLine(false)"
+        >
+          删除曲线
+        </el-button>
       </div>
     </div>
 
@@ -27,6 +66,7 @@
       点标注，
       如果只想用文字标注label，可以把图片设置成一个像素的透明图片，
       如果只想用图标就label设置为null
+      使用循环的方法，可以添加多个矢量点
     -->
     <map-icon-mark
       :position="mapIconData && mapIconData.position || []"
@@ -34,6 +74,23 @@
       :icon="mapIconData && mapIconData.icon || defaultIconImage"
       :element-name="mapIconData && mapIconData.elementName"
       :class-name="mapIconData && mapIconData.className"
+    />
+
+    <!-- 折线 -->
+    <map-broken-line
+      :point-list="mapBrokenLineData && mapBrokenLineData.pointList || []"
+      :line-color="mapBrokenLineData && mapBrokenLineData.lineColor"
+      :line-width="mapBrokenLineData && mapBrokenLineData.lineWidth"
+      :line-dash="mapBrokenLineData && mapBrokenLineData.lineDash"
+      :element-name="mapBrokenLineData && mapBrokenLineData.elementName"
+      :class-name="mapBrokenLineData && mapBrokenLineData.className"
+    />
+
+    <!-- 曲线 -->
+    <map-smooth-line
+      :point-list="mapSmoothLineData && mapSmoothLineData.pointList || []"
+      :line-color="mapSmoothLineData && mapSmoothLineData.lineColor"
+      :line-width="mapSmoothLineData && mapSmoothLineData.lineWidth"
     />
   </div>
 </template>
@@ -46,16 +103,20 @@ import mapConfig from './config/map-config';
 export default {
   name: 'MapShow',
   components: {
-    MapIconMark: () => import('./components/map-icon-mark') // 点标注
+    MapIconMark: () => import('./components/map-icon-mark'), // 点标注
+    MapBrokenLine: () => import('./components/map-broken-line'), // 折线
+    MapSmoothLine: () => import('./components/map-smooth-line') // 曲线
   },
   data() {
     return {
       mapData: null,
       mapCenter: [118.089425, 24.479883],
-      mapZoom: 14,
+      mapZoom: 13,
       clickCenter: [0, 0],
       defaultIconImage: require('./images/red_mark.png'),
-      mapIconData: null // 矢量点的标注
+      mapIconData: null, // 矢量点的标注
+      mapBrokenLineData: null, // 折线
+      mapSmoothLineData: null // 曲线
     };
   },
   mounted() {
@@ -113,6 +174,49 @@ export default {
         elementName: '点标识id', // 标注点识别名称 String， 可以通过 feature.get('name') 获取到， 非必须， 默认为 'el-mapIconMark'
         className: 'map-icon-mark' // 图层的class String， 非必须，默认为 'map-icon-mark'
       };
+    },
+    /**
+     * 添加&删除折线
+     * @param type
+     */
+    addBrokenLine(type) {
+      if (!type) {
+        this.mapBrokenLineData = null;
+        return false;
+      }
+      this.mapBrokenLineData = {
+        pointList: [ // 线条所有的点数组 Array[array]， 必须
+          [118.13073235993387, 24.533700182779317],
+          [118.1582035446644, 24.521075024946217],
+          [118.14371693377497, 24.512703850610738],
+          [118.16693011169436, 24.50542969976235]
+        ],
+        elementName: '地图线条', //弹窗标识别名 String， 非必须，默认为 'el-mapLineString'
+        lineColor: 'rgba(0,77,168,0.9)', // 线条颜色 String，非必须，默认为 '#409eff'
+        lineWidth: 2, // 线条宽度 Number，非必须，默认为 2
+        lineDash: [2, 10], // 虚线 Array[number]， 是否使用虚线，默认为 null
+        className: 'map-line-string', // 图层的class String， 非必须， 默认 "map-line-string"
+        zIndex: 300 // 图层z轴高度， 非必须， 默认 300
+      };
+    },
+    /**
+     * 添加&删除曲线
+     * @param type
+     */
+    addSmoothLine(type) {
+      if (!type) {
+        this.mapSmoothLineData = null;
+        return false;
+      }
+      this.mapSmoothLineData = {
+        pointList: [ // 线条所有的点数组 Array[array]， 必须
+          [118.16286276864622, 24.48967986492911],
+          [118.14642864708902, 24.495549782855992],
+          [118.16592294220926, 24.51542361055184]
+        ],
+        lineColor: 'rgba(0,77,168,0.9)', // 线条颜色 String，非必须，默认为 '#409eff'
+        lineWidth: 2 // 线条宽度 Number，非必须，默认为 2
+      };
     }
   }
 };
@@ -144,6 +248,9 @@ export default {
       top: 5px;
       left: 5px;
       z-index: 2;
+      .row{
+        margin-bottom: 5px;
+      }
     }
   }
 </style>
