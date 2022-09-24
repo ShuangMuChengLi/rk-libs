@@ -116,6 +116,20 @@
           删除窗体
         </el-button>
       </div>
+      <div class="row">
+        <el-button
+          size="mini"
+          @click="addPointCollection(true)"
+        >
+          添加聚合点
+        </el-button>
+        <el-button
+          size="mini"
+          @click="addPointCollection(false)"
+        >
+          删除聚合点
+        </el-button>
+      </div>
     </div>
 
     <!--
@@ -174,7 +188,7 @@
 
     <!-- 自定义覆盖物 -->
     <MapOverlay
-      :position="mapOverlayData && mapOverlayData.position"
+      :position="mapOverlayData && mapOverlayData.position || []"
       :offset="mapOverlayData && mapOverlayData.offset"
       :class-name="mapOverlayData && mapOverlayData.className"
     >
@@ -189,14 +203,27 @@
 
     <!-- 弹出窗体 -->
     <MapPopup
-      :position="mapPopupData && mapPopupData.position"
+      :position="mapPopupData && mapPopupData.position || []"
       :title="mapPopupData && mapPopupData.title"
       :offset="mapPopupData && mapPopupData.offset"
-      :mapShow="mapPopupData && mapPopupData.show"
+      :map-show="mapPopupData && mapPopupData.show"
+      :class-name="mapPopupData && mapPopupData.className"
       @close="() => mapPopupData.show = false"
-      :className="mapPopupData && mapPopupData.className">
+    >
       这边是自定义的内容
     </MapPopup>
+
+    <!-- 海量点&聚合 -->
+    <MapPointCollection
+      :point-list="mapPointCollectionData && mapPointCollectionData.pointList || []"
+      :bg-img="mapPointCollectionData && mapPointCollectionData.bgImg"
+      :distance="mapPointCollectionData && mapPointCollectionData.distance"
+      :fill-color="mapPointCollectionData && mapPointCollectionData.fillColor"
+      :font-color="mapPointCollectionData && mapPointCollectionData.fontColor"
+      :z-index="mapPointCollectionData && mapPointCollectionData.zIndex"
+      :offset="mapPointCollectionData && mapPointCollectionData.offset"
+      :class-name="mapPointCollectionData && mapPointCollectionData.className"
+    />
   </div>
 </template>
 
@@ -214,7 +241,8 @@ export default {
     MapPolygon: () => import('./components/map-polygon'), // 多边形
     MapCircle: () => import('./components/map-circle'), // 圆形
     MapOverlay: () => import('./components/map-overlay'), // 覆盖物
-    MapPopup: () => import('./components/map-popup') // 弹出窗体
+    MapPopup: () => import('./components/map-popup'), // 弹出窗体
+    MapPointCollection: () => import('./components/map-point-collection') // 聚合的点
   },
   data() {
     return {
@@ -230,6 +258,7 @@ export default {
       mapCircleData: null, // 圆形
       mapOverlayData: null, // 自定义覆盖物
       mapPopupData: null, // 弹出窗体
+      mapPointCollectionData: null // 聚合的点
     };
   },
   mounted() {
@@ -406,6 +435,33 @@ export default {
         show: true, // 弹窗显隐 Boolean，必须，默认为 true
         offset:[0, 0], // 弹窗偏移 Array[number]，必须，默认为 [0, 0]
         className: 'map-popup' // 图层的class String，非必须，默认为 'map-popup'
+      };
+    },
+    /**
+     * 添加聚合的点
+     * @param type
+     */
+    addPointCollection(type) {
+      if (!type) {
+        // 这边不能清除点，后续再完善
+        this.mapPointCollectionData = null;
+        return false;
+      }
+      this.mapPointCollectionData = {
+        pointList: [
+          [118.03985241298678, 24.56660552297402],
+          [118.17225966100695, 24.49398069058228],
+          [118.23586288337708, 24.548048659904484],
+          [118.04870630244483, 24.396473587403964],
+          [118.04870630244483, 24.406473587403964]
+        ],
+        distance: 100, // 收起点的间距  number，必须，默认为 40
+        zIndex: 500, // 图层z轴高度， 非必须， 默认 400
+        offset:[0, 2], // 文字偏移距离 [x,y]， 非必须， 默认 [0,0]
+        className: 'map-point-collection', // 图层的class String，非必须，默认为 'map-popup'
+        fontColor: '#ffeb00', // 文字的颜色 string （色彩标识，支持rgba），默认'#fff'(如果去掉文字那么直接rgba透明度设置为0)
+        fillColor: '#06d073', // 文字的背景颜色 string（色彩标识，支持rgba），默认'#f00'(如果去不要背景颜色那么直接rgba透明度设置为0)
+        bgImg: require('./images/blue_mark.png') // 设置背景图，如果设置了此那么文字背景可以不设置
       };
     }
   }

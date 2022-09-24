@@ -10,7 +10,7 @@ Vue.js、openlayers
 | 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
 | ---- | ---- |---- | ----   |----  |  --- |
 | position | 经纬度 | Array | 必须 | -  | [] |
-| icon | 文件地址 | String[url] | 非必须 | -  | null |
+| icon | 图标地址 | String[url] | 非必须 | -  | null |
 | label | 标注点文字 | String | 非必须 | -  | null |
 | elementName | 点标识id，可以通过 feature.get('name') 获取到 | String | 非必须 | -  |  null |
 | className | 图层的class | String | 非必须 | - |  map-icon-mark |
@@ -71,6 +71,17 @@ Vue.js、openlayers
 | show | 弹窗显隐 | Boolean | 必须 | -  |  false |
 | offset | 偏移量 | Array[number] | 非必须 | - |  [0, 0] |
 | className | 图层的class | String | 非必须 | - | map-popup |
+
+## 聚合点组件 Attributes
+| 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
+| ---- | ---- |---- | ----   |----  |  --- |
+| position | 经纬度 | Array | 必须 | -  | [] |
+| distance | 收起点的间距 | Number | 必须 | -  | 40 |
+| fontColor | 文字的颜色，色彩标识，支持rgba，如果去掉文字那么直接rgba透明度设置为0 | String | 非必须 | -  | #fff |
+| fillColor | 文字的背景颜色，色彩标识，支持rgba，如果去不要背景颜色那么直接rgba透明度设置为0 | String | 非必须 | -  |  #f00 |
+| zIndex | 图层z轴高度 | Number | 非必须 | - |  300 |
+| offset | 文字偏移量 | Array[number] | 非必须 | - |  [0, 0] |
+| bgImg | 背景图，如果设置了此那么文字背景可以不设置 | String[url] | 非必须 | -  | null |
 
 ## usage
 ```

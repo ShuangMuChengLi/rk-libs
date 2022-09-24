@@ -1,10 +1,21 @@
 <!-- 弹出窗体 -->
 <template>
   <!-- 弹窗 start -->
-  <div ref="mapPopup" class="map-popup-all" v-show="popupShow">
-    <div class="map-popup-closer" @click="closePopup">+</div>
+  <div
+    v-show="popupShow"
+    ref="mapPopup"
+    class="map-popup-all"
+  >
+    <div
+      class="map-popup-closer"
+      @click="closePopup"
+    >
+      +
+    </div>
     <h3>{{ title || ' ' }}</h3>
-    <div id="popup-content"><slot /></div>
+    <div id="popup-content">
+      <slot />
+    </div>
   </div>
   <!-- 弹窗 end -->
 </template>
