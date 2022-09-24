@@ -44,6 +44,19 @@ Vue.js、openlayers
 | className | 图层的class | String | 非必须 | - |  el-mapPolygon |
 | fillColor | 填充颜色 | Number | 非必须 | - |  rgba(0,0,0,0.8) |
 
+## 圆形组件 Attributes
+| 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
+| ---- | ---- |---- | ----   |----  |  --- |
+| position | 经纬度 | Array | 必须 | -  | [] |
+| elementName | 标识别名 | String | 非必须 | -  | el-mapCircle |
+| lineColor | 线条颜色 | String | 非必须 | -  | #409eff |
+| lineWidth | 线条宽度 | String | 非必须 | -  |  2 |
+| lineDash | 虚线 | Array[number] | 非必须 | -  |  null |
+| className | 图层的class | String | 非必须 | - |  map-circle |
+| fillColor | 填充颜色 | Number | 非必须 | - |  rgba(0,0,0,0.8) |
+| radius | 圆半径 | Number | 非必须 | - |  100 |
+
+
 ## usage
 ```
 <template>

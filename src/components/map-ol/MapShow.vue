@@ -74,6 +74,20 @@
           删除多边形
         </el-button>
       </div>
+      <div class="row">
+        <el-button
+          size="mini"
+          @click="addCircle(true)"
+        >
+          添加圆形
+        </el-button>
+        <el-button
+          size="mini"
+          @click="addCircle(false)"
+        >
+          删除圆形
+        </el-button>
+      </div>
     </div>
 
     <!--
@@ -117,6 +131,19 @@
       :element-name="mapPolygonData && mapPolygonData.elementName"
       :class-name="mapPolygonData && mapPolygonData.className"
     />
+
+    <!-- 圆形 -->
+    <map-circle
+      :position="mapCircleData && mapCircleData.position || []"
+      :radius="mapCircleData && mapCircleData.radius"
+      :fill-color="mapCircleData && mapCircleData.fillColor"
+      :line-color="mapCircleData && mapCircleData.lineColor"
+      :line-width="mapCircleData && mapCircleData.lineWidth"
+      :line-dash="mapCircleData && mapCircleData.lineDash"
+      :element-name="mapCircleData && mapCircleData.elementName"
+      :class-name="mapCircleData && mapCircleData.className"
+    />
+
   </div>
 </template>
 
@@ -131,7 +158,8 @@ export default {
     MapIconMark: () => import('./components/map-icon-mark'), // 点标注
     MapBrokenLine: () => import('./components/map-broken-line'), // 折线
     MapSmoothLine: () => import('./components/map-smooth-line'), // 曲线
-    MapPolygon: () => import('./components/map-polygon') // 多边形
+    MapPolygon: () => import('./components/map-polygon'), // 多边形
+    MapCircle: () => import('./components/map-circle') // 圆形
   },
   data() {
     return {
@@ -144,6 +172,7 @@ export default {
       mapBrokenLineData: null, // 折线
       mapSmoothLineData: null, // 曲线
       mapPolygonData: null, // 多边形
+      mapCircleData: null, // 圆形
     };
   },
   mounted() {
@@ -268,6 +297,26 @@ export default {
         lineWidth: 2, // 多边形线条宽度 Number，非必须，默认为 2
         lineDash: null, // 多边形虚线 Array[number], 是否使用虚线 ，默认为 null
         className: 'map-polygon' // 图层的class String, 非必须，默认为 'map-polygon'
+      };
+    },
+    /**
+     * 添加&删除圆形
+     * @param type
+     */
+    addCircle(type) {
+      if (!type) {
+        this.mapCircleData = null;
+        return false;
+      }
+      this.mapCircleData = {
+        position: [ 117.99444931988718, 24.479064926250462 ], // 圆中心点 Array， 必须
+        radius: 1000, // 圆半径 number ，默认为 100
+        fillColor: 'rgba(255,255,0,0.5)', // 圆形填充颜色，非必须，默认为 'rgba(255,255,255,0.5)'
+        elementName: '圆形叠加', // 圆形识别名称 String, 非必须，默认为 'el-mapCircle'
+        lineColor: '#409eff', // 圆形线条颜色 String，非必须，默认为 '#409eff'
+        lineWidth: 2, // 圆形线条宽度 Number，非必须，默认为 2
+        lineDash: [20, 5], // 圆形虚线 Array[number], 是否使用虚线 ，默认为 null
+        className: 'map-circle' // 图层的class String, 非必须，默认为 'map-circle'
       };
     }
   }
