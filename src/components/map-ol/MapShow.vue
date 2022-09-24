@@ -60,6 +60,20 @@
           删除曲线
         </el-button>
       </div>
+      <div class="row">
+        <el-button
+          size="mini"
+          @click="addPolygon(true)"
+        >
+          添加多边形
+        </el-button>
+        <el-button
+          size="mini"
+          @click="addPolygon(false)"
+        >
+          删除多边形
+        </el-button>
+      </div>
     </div>
 
     <!--
@@ -92,6 +106,17 @@
       :line-color="mapSmoothLineData && mapSmoothLineData.lineColor"
       :line-width="mapSmoothLineData && mapSmoothLineData.lineWidth"
     />
+
+    <!-- 多边形 -->
+    <map-polygon
+      :point-list="mapPolygonData && mapPolygonData.pointList || []"
+      :fill-color="mapPolygonData && mapPolygonData.fillColor"
+      :line-color="mapPolygonData && mapPolygonData.lineColor"
+      :line-width="mapPolygonData && mapPolygonData.lineWidth"
+      :line-dash="mapPolygonData && mapPolygonData.lineDash"
+      :element-name="mapPolygonData && mapPolygonData.elementName"
+      :class-name="mapPolygonData && mapPolygonData.className"
+    />
   </div>
 </template>
 
@@ -105,7 +130,8 @@ export default {
   components: {
     MapIconMark: () => import('./components/map-icon-mark'), // 点标注
     MapBrokenLine: () => import('./components/map-broken-line'), // 折线
-    MapSmoothLine: () => import('./components/map-smooth-line') // 曲线
+    MapSmoothLine: () => import('./components/map-smooth-line'), // 曲线
+    MapPolygon: () => import('./components/map-polygon') // 多边形
   },
   data() {
     return {
@@ -116,7 +142,8 @@ export default {
       defaultIconImage: require('./images/red_mark.png'),
       mapIconData: null, // 矢量点的标注
       mapBrokenLineData: null, // 折线
-      mapSmoothLineData: null // 曲线
+      mapSmoothLineData: null, // 曲线
+      mapPolygonData: null, // 多边形
     };
   },
   mounted() {
@@ -216,6 +243,31 @@ export default {
         ],
         lineColor: 'rgba(0,77,168,0.9)', // 线条颜色 String，非必须，默认为 '#409eff'
         lineWidth: 2 // 线条宽度 Number，非必须，默认为 2
+      };
+    },
+    /**
+     * 添加&删除多边形
+     * @param type
+     */
+    addPolygon(type){
+      if (!type) {
+        this.mapPolygonData = null;
+        return false;
+      }
+      this.mapPolygonData = {
+        pointList:[
+          [ 117.99873280768396, 24.529627248390202 ],
+          [ 118.03365382795336, 24.512233122928624 ],
+          [ 118.01426145677569, 24.500721081836705 ],
+          [ 117.99904930834772, 24.5042683032589 ],
+          [ 117.98478800301554, 24.53176094566155 ]
+        ],
+        fillColor: 'rgba(255,0,0,0.8)', // 多边形填充颜色，非必须，默认为 'rgba(0,0,0,0.8)'
+        elementName: '地图多边形', // 多边形识别名称 String, 非必须，默认为 'el-mapPolygon'
+        lineColor: 'rgba(0,0,0,0.5)', // 多边形线条颜色 String，非必须，默认为 '#409eff'
+        lineWidth: 2, // 多边形线条宽度 Number，非必须，默认为 2
+        lineDash: null, // 多边形虚线 Array[number], 是否使用虚线 ，默认为 null
+        className: 'map-polygon' // 图层的class String, 非必须，默认为 'map-polygon'
       };
     }
   }

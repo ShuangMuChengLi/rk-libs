@@ -19,9 +19,9 @@ Vue.js、openlayers
 | 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
 | ---- | ---- |---- | ----   |----  |  --- |
 | position | 经纬度 | Array | 必须 | -  | [] |
-| elementName | 弹窗标识别名 | String | 非必须 | -  | null |
-| lineColor | 线条颜色 | String | 非必须 | -  | null |
-| lineWidth | 线条宽度 | String | 非必须 | -  |  null |
+| elementName | 标识别名 | String | 非必须 | -  | el-mapLineString |
+| lineColor | 线条颜色 | String | 非必须 | -  | #409eff |
+| lineWidth | 线条宽度 | String | 非必须 | -  |  2 |
 | lineDash | 虚线 | Array[number] | 非必须 | -  |  null |
 | className | 图层的class | String | 非必须 | - |  map-line-string |
 | zIndex | 图层z轴高度 | Number | 非必须 | - |  300 |
@@ -30,8 +30,19 @@ Vue.js、openlayers
 | 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
 | ---- | ---- |---- | ----   |----  |  --- |
 | position | 经纬度 | Array | 必须 | -  | [] |
-| lineColor | 线条颜色 | String | 非必须 | -  | null |
-| lineWidth | 线条宽度 | String | 非必须 | -  |  null |
+| lineColor | 线条颜色 | String | 非必须 | -  | #409eff |
+| lineWidth | 线条宽度 | String | 非必须 | -  |  2 |
+
+## 多边形组件 Attributes
+| 参数 |	说明 |类型 |是否必填	| 可选值 | 默认值 |
+| ---- | ---- |---- | ----   |----  |  --- |
+| position | 经纬度 | Array | 必须 | -  | [] |
+| elementName | 标识别名 | String | 非必须 | -  | el-mapPolygon |
+| lineColor | 线条颜色 | String | 非必须 | -  | #409eff |
+| lineWidth | 线条宽度 | String | 非必须 | -  |  2 |
+| lineDash | 虚线 | Array[number] | 非必须 | -  |  null |
+| className | 图层的class | String | 非必须 | - |  el-mapPolygon |
+| fillColor | 填充颜色 | Number | 非必须 | - |  rgba(0,0,0,0.8) |
 
 ## usage
 ```
