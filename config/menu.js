@@ -191,7 +191,17 @@ export const menu = [
             label: '添加文件',
             source: require('../src/components/rk-add-file/README.md'),
             date: '2022-09-15'
-          }
+          },
+          {
+            label: '动态路由目录',
+            source: require('../src/components/router-menu/README.md'),
+            date: '2022-09-26'
+          },
+          {
+            label: 'JSON编辑器',
+            source: require('../src/components/json-editor/README.md'),
+            date: '2022-09-26'
+          },
           // {
           //   label: '弹窗可拖拽并改变大小',
           //   source: require('../src/components/dialog-drag/README.md'),
@@ -444,6 +454,11 @@ export const menu = [
             label: '开启gzip',
             source: require('../src/experience/solution/gzip/README.md'),
             date: '2022-09-01'
+          },
+          {
+            label: 'rem屏幕适配方案',
+            source: require('../src/experience/js/rem/README.md'),
+            date: '2022-09-26'
           },
         ]
       },

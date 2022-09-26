@@ -244,6 +244,14 @@ export const routes = [
     path: '/components/map-ol/map-ol-show',
     component: ()=>import('../components/map-ol/MapShow')
   },
+  {
+    path: '/components/router-menu/router-menu-demo',
+    component: ()=>import('../components/router-menu/router-menu-demo')
+  },
+  {
+    path: '/components/json-editor/json-editor-demo',
+    component: ()=>import('../components/json-editor/json-editor-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

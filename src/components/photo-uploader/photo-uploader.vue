@@ -249,6 +249,7 @@ export default {
     },
     // 显示该控件与否
     value: {
+      type: Boolean,
       'default': true
     },
     // 上传地址
