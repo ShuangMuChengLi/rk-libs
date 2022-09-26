@@ -5,7 +5,7 @@
       controls
     />
     <div>
-      音频时长为： {{audioText}}
+      音频时长为： {{ audioText }}
     </div>
   </div>
 </template>

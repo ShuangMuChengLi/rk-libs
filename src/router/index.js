@@ -240,6 +240,10 @@ export const routes = [
     path: '/demo/audio-duration-demo',
     component: ()=>import('../js/html/audio-duration/audio-duration-demo')
   },
+  {
+    path: '/components/map-ol/map-ol-show',
+    component: ()=>import('../components/map-ol/MapShow')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

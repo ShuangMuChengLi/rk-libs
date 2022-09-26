@@ -7,7 +7,7 @@
         点击上传文件 slot
       </div>
     </rk-add-file>
-    <img :src="base64Url" />
+    <img :src="base64Url">
   </div>
 </template>
 

@@ -3,7 +3,7 @@ node_modules
 /dist
 /rk-libs
 dist.zip
-
+yarn.lock
 # local env files
 .env.local
 .env.*.local
@@ -22,3 +22,4 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
