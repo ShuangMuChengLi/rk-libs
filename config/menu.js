@@ -191,7 +191,12 @@ export const menu = [
             label: '添加文件',
             source: require('../src/components/rk-add-file/README.md'),
             date: '2022-09-15'
-          }
+          },
+          {
+            label: '地图组件',
+            source: require('../src/components/map-ol/README.md'),
+            date: '2022-09-27'
+          },
           // {
           //   label: '弹窗可拖拽并改变大小',
           //   source: require('../src/components/dialog-drag/README.md'),
@@ -527,6 +532,10 @@ export const menu = [
           {
             label: '滚动显示特效',
             source: require('../src/experience/special-effects/wow/README.md')
+          },
+          {
+            label: '统一门户项目背景特效',
+            source: require('../src/experience/special-effects/PortalBg/README.md')
           },
         ]
       },

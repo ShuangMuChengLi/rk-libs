@@ -125,6 +125,10 @@ export const routes = [
     component: ()=>import('../experience/html/css/css-demo')
   },
   {
+    path: '/experience/special-effects/PortalBg',
+    component: ()=>import('../experience/special-effects/PortalBg/PortalBg')
+  },
+  {
     path: '/demo/worker-demo',
     component: ()=>import('../views/test/worker-demo/worker-test')
   },
