@@ -34,6 +34,14 @@ export const menu = [
             label: '海康播放器（插件）',
             source: require('../src/components/hikvision-video-player-plugin/README.md')
           },
+          {
+            label: '海康播放器（hls）',
+            source: require('../src/components/hikvision-video-player-hls/README.md')
+          },
+          {
+            label: '海康播放器（websocket）',
+            source: require('../src/components/hikvision-video-player-ws/README.md')
+          }
         ]
       },
       {
@@ -197,6 +205,16 @@ export const menu = [
             source: require('../src/components/map-ol/README.md'),
             date: '2022-09-27'
           },
+          {
+            label: '动态路由目录',
+            source: require('../src/components/router-menu/README.md'),
+            date: '2022-09-26'
+          },
+          {
+            label: 'JSON编辑器',
+            source: require('../src/components/json-editor/README.md'),
+            date: '2022-09-26'
+          },
           // {
           //   label: '弹窗可拖拽并改变大小',
           //   source: require('../src/components/dialog-drag/README.md'),
@@ -265,6 +283,10 @@ export const menu = [
           {
             label: '3des加密、解密',
             source: require('../src/js/math/rk-3des/README.md')
+          },
+          {
+            label: '判断小数相等',
+            source: require('../src/js/math/isEqual/README.md')
           }
         ]
       },
@@ -449,6 +471,16 @@ export const menu = [
             label: '开启gzip',
             source: require('../src/experience/solution/gzip/README.md'),
             date: '2022-09-01'
+          },
+          {
+            label: 'rem屏幕适配方案',
+            source: require('../src/experience/js/rem/README.md'),
+            date: '2022-09-26'
+          },
+          {
+            label: '伪数组转数组',
+            source: require('../src/experience/solution/array-like/README.md'),
+            date: '2022-09-26'
           },
         ]
       },

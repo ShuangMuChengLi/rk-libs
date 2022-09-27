@@ -33,6 +33,8 @@
     "http-server": "^14.1.0",
     "imports-loader": "1.2.0",
     "jest": "^27.0.5",
+    "jsoneditor": "^9.9.0",
+    "jspdf": "^2.5.1",
     "leaflet": "^1.7.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
