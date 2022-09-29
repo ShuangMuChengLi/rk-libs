@@ -12,6 +12,9 @@ rk-axios
 | option | 播放器配置 | Object | false | -  |  { iWidth: 500,iHeight: 300 } |
 | channelCode | 通道号 | String or Array\<String\> | true | -  |  - |
 ## usage
+```html
+ <script src="/h5player/plugin/jsWebControl-1.0.0.min.js"></script>
+```
 需要通过后端获取实际的播放地址
 ```vue
 <template>
@@ -30,7 +33,7 @@ rk-axios
   </div>
 </template>
 <script>
-import videoPlayerWs from '@/components/video-player/video-player-Ws';
+import videoPlayerWs from '@/components/video-player/video-player-ws';
 export default {
   components: {
     videoPlayerWs
