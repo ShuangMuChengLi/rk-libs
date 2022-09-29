@@ -256,6 +256,10 @@ export const routes = [
     path: '/components/json-editor/json-editor-demo',
     component: ()=>import('../components/json-editor/json-editor-demo')
   },
+  {
+    path: '/components/video-js-hls',
+    component: ()=>import('../components/video-js-hls/video-js-hls-demo')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

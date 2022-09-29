@@ -4,11 +4,12 @@ import router from './router';
 import store from './store';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import 'video.js/dist/video-js.css';
 import './css/base.less';
 import {axios} from './js/html/axios/axios';
-if(process.env.NODE_ENV === 'development'){
-  require('../api/mock-test');
-}
+// if(process.env.NODE_ENV === 'development'){
+//   require('../api/mock-test');
+// }
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 Vue.use(axios);
