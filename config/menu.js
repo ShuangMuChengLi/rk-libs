@@ -41,6 +41,10 @@ export const menu = [
           {
             label: '海康播放器（websocket）',
             source: require('../src/components/hikvision-video-player-ws/README.md')
+          },
+          {
+            label: 'video.js实现hlv播放组件',
+            source: require('../src/components/video-js-hls/README.md')
           }
         ]
       },
