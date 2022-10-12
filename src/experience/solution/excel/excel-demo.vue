@@ -26,23 +26,16 @@ export default {
   data(){
     return {
       textarea: `[
-        [1, 2, 3],
-        [true, false, null, 'sheetjs'],
-        ['foo', 'bar', 'new Date('2014-02-19T14:30Z')', '0.3'],
-        ['baz', null, 'qux'],
-      ]`
+  ["日期", "姓名", "地址"],
+  ["2016-05-02", "王小虎", "上海市普陀区金沙江路 1518 弄"],
+  ["2016-05-03", "王小虎", "上海市普陀区金沙江路 1518 弄"],
+  ["2016-05-04", "王小虎", "上海市普陀区金沙江路 1518 弄"]
+]`
     };
   },
   methods:{
     exportExcel(){
-      let data = [
-        [1, 2, 3],
-        [true, false, null, 'sheetjs'],
-        ['foo', 'bar', new Date('2014-02-19T14:30Z'), '0.3'],
-        ['baz', null, 'qux'],
-      ];
-      // let data = JSON.parse(this.textarea);
-      console.log(data);
+      let data = JSON.parse(this.textarea.replace(/\s/g, ''));
       var buffer = xlsx.build([{name: 'mySheetName.xlsx', data:data }]);
       FileSaver.saveAs(
         // Blob 对象表示一个不可变、原始数据的类文件对象。
