@@ -117,6 +117,10 @@ export const routes = [
     component: ()=>import('../js/map/map-mixin/map-mixin-demo.vue')
   },
   {
+    path: '/experience/solution/excel/excel-demo',
+    component: ()=>import('../experience/solution/excel/excel-demo')
+  },
+  {
     path: '/experience/html/speech/speech-demo',
     component: ()=>import('../experience/html/speech/speech-demo')
   },
