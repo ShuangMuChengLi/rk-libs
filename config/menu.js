@@ -375,6 +375,11 @@ export const menu = [
             source: require('../src/js/tools/system-util/README.md'),
             date: '2022-04-20'
           },
+          {
+            label: '前端生成并导出excel',
+            source: require('../src/js/tools/export-excel/README.md'),
+            date: '2022-10-13'
+          },
         ]
       },
     ]
@@ -421,11 +426,11 @@ export const menu = [
             label: '常用webpack配置汇总(VueJS环境)',
             source: require('../src/experience/solution/webpack/README.md')
           },
-          {
-            label: '前端读取或生成excel',
-            source: require('../src/experience/solution/excel/README.md'),
-            date: '2021-09-23'
-          },
+          // {
+          //   label: '前端读取或生成excel',
+          //   source: require('../src/experience/solution/excel/README.md'),
+          //   date: '2021-09-23'
+          // },
           {
             label: '前端读取并展示md文件',
             source: require('../src/experience/solution/md/README.md'),

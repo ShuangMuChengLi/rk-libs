@@ -213,6 +213,10 @@ export const routes = [
     component: ()=>import('../js/html/com-valid/valid')
   },
   {
+    path: '/tools/export-excel',
+    component: ()=>import('../js/tools/export-excel/export-excel-demo')
+  },
+  {
     path: '/components/com-signWrite/signWrite',
     component: ()=>import('../components/com-signWrite/signWrite')
   },

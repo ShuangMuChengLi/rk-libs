@@ -1,4 +1,4 @@
-# 前端读取或生成excel
+# 前端读取或生成excel（废弃：存在兼容性问题，请用src/js/tools/export-excel）
 ## node-xlsx
 [官网](https://www.npmjs.com/package/node-xlsx)
 [demo](./index.html#/experience/solution/excel/excel-demo)
