@@ -10,6 +10,8 @@
     choose 文件选择
   emit:
     finish
+## contributor
+纪爱妹
 ## preview
 [预览](./index.html#/components/rk-add-file/rk-add-file-demo)
 ## download

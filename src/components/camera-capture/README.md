@@ -1,5 +1,6 @@
 # 浏览器拍照+人脸识别
-
+## contributor
+邹双玉
 ## preview
 
 ## download

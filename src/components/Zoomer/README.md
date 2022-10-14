@@ -1,5 +1,7 @@
 # 图片放大镜组件
 鼠标在图片上时，显示放大镜效果
+## contributor
+纪爱妹
 ## preview
 [预览](./index.html#/components/Zoomer)
 ## download

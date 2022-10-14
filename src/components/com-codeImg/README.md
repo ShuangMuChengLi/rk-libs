@@ -1,5 +1,7 @@
 # 图片验证码
 点击图片和输入错误时更新验证码
+## contributor
+沈鑫龙
 ## preview
 [预览](./index.html#/components/com-codeImg/codeImg)
 ## download

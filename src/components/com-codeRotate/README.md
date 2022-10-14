@@ -1,4 +1,6 @@
 # 旋转图片验证码
+## contributor
+沈鑫龙
 ## preview
 [预览](./index.html#/components/com-codeRotate/codeRotate)
 ## download

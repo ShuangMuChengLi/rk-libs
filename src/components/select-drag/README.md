@@ -1,4 +1,6 @@
 # 拖拽下拉框组件
+## contributor
+黄镇滨
 ## preview
 [预览](./index.html#/components/select-drag/select-drag-demo)
 ## download

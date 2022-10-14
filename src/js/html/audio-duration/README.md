@@ -1,5 +1,7 @@
 # 音频时长
   计算音频时长
+## contributor
+纪爱妹
 ## preview
 [预览](./index.html#/demo/audio-duration-demo)
 ## download

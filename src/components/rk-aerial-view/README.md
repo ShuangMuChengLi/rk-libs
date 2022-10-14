@@ -2,6 +2,8 @@
   网页鸟瞰
   按住图标移动
   按住鸟瞰移动(红色框区域)
+## contributor
+纪爱妹
 ## preview
 [预览](./index.html#/components/rk-aerial-view/rk-aerial-view-demo)
 ## download

@@ -1,4 +1,6 @@
 # 前端对接海康媒体平台websocket的vue封装
+## contributor
+肖广
 ## preview
 无
 ## download

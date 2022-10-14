@@ -1,4 +1,6 @@
 # 签名板组件
+## contributor
+沈鑫龙
 ## preview
 [预览](./index.html#/components/com-signWrite/signWrite)
 ## download

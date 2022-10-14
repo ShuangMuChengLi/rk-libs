@@ -1,6 +1,8 @@
 # 动态路由目录
   根据数据动态生成目录
   支持点击跳转
+## contributor
+林佳男
 ## preview
 [预览](./index.html#/components/router-menu/router-menu-demo)
 ## download

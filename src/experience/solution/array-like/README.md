@@ -1,4 +1,6 @@
 # 伪数组转换为数组
+## contributor
+肖广
 ## dependence
 无
 ## function

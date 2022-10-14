@@ -1,4 +1,6 @@
 # 屏幕截屏
+## contributor
+林超群、林佳男
 ## dependence
 html2canvas、saveAs、jsPdf
 ## 步骤

@@ -1,4 +1,6 @@
 # echart封装
+## contributor
+程丽萍
 ## preview
 [预览](./index.html#/components/echart/chart-show)
 ## download

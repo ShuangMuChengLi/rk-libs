@@ -1,4 +1,6 @@
 # openlayer 点、线、弹窗等常用组件的封装
+## contributor
+程丽萍
 ## preview
 [预览](./index.html#/components/map-ol/map-ol-show)
 ## download

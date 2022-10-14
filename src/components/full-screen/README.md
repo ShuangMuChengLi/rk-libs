@@ -1,5 +1,6 @@
 # 全屏
-
+## contributor
+邹双玉
 ## preview
 [预览](./index.html#/components/full-screen/FullScreenDemo)
 

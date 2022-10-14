@@ -1,5 +1,6 @@
 # 文件上传
-
+## contributor
+邹双玉
 ## preview
 [预览](./index.html#/components/FileUpload/FileUploadDemo)
 

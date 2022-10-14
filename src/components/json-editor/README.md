@@ -1,6 +1,8 @@
 # JSON编辑器
   支持JSON编辑
   支持展示模式切换
+## contributor
+林佳男
 ## preview
 [预览](./index.html#/components/json-editor/json-editor-demo)
 ## download

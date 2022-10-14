@@ -1,4 +1,6 @@
 # 可拖拽弹窗dialog-drag
+## contributor
+黄剑洪
 ## preview
 [预览](./index.html#/demo/dialogDrag)
 ## download

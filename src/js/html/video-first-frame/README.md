@@ -1,5 +1,7 @@
 # 视频第一帧图片
   视频图片展示
+## contributor
+纪爱妹
 ## preview
 [预览](./index.html#/demo/video-first-frame-demo)
 ## download

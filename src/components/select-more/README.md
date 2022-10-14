@@ -1,5 +1,7 @@
 # 下拉多选-列表优化
 Element多选下拉组件的扩展
+## contributor
+邹双玉
 ## preview
 [预览](./index.html#/components/select-more/SelectMoreDemo)
 

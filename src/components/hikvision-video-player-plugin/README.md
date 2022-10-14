@@ -1,4 +1,6 @@
 # 前端对接海康媒体平台视频播放插件的vue封装
+## contributor
+肖广
 ## preview
 [预览](./#/components/video-player-plugin)
 ## download

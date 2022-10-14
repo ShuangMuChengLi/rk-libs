@@ -2,6 +2,8 @@
   参考线：在标尺上拖动鼠标
   移动：空格键 + 鼠标移动
   缩放：空格键 + 鼠标滚动  步长为0.01
+## contributor
+纪爱妹
 ## preview
 [预览](./index.html#/components/rk-ruler/rk-ruler-demo)
 ## download

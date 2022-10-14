@@ -1,5 +1,7 @@
 # 下拉选择树组件
 支持下拉单选或多选树
+## contributor
+林佳男
 ## preview
 [预览](./index.html#/components/SelectTree/SelectMoreDemo)
 ## download

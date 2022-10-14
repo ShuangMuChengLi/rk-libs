@@ -1,5 +1,7 @@
 # 表单校验、限制输入
 适用于对表单进行限制输入、校验
+## contributor
+沈鑫龙
 ## preview
 [预览](./index.html#/demo/valid)
 ## download

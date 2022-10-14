@@ -1,5 +1,6 @@
 # 虚拟列表优化
-
+## contributor
+邹双玉
 ## preview
 [预览](./index.html#/components/virtual-list/VirtualListDemo)
 

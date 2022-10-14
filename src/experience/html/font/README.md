@@ -1,5 +1,6 @@
 # 字体资源下载
-
+## contributor
+邹双玉
 ## preview
 [预览](./index.html#/demo/font)
 

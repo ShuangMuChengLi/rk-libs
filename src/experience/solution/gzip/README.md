@@ -1,5 +1,6 @@
 # Vue性能优化之使用gzip压缩打包，减小chunk-venders.js体积 
-
+## contributor
+邹双玉
 [gzip学习](https://www.cnblogs.com/zoushuangyu/p/16095732.html)
 
 ## dependence
