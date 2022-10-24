@@ -1,7 +1,7 @@
 # 前端生成并导出excel
 前端生成并导出excel
 ## preview
-[预览](./index.html#/tools/export-excel)
+[预览](./index.html#/tools/export-excel) [codesandbox live demo](https://codesandbox.io/s/export-excel-iymho4)
 ## Download
 [库文件下载](./js/tools/export-excel.zip)
 ## dependence
