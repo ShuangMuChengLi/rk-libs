@@ -35,8 +35,8 @@ export default {
         pageId: 1,
         pageSize: 10,
       },
-	    total: 100,
-	    columnConfig:[
+      total: 100,
+      columnConfig:[
         {
           prop: 'img',
           label: '抓拍照',
@@ -83,20 +83,20 @@ export default {
     };
   },
   methods:{
-	  selectionChange(val){
-		  console.log(val);
-	  },
-	  rowClick(row){
-	  	console.log(row);
-	  },
-	  imgClick(row, index, prop){
-	  	console.log(row, index, prop);
-	  },
-	  pageChange(){
-	  	console.log('pageChange');
+    selectionChange(val){
+      console.log(val);
     },
-	  view(row){
-	  	console.log(row);
+    rowClick(row){
+      console.log(row);
+    },
+    imgClick(row, index, prop){
+      console.log(row, index, prop);
+    },
+    pageChange(){
+      console.log('pageChange');
+    },
+    view(row){
+      console.log(row);
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <common-filter
-    :form-info="dangerAreaFilter"
+    :form-info="filterConfig"
     @submit="query"
   >
     <el-button
@@ -17,7 +17,7 @@ export default {
   components: {CommonFilter},
   data(){
     return {
-      dangerAreaFilter: [
+      filterConfig: [
         {
           label: '漫入日期',
           prop: ['mrqssj', 'mrjssj'],
@@ -56,27 +56,6 @@ export default {
               value: '3'
             },
           ]
-        },
-        {
-          label: '是否可见',
-          prop: 'visible',
-          type: 'select',
-	        optionsFn: async ()=>{
-          	return [
-		          {
-			          label: '高风险',
-			          value: '1'
-		          },
-		          {
-			          label: '中风险',
-			          value: '2'
-		          },
-		          {
-			          label: '低风险',
-			          value: '3'
-		          },
-	          ];
-          }
         },
         {
           label: '浸入地',

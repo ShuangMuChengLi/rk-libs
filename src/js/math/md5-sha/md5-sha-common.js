@@ -8,7 +8,6 @@ let { createHash } = require('crypto');
 function md5Sha(message, algorithm = 'md5'){
   const hash = createHash(algorithm);
   hash.update(message);
-  console.log(hash);
   return hash.digest('hex');
 }
 module.exports = md5Sha;

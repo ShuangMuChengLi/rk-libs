@@ -17,16 +17,10 @@ Vue.js、ElementUI
 | label | 字段标题 | String | true | -  |  - |
 | type | 字段类型 | String | true | 'dateRange'、'select'、'input'  |  - |
 | options | 下拉框的选项列表 | Array | false | -  |  - |
-| optionsFn | 下拉框的选项列表获取函数 | Function | false | -  |  - |
 ## event
 | 事件名称 |	说明 |回调参数 |
 | ---- | ---- |---- |
 | submit | 提交事件 | 筛选表单数据 | 
-## slots
-| slots名称 | 说明 |
-| ---- | ---- |
-| left | 左侧插槽 |
-| default | 右侧插槽 |
 ## usage
 ```
 <template>
@@ -89,27 +83,6 @@ export default {
           ]
         },
         {
-          label: '是否可见',
-          prop: 'visible',
-          type: 'select',
-	        optionsFn: async ()=>{
-          	return [
-		          {
-			          label: '高风险',
-			          value: '1'
-		          },
-		          {
-			          label: '中风险',
-			          value: '2'
-		          },
-		          {
-			          label: '低风险',
-			          value: '3'
-		          },
-	          ];
-          }
-        },
-        {
           label: '浸入地',
           prop: 'mrd',
           type: 'input',
@@ -138,6 +111,5 @@ export default {
 <style scoped>
 
 </style>
-
 
 ```

@@ -20,6 +20,28 @@
       <div>
         <template v-for="(item, key) in formInfoSelf">
           <el-form-item
+            v-if="item.type === 'monthRange'"
+            :key="'formInfoItem' + key"
+            :label="item.label"
+          >
+            <el-date-picker
+              v-model="form[item.prop[0]]"
+              type="month"
+              placeholder="选择月份"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              clearable
+            />
+            <span class="filter-time-join"> - </span>
+            <el-date-picker
+              v-model="form[item.prop[1]]"
+              type="month"
+              placeholder="选择月份"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              clearable
+              @change="monthEndChange(item.prop[1])"
+            />
+          </el-form-item>
+          <el-form-item
             v-if="item.type === 'dateRange'"
             :key="'formInfoItem' + key"
             :label="item.label"
@@ -42,6 +64,28 @@
             />
           </el-form-item>
           <el-form-item
+            v-if="item.type === 'onlyDayRange'"
+            :key="'formInfoItem' + key"
+            :label="item.label"
+          >
+            <el-date-picker
+              v-model="form[item.prop[0]]"
+              type="date"
+              placeholder="选择日期"
+              value-format="yyyy-MM-dd"
+              clearable
+            />
+            <span class="filter-time-join"> - </span>
+            <el-date-picker
+              v-model="form[item.prop[1]]"
+              type="date"
+              placeholder="选择日期"
+              value-format="yyyy-MM-dd"
+              clearable
+            />
+          </el-form-item>
+
+          <el-form-item
             v-if="item.type === 'select'"
             :key="'formInfoItem' + key"
             :label="item.label"
@@ -62,6 +106,7 @@
           </el-form-item>
           <el-form-item
             v-if="item.type === 'input'"
+            v-show="!item.hidden"
             :key="'formInfoItem' + key"
             :label="item.label"
           >
@@ -101,6 +146,14 @@
           <slot />
         </el-form-item>
       </div>
+      <div
+        v-if="$slots.right"
+        class="right"
+      >
+        <slot
+          name="right"
+        />
+      </div>
     </el-form>
   </div>
 </template>
@@ -111,7 +164,7 @@ import moment from 'moment';
 import {pickerOptionsFn} from './pickerOptionsFn';
 export default {
   name: 'CommonFilter',
-  props:{
+  props: {
     auto: {
       type: Boolean,
       default: false
@@ -122,7 +175,7 @@ export default {
     },
     formInfo: {
       type: Array,
-      default(){
+      default() {
         return [];
       }
     },
@@ -137,48 +190,53 @@ export default {
       },
     };
   },
-  watch:{
-    formInfo:{
+  watch: {
+    formInfo: {
       immediate: true,
-      handler(val){
+      handler(val) {
         this.formInfoSelf = _.cloneDeep(val || []);
         this.init();
       }
     }
   },
   mounted() {
-		
+
   },
   methods: {
-    init(){
+    changeUndefinedToNull(value) {
+      if(value === undefined)return null;
+
+      return value;
+    },
+    init() {
       this.form = {};
-      for(let i = 0; i < this.formInfo.length; i++){
+      for(let i = 0; i < this.formInfo.length; i++) {
         let item = this.formInfo[i];
-        if(_.isArray(item.prop)){
-          for(let i = 0; i < item.prop.length; i++){
+        if(_.isArray(item.prop)) {
+          for(let i = 0; i < item.prop.length; i++) {
             let prop = item.prop[i];
             this.$set(this.form, prop, item.defaultValue ? item.defaultValue[i] : null);
           }
         }else{
-          this.$set(this.form, item.prop, item.defaultValue || null);
+          this.$set(this.form, item.prop, this.changeUndefinedToNull(item.defaultValue));
         }
-        if(item.optionsFn){
+        if(item.optionsFn) {
           (async ()=>{
             let list = await item.optionsFn();
             this.$set(this.formInfoSelf[i], 'options', list);
           })();
         }
       }
-      if(this.auto){
+      if(this.auto) {
         this.onSubmit();
       }
     },
     onSubmit() {
-      for(let item of this.formInfoSelf){
-        if(item.type === 'dateRange'){
+      for(let item of this.formInfoSelf) {
+        if(item.type === 'dateRange') {
           let beginTime = this.form[item.prop[0]];
           let endTime = this.form[item.prop[1]];
-          if(beginTime && endTime && moment(beginTime).isAfter(moment(endTime))){
+          if(beginTime && endTime && moment(beginTime).isAfter(moment(endTime))) {
             this.$message.error(item.label + '的开始时间大于结束时间');
             return;
           }
@@ -188,9 +246,9 @@ export default {
     },
     reset() {
       this.form = {};
-      for(let item of this.formInfoSelf){
-        if(_.isArray(item.prop)){
-          for(let i = 0; i < item.prop.length; i++){
+      for(let item of this.formInfoSelf) {
+        if(_.isArray(item.prop)) {
+          for(let i = 0; i < item.prop.length; i++) {
             let prop = item.prop[i];
             this.$set(this.form, prop, item.defaultValue ? item.defaultValue[i] : null);
           }
@@ -200,6 +258,9 @@ export default {
       }
       this.$emit('reset');
       this.$emit('submit', _.clone(this.form));
+    },
+    monthEndChange(prop) {
+      this.$set(this.form, prop, moment(this.form[prop]).endOf('month').format('YYYY-MM-DD HH:mm:ss'));
     }
   }
 };

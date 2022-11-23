@@ -9,6 +9,7 @@
       style="width: 100%"
       height="100%"
       stripe
+      highlight-current-row
       @row-click="rowClick"
       @selection-change="selectionChange"
     >
@@ -23,6 +24,7 @@
         type="index"
         :header-align="headerAlign"
         :index="indexMethod"
+        width="55"
       />
       <template v-for="(item, key) in column">
         <el-table-column
@@ -54,7 +56,7 @@
               alt=""
               class="img"
               fit="contain"
-              @click="imgClick(scope.row, scope.$index, item.prop)"
+              @click.native="imgClick(scope.$index)"
             />
           </template>
         </el-table-column>
@@ -160,36 +162,36 @@
 import {tableIndexMixin} from './table-index-mixin';
 export default {
   name: 'CommonTable',
-  mixins:[ tableIndexMixin ],
-  props:{
-    hasSelection:{
+  mixins: [ tableIndexMixin ],
+  props: {
+    pageSizes: {
+      default() {
+        return [10, 20, 60, 120];
+      },
+      type: Array
+    },
+    hasSelection: {
       default: false,
       type: Boolean
     },
-    total:{
+    total: {
       default: 0,
       type: Number
     },
-    column:{
-      default(){
+    column: {
+      default() {
         return [];
       },
       type: Array
     },
-    data:{
-      default(){
+    data: {
+      default() {
         return [];
       },
       type: Array
     },
-	  pageSizes: {
-		  default(){
-			  return [10, 20, 60, 120];
-		  },
-		  type: Array
-	  },
-    pageInfo:{
-      default(){
+    pageInfo: {
+      default() {
         return {
           pageId: 1,
           pageSize: 10,
@@ -197,22 +199,22 @@ export default {
       },
       type: Object
     },
-    layout:{
+    layout: {
       default: 'total, sizes, prev, pager, next, jumper',
       type: String
     },
-    headerAlign:{
+    headerAlign: {
       default: null,
       type: String
     }
   },
   data() {
     return {
-			
+
     };
   },
-  methods:{
-    pageChange(val){
+  methods: {
+    pageChange(val) {
       let pageInfo = {
         pageId: val,
         pageSize: this.pageInfo.pageSize,
@@ -220,7 +222,7 @@ export default {
       this.$emit('update:pageInfo', pageInfo);
       this.$emit('pageChange', pageInfo);
     },
-    pageSizeChange(val){
+    pageSizeChange(val) {
       let pageInfo = {
         pageId: 1,
         pageSize: val,
@@ -228,13 +230,13 @@ export default {
       this.$emit('update:pageInfo', pageInfo);
       this.$emit('pageChange', pageInfo);
     },
-    imgClick(row, index, prop){
-      this.$emit('imgClick', row, index, prop);
+    imgClick(index) {
+      this.$emit('imgClick', index);
     },
-    rowClick(item){
+    rowClick(item) {
       this.$emit('rowClick', item);
     },
-    selectionChange(val){
+    selectionChange(val) {
       this.$emit('selectionChange', val);
     }
   }
@@ -253,16 +255,12 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 5px 0;
+    background-color: #1b3d6e;
     flex-shrink: 0;
   }
   .img{
     width: 100px;
     height: 100px;
     background-color: rgba(0,0,0,0.6);
-  }
-  .content-table-row{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 </style>
