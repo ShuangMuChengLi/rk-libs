@@ -406,6 +406,11 @@ export const menu = [
             date: '2022-04-01'
           },
           {
+            label: 'vis-network画拓扑图',
+            source: require('../src/experience/solution/vis-network/README.md'),
+            date: '2022-12-13'
+          },
+          {
             label: '语义识别、关键词提取',
             source: require('../src/experience/solution/get-keyword/README.md'),
           },
