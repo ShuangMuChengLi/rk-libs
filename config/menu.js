@@ -238,22 +238,7 @@ export const menu = [
             label: 'Openlayers地图的Vue.js混入封装',
             source: require('../src/js/map/map-mixin/README.md'),
             date: '2022-04-01'
-          },
-          {
-            label: '判断点位在地图几何范围内',
-            source: require('../src/js/map/intersectsCoordinate/README.md'),
-            date: '2022-03-28'
-          },
-          {
-            label: '计算两经纬度点位的距离',
-            source: require('../src/js/map/point-distance/README.md'),
-            date: '2021-09-13'
-          },
-          {
-            label: '对点位列表以一定距离进行聚合分组',
-            source: require('../src/js/map/point-cluster/README.md'),
-            date: '2021-10-13'
-          },
+          }
         ]
       },
       {

@@ -2,7 +2,7 @@ import Polygon from 'ol/geom/Polygon';
 import { fromLonLat, getTransform } from 'ol/proj';
 import {getDistance} from '../point-distance/point-distance';
 /**
- *
+ * 判断点位在地图几何范围内
  * @param list
  * @param point
  * @returns {boolean}
@@ -14,7 +14,7 @@ export function intersectsCoordinate(list, point){
 }
 
 /**
- *
+ *  判断点位在圆内
  * @param center
  * @param radius KM
  * @param point

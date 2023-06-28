@@ -1,25 +1,5 @@
-function main(){
-  this.timeSet = [
-    {
-      id: '',
-      fn(){
-
-      },
-      time,
-      d
-    }
-  ];
-  setInterval(()=>{
-    for(let time of this.timeSet){
-
-    }
-  }, 1000);
+function main([lon1, lat1], [lon2, lat2]){
+  console.log(lon1, lon2, lat1, lat2);
 
 }
-main.prototype.setTimer = function (arg){
-  this.timeSet.push(arg);
-}
-main.prototype.delTimer = function (id){
-  let item = _.find(this.timeSet, )
-  this.timeSet.push(arg);
-}
+main([1, 2], [3, 4])

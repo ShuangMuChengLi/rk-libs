@@ -1,4 +1,4 @@
-import { pointCluster } from './point-cluster';
+import { groupPointByDistance } from './groupPointByDistance';
 
 let list = [
   {
@@ -15,7 +15,7 @@ let list = [
   },
 ];
 test('pointCluster', () => {
-  let result = pointCluster({
+  let result = groupPointByDistance({
     list,
     d: 0.5,
     lonName: 'lon',

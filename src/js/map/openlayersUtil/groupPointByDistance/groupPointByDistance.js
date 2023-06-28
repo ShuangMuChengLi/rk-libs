@@ -17,7 +17,7 @@ import { getDistance } from '../point-distance/point-distance';
  *   }
  * ]}
  */
-export function pointCluster(options){
+export function groupPointByDistance(options){
   let {
     list,
     d = 0.5,
