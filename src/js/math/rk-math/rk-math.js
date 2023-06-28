@@ -9,6 +9,15 @@ export const rkMath = {
     return Math.log(y) / Math.log(x);
   },
   /**
+   * 获取x的y次方根
+   * @param x
+   * @param y
+   * @return {number}
+   */
+  getRoot(x, y) {
+    return Math.pow(x, 1 / y);;
+  },
+  /**
    * 是否奇数
    * @param x
    * @return {boolean}

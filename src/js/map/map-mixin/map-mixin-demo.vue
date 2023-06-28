@@ -31,6 +31,12 @@
       >
         弹窗
       </el-button>
+      <el-button
+        type="primary"
+        @click="getStuff"
+      >
+        获取
+      </el-button>
     </div>
     <div
       id="map"
@@ -83,7 +89,8 @@ export default {
           value: 'None',
         },
       ],
-      map: null
+      map: null,
+      clusterLayer: null
     };
   },
   mounted() {
@@ -196,10 +203,12 @@ export default {
 
       let clusterList = [
         {
+          id:'1',
           lonLat: [118.18935119628907, 24.503551153564448],
           text: '100'
         },
         {
+          id:'2',
           lonLat: [118.19278442382813, 24.482951788330073],
           text: '222'
         },
@@ -212,6 +221,7 @@ export default {
           text: feature.get('features')[0].getProperties().text
         };
       });
+      this.clusterLayer = clusterLayer;
       this.showClusterPoints({layer: clusterLayer, list: clusterList});
       this.createSelect({
         style:(feature)=> {
@@ -237,6 +247,16 @@ export default {
         [118.16205703735352, 24.402270941162104]
       ], this.lineLayer);
       this.drawVector = this.getVectorLayer();
+    },
+    getStuff(){
+      // let result = this.clusterLayer.getSource().getSource().getFeatures()[0].getGeometry();
+      // result.setCoordinates([119.2266017150879, 24.560886053466792]);
+      // console.log(result);
+      let feature = this.clusterLayer.getSource().getSource().getFeatureById('1');
+      console.log(feature);
+      let result = feature.getGeometry();
+      result.setCoordinates([119.2266017150879, 24.560886053466792]);
+      console.log(result);
     },
     showDialogBtn(){
       let center = this.map.getView().getCenter();
