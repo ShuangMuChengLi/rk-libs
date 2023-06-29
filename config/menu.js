@@ -452,6 +452,11 @@ export const menu = [
             date: '2022-01-17'
           },
           {
+            label: 'js生成pdf——jsPDF',
+            source: require('../src/experience/js/jsPDF/README.md'),
+            date: '2023-06-29'
+          },
+          {
             label: 'svg开发库Snap-svg',
             source: require('../src/experience/js/Snap/README.md'),
             date: '2022-03-22'
