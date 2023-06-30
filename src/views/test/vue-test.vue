@@ -9,9 +9,12 @@
 </template>
 
 <script>
+import {lib} from './lib';
+
 export default {
   name: 'VideoExample',
   async mounted() {
+    lib.alert();
     local_ip();
     function local_ip(){
       var $mytimeout;

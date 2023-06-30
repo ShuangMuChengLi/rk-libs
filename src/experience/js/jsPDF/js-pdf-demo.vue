@@ -12,6 +12,7 @@
 <script>
 import { jsPDF } from 'jspdf';
 import simkai from './simkai.ttf';
+import axios from 'axios';
 console.log(simkai);
 const fs = require('fs'); // will automatically load the node version
 const path = require('path');
@@ -24,20 +25,10 @@ export default {
 
     },
     test(){
-      const doc = new jsPDF();
-      doc.addFont(simkai, 'MyFont', 'normal');
-      doc.setFont('MyFont');
-      doc.text('爱我中华!', 10, 10);
-      doc.save('a4.pdf'); // will save the file in the current working directory
-      return;
-
-      fetch(simkai, {
+      axios.get(simkai, {
         responseType: 'blob'
       })
-        .then(response => {
-          return response.blob();
-        })
-        .then(blob => {
+        .then(res => {
           let oFileReader = new FileReader();
           oFileReader.onloadend = function(e) {
             // base64结果
@@ -50,7 +41,7 @@ export default {
             doc.text('爱我中华!', 10, 10);
             doc.save('a4.pdf'); // will save the file in the current working directory
           };
-          oFileReader.readAsDataURL(blob);
+          oFileReader.readAsDataURL(res.data);
         });
 
     }

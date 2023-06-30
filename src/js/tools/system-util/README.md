@@ -34,3 +34,15 @@ async function fn(){
 let result = systemUtil.toThousands(123456789);
 // 123,456,789
 ```
+
+### blobToBase64(blob)
+blob转为base64
+
+### fileToBase64(file)
+File转为base64
+
+### base64ToBlob(data, mime)
+base64转为blob
+
+### blobToFile(bits, name, options)
+blob转为File
