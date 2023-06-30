@@ -1,9 +1,5 @@
 export const testRoutes = [
   {
-    path: '/js-test/map/intersectsCoordinate-test',
-    component: ()=>import('../js/map/intersectsCoordinate/intersectsCoordinate-test')
-  },
-  {
     path: '/test/ol-demo',
     component: ()=>import('../views/test/ol-demo.vue')
   },

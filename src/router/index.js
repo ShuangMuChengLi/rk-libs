@@ -28,6 +28,11 @@ export const routes = [
     date: '2022-01-09'
   },
   {
+    path: '/demo/js-pdf-demo',
+    component: ()=>import('../experience/js/jsPDF/js-pdf-demo.vue'),
+    date: '2023-06-30'
+  },
+  {
     path: '/demo/purdah-slide',
     component: ()=>import('../components/purdah-slide/purdah-slide-test')
   },
