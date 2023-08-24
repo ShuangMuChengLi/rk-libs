@@ -1,37 +1,42 @@
 <template>
   <div class="wrapper">
-    <div class="out">
-      <div class="card">
-        本来面目
-      </div>
-    </div>
+    <el-button type="primary" @click="getFile">下载</el-button>
   </div>
 </template>
 
 <script>
-import {lib} from './lib';
-
+import axios from 'axios';
 export default {
   name: 'VideoExample',
   async mounted() {
-    lib.alert();
-    local_ip();
-    function local_ip(){
-      var $mytimeout;
-      if ( window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection ){
-        window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-        var $pc = new RTCPeerConnection({iceServers:[]}),
-          $noop = function(){};
-        $pc.createDataChannel('');
-        $pc.createOffer($pc.setLocalDescription.bind($pc), $noop);
-        $pc.onicecandidate = function($ice){
-          console.log($ice.currentTarget.localDescription.sdp);
-          console.log($ice.currentTarget.pendingLocalDescription.sdp);
-        };
-      }
-      else{
-        document.getElementById('list').innerHTML = '-';
-      }
+
+  },
+  methods:{
+    getFile(){
+      axios({
+        url: '/local/html/file',
+        method: 'get',
+        // responseType: 'arraybuffer',
+        responseType: 'blob',
+      }).then(res=>{
+        this.exportFile(res);
+      });
+    },
+    /**
+     * 导出文件
+     * @param {arraybuffer} data
+     */
+    exportFile(data) {
+      // 创建blob文件流
+      // let blob = new Blob([data.data]);
+
+      let a = document.createElement('a');
+      a.download = '1.jpg';
+      a.href = URL.createObjectURL(data.data);;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      a = null;
     }
   }
 };

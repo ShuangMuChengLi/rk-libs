@@ -76,5 +76,28 @@ export const systemUtil = {
    */
   blobToFile(bits, name, options){
     return new File(bits, name, options);
+  },
+  /**
+   * 导出文件
+   * @param {arraybuffer} data
+   */
+  exportFile(data) {
+    // 1、获取文件名
+    const reg = /(?<=filename=)[^&]*/;
+    const matchs = data.headers['content-disposition'].match(reg);
+    let filename = '';
+    if(matchs) {
+      filename = decodeURIComponent(matchs[0]);
+    }
+    // 创建blob文件流
+    let blob = new Blob([data.data]);
+
+    let a = document.createElement('a');
+    a.download = filename;
+    a.href = URL.createObjectURL(blob);;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    a = null;
   }
 };

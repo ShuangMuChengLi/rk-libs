@@ -273,6 +273,10 @@ export const routes = [
     path: '/components/video-js-hls',
     component: ()=>import('../components/video-js-hls/video-js-hls-demo')
   },
+  {
+    path: '/experience/html/v-viewer/VViewerDemo',
+    component: ()=>import('../experience/html/v-viewer/VViewerDemo.vue')
+  },
   ...testRoutes
 ];
 const ENV = process.env.NODE_ENV;

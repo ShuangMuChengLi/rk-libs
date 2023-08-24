@@ -46,6 +46,7 @@
     "text-loader": "^0.0.1",
     "three": "0.125.2",
     "tween": "^0.9.0",
+    "v-viewer": "1.6.4",
     "video.js": "^7.20.3",
     "videojs-contrib-hls": "^5.15.0",
     "vue": "^2.6.11",

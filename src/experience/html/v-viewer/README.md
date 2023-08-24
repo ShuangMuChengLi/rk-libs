@@ -1,2 +1,9 @@
 # v-viewer
-[v-viewer](https://github.com/mirari/v-viewer/tree/v3)
+```
+yarn add v-viewer@1.6.4
+```
+```
+import Viewer from 'v-viewer';
+import 'viewerjs/dist/viewer.css';
+Vue.use(Viewer);
+```
