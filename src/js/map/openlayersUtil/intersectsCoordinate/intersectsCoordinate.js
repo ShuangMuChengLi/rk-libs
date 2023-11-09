@@ -8,9 +8,7 @@ import {getDistance} from '../point-distance/point-distance';
  * @returns {boolean}
  */
 export function intersectsCoordinate(list, point){
-  const p = new Polygon(list);
-  p.applyTransform(getTransform('EPSG:4326', 'EPSG:3857'));
-  return p.intersectsCoordinate(fromLonLat(point));
+  return new Polygon(list).applyTransform(getTransform('EPSG:4326', 'EPSG:3857')).intersectsCoordinate(fromLonLat(point));
 }
 
 /**
