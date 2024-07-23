@@ -31,12 +31,6 @@
       >
         弹窗
       </el-button>
-      <el-button
-        type="primary"
-        @click="getStuff"
-      >
-        获取
-      </el-button>
     </div>
     <div
       id="map"
@@ -59,7 +53,8 @@ import {mapCommonMixin} from './map-common-mixin';
 import icon from './icon.png';
 import startIcon from './start.png';
 import endIcon from './end.png';
-import t from './t.json';
+import t from './t';
+import config from '../../../../config/config';
 export default {
   name: 'OlDemo',
   mixins: [mapCommonMixin],
@@ -89,22 +84,21 @@ export default {
           value: 'None',
         },
       ],
-      map: null,
-      clusterLayer: null
+      map: null
     };
   },
   mounted() {
     this.map = this.initMap({
       target: 'map',
       center: [118.12, 24.4869],
-      url: 'https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=Em2forfI5ZPT8NaJic3f'
+      url: config.map_url || 'http://10.130.189.46:7100/mapImageServer/showElecPic?imgFormat=png&x={x}&y={y}&z={z}'
     });
     this.clickLayer = this.getVectorLayer({
       icon: icon,
       anchor: [0.5, 1]
     });
-    this.addMapEventListener('mapClick', (data, lonLat)=>{
-      console.log(lonLat);
+    this.addMapEventListener('mapClick', (lonLat)=>{
+      console.log(...lonLat);
       // this.clearLayer(this.clickLayer);
       // this.showPoint(
       //   {
@@ -120,14 +114,6 @@ export default {
   },
   methods: {
     initLayers() {
-      this.polygonLayer = this.getVectorLayer();
-      this.showPolygon({
-        layer: this.polygonLayer,
-        text: [''],
-        list: [
-          t
-        ]
-      });
       this.iconLayer = this.getVectorLayer({icon: icon});
       this.createSelect(
         {
@@ -147,8 +133,8 @@ export default {
         {
           layer: this.iconLayer,
           item: {
-            lon: 118.085,
-            lat: 24.457,
+            lon: 118.12,
+            lat: 24.48,
             text: '111'
           },
           style(feature){
@@ -200,46 +186,49 @@ export default {
         },
       });
 
-
-      let clusterList = [
-        {
-          id:'1',
-          lonLat: [118.18935119628907, 24.503551153564448],
-          text: '100'
-        },
-        {
-          id:'2',
-          lonLat: [118.19278442382813, 24.482951788330073],
-          text: '222'
-        },
-
-      ];
-      let clusterLayer = this.getClusterLayer((feature)=> {
-        return {
-          icon: icon,
-          color: '#3399CC',
-          text: feature.get('features')[0].getProperties().text
-        };
+      this.polygonLayer = this.getVectorLayer();
+      this.showPolygon({
+        layer: this.polygonLayer,
+        text: ['思明区', '湖里区'],
+        list: t
       });
-      this.clusterLayer = clusterLayer;
-      this.showClusterPoints({layer: clusterLayer, list: clusterList});
-      this.createSelect({
-        style:(feature)=> {
-          return {
-            icon: startIcon,
-            color: 'orange',
-            text: feature.get('features')[0].getProperties().text
-          };
-        },
-        isCluster: true,
-        layers: [clusterLayer],
-        callback(feature, info) {
-          console.log(feature, info);
-          // console.log(feature.get('features'));
-          // if(feature.)
-          // console.log(feature, info);
-        }
-      });
+      console.log(t);
+      // let clusterList = [
+      //   {
+      //     lonLat: [118.18935119628907, 24.503551153564448],
+      //     text: '100'
+      //   },
+      //   {
+      //     lonLat: [118.19278442382813, 24.482951788330073],
+      //     text: '222'
+      //   },
+      //
+      // ];
+      // let clusterLayer = this.getClusterLayer((feature)=> {
+      //   return {
+      //     icon: icon,
+      //     color: '#3399CC',
+      //     text: feature.get('features')[0].getProperties().text
+      //   };
+      // });
+      // this.showClusterPoints({layer: clusterLayer, list: clusterList});
+      // this.createSelect({
+      //   style:(feature)=> {
+      //     return {
+      //       icon: startIcon,
+      //       color: 'orange',
+      //       text: feature.get('features')[0].getProperties().text
+      //     };
+      //   },
+      //   isCluster: true,
+      //   layers: [clusterLayer],
+      //   callback(feature, info) {
+      //     console.log(feature, info);
+      //     // console.log(feature.get('features'));
+      //     // if(feature.)
+      //     // console.log(feature, info);
+      //   }
+      // });
       this.lineLayer = this.getVectorLayer();
       this.drawLine([
         [118.2266017150879, 24.560886053466792],
@@ -247,16 +236,6 @@ export default {
         [118.16205703735352, 24.402270941162104]
       ], this.lineLayer);
       this.drawVector = this.getVectorLayer();
-    },
-    getStuff(){
-      // let result = this.clusterLayer.getSource().getSource().getFeatures()[0].getGeometry();
-      // result.setCoordinates([119.2266017150879, 24.560886053466792]);
-      // console.log(result);
-      let feature = this.clusterLayer.getSource().getSource().getFeatureById('1');
-      console.log(feature);
-      let result = feature.getGeometry();
-      result.setCoordinates([119.2266017150879, 24.560886053466792]);
-      console.log(result);
     },
     showDialogBtn(){
       let center = this.map.getView().getCenter();
