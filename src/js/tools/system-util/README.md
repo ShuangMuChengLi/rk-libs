@@ -46,3 +46,6 @@ base64转为blob
 
 ### blobToFile(bits, name, options)
 blob转为File
+
+### copy(text)
+复制到剪切板
