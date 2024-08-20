@@ -152,7 +152,7 @@ export const menu = [
           {
             label: '下拉选择树',
             source: require('../src/components/SelectTree/README.md'),
-            date: '2022-08-26'
+            date: '2024-08-20',
           },
           {
             label: '虚拟列表',
@@ -333,7 +333,7 @@ export const menu = [
           {
             label: '中间层弹窗的混入',
             source: require('../src/js/html/inner-dialog-mixin/README.md'),
-            date: '2022-08-30',
+            date: '2024-08-20',
           },
           {
             label: '表单校验、限制输入',
@@ -358,12 +358,17 @@ export const menu = [
           {
             label: '项目工具包systemUtil',
             source: require('../src/js/tools/system-util/README.md'),
-            date: '2022-04-20'
+            date: '2024-08-20'
           },
           {
             label: '前端生成并导出excel',
             source: require('../src/js/tools/export-excel/README.md'),
             date: '2022-10-13'
+          },
+          {
+            label: '前端生成并导出word',
+            source: require('../src/js/tools/export-word/README.md'),
+            date: '2024-08-20'
           },
         ]
       },
@@ -555,6 +560,16 @@ export const menu = [
           {
             label: '字体资源下载',
             source: require('../src/experience/html/font/README.md')
+          },
+          {
+            label: 'elementUI upload特殊用法',
+            date: '2024-08-20',
+            source: require('../src/experience/html/element-upload/README.md')
+          },
+          {
+            label: 'elementUI TREE相关操作',
+            date: '2024-08-20',
+            source: require('../src/experience/html/element-tree/README.md')
           }
         ]
       },
@@ -572,6 +587,16 @@ export const menu = [
           {
             label: '统一门户项目背景特效',
             source: require('../src/experience/special-effects/PortalBg/README.md')
+          },
+        ]
+      },
+      {
+        label: '代码库',
+        children: [
+          {
+            label: 'echart关系图',
+            date: '2024-08-20',
+            source: require('../src/experience/code-libs/echart-graph/README.md')
           },
         ]
       },

@@ -4,6 +4,7 @@
     class="select-tree"
   >
     <el-popover
+      v-model="visible"
       :width="popoverWidth"
       placement="bottom"
       trigger="click"
@@ -13,7 +14,7 @@
         class="tree"
         :data="treeData"
         :show-checkbox="multiple"
-        :node-key="treeKey"
+        :node-key="nodeKey"
         :load="loadNode"
         :lazy="lazy"
         highlight-current
@@ -22,17 +23,31 @@
           children: 'children',
           ...treeProps
         }"
+        v-bind="$attrs"
         @check="handleCheckChange"
         @current-change="handleClickChange"
-      />
-      <template v-slot:reference>
+      >
+        <span
+          slot-scope="{ node, data }"
+        >
+          <slot
+            :node="node"
+            :data="data"
+          >
+            <span
+              class="label"
+            >{{ node.label }}</span>
+          </slot>
+        </span>
+      </el-tree>
+      <template #reference>
         <div
           class="el-input"
           :class="`el-input--${size}`"
         >
           <div class="el-input__inner">
             <div
-              v-if="!value || !value.length"
+              v-if="!value"
               class="placeholder"
             >
               {{ placeholder }}
@@ -40,18 +55,22 @@
             <template v-else-if="multiple">
               <div
                 v-for="item in checkList"
-                :key="item[treeKey]"
+                :key="item[nodeKey]"
                 class="tag el-tag el-tag--info el-tag--small el-tag--light"
               >
                 <span class="el-select__tags-text">{{ item[labelKey] }}</span>
                 <i
                   class="el-tag__close el-icon-close"
-                  @click.stop="handleRemove(item[treeKey])"
+                  @click.stop="handleRemove(item[nodeKey])"
                 />
               </div>
             </template>
             <template v-else-if="!multiple">
-              {{ selectObj[labelKey] }}
+              <span class="value">{{ selectObj[labelKey] }}</span>
+              <i
+                class="el-icon-close"
+                @click.stop="clear"
+              />
             </template>
           </div>
         </div>
@@ -65,7 +84,11 @@ export default {
   name: 'SelectTree',
   props: {
     value: {
-      type: [Array, String, Number],
+      type: [Array, String, Number, Object],
+      default: null
+    },
+    checkFilterFn: {
+      type: Function,
       default: null
     },
     treeData: {
@@ -76,7 +99,7 @@ export default {
       type: Boolean,
       default: true
     },
-    treeKey: {
+    nodeKey: {
       type: String,
       default: 'id'
     },
@@ -107,6 +130,7 @@ export default {
   },
   data() {
     return {
+      visible: false,
       checkNode: [],
       selectNode: '',
       checkList: [],
@@ -132,6 +156,7 @@ export default {
     this.popoverWidth = this.$refs['select-tree'].clientWidth;
   },
   methods: {
+    
     handleRemove(value) {
       this.$refs.tree.setChecked(value, false, true);
       this.handleCheckChange();
@@ -141,20 +166,30 @@ export default {
         this.checkList = this.$refs.tree
           ?.getCheckedNodes()
           .filter((i) => i.isLeaf);
-        this.checkNode = this.checkList.map((i) => i[this.treeKey]);
+        this.checkNode = this.checkList.map((i) => i[this.nodeKey]);
       } else {
         this.checkList = this.$refs.tree?.getCheckedNodes();
-        this.checkNode = this.checkList.map((i) => i[this.treeKey]);
+        this.checkNode = this.checkList.map((i) => i[this.nodeKey]);
       }
       this.$emit('input', this.checkNode);
       this.$emit('change', this.checkList);
     },
     handleClickChange() {
       if (this.multiple) return;
-      this.selectNode = this.$refs.tree.getCurrentKey();
-      this.selectObj = this.$refs.tree.getCurrentNode();
-      this.$emit('input', this.selectNode);
-      this.$emit('change', this.selectObj);
+      
+      let selectObj = this.$refs.tree.getCurrentNode();
+      if(this.checkFilterFn && !this.checkFilterFn(selectObj)) {
+        return;
+      }
+
+      this.selectObj = selectObj;
+      this.$emit('change', this.selectObj[this.nodeKey]);
+      this.$emit('input', this.selectObj[this.nodeKey]);
+      this.visible = false;
+    },
+    clear() {
+      this.$emit('change', null);
+      this.$emit('input', null);
     },
     handleUpdateValue() {
       if (this.multiple) {
@@ -165,6 +200,7 @@ export default {
       } else {
         if (!_.isEqual(this.value, this.selectNode)) {
           if (!this.value || !this.$refs.tree.getNode(this.value)) return;
+
           this.$refs.tree.setCurrentKey(this.value);
           this.handleClickChange();
         }
@@ -173,20 +209,42 @@ export default {
   }
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .select-tree {
-  .el-input__inner {
-    height: inherit;
-  }
+  width: 100%;
   .el-input {
     cursor: pointer;
+    .el-input__inner{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5px;
+      .value{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: auto;
+      }
+      .el-icon-close{
+        flex-shrink: 0;
+        cursor: pointer;
+        visibility: hidden;
+      }
+      &:hover{
+        .el-icon-close{
+          visibility:visible;
+        }
+      }
+      
+    }
+    
   }
   .placeholder {
-    font-size: 14/16rem;
+    font-size: 14px;
     color: #999;
   }
   .tag + .tag {
-    margin-left: 10/16rem;
+    margin-left: 1px;
   }
 }
 </style>
