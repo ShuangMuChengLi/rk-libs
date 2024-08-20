@@ -15,7 +15,7 @@
 capture-dialog.vue
 ```vue
 <common-dialog
-    :visible.sync="dialogVisible">
+    v-model="dialogVisible">
 </common-dialog>
 <script>
 import {innerDialogMixin} from './inner-dialog-mixin';
@@ -28,7 +28,7 @@ export default {
 main.vue
 ```vue
 <capture-dialog
-  :visible.sync="captureDialogVisible" />
+  v-model="captureDialogVisible" />
 <script>
 export default {
   data(){

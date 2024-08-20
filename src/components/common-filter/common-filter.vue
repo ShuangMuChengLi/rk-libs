@@ -53,6 +53,7 @@
               value-format="yyyy-MM-dd HH:mm:ss"
               :picker-options="pickerOptionsFn(item.prop[1])"
               clearable
+              style="width: 200px"
             />
             <span class="filter-time-join"> - </span>
             <el-date-picker
@@ -61,6 +62,7 @@
               placeholder="选择日期时间"
               value-format="yyyy-MM-dd HH:mm:ss"
               clearable
+              style="width: 200px"
             />
           </el-form-item>
           <el-form-item
@@ -93,7 +95,7 @@
             <el-select
               v-model="form[item.prop]"
               :clearable="!item.noneClearable"
-              :style="{width: item.width? item.width+'px': null}"
+              :style="{width: item.width? item.width+'px': '240px'}"
             >
               <el-option
                 v-for="(option, index) in item.options"

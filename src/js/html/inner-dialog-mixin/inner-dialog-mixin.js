@@ -1,6 +1,6 @@
 export const innerDialogMixin = {
   props: {
-    visible:{
+    value: {
       default: false,
       type: Boolean
     }
@@ -12,7 +12,7 @@ export const innerDialogMixin = {
   },
 
   watch: {
-    visible: {
+    value: {
       handler(val) {
         this.dialogVisible = val;
       },
@@ -20,7 +20,7 @@ export const innerDialogMixin = {
     },
     dialogVisible: {
       handler(val) {
-        this.$emit('update:visible', val);
+        this.$emit('input', val);
       },
       immediate: true
     },
