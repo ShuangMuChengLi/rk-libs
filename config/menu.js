@@ -491,6 +491,11 @@ export const menu = [
             source: require('../src/experience/solution/array-like/README.md'),
             date: '2022-09-26'
           },
+          {
+            label: 'Server-Sent Events前端对接',
+            source: require('../src/experience/js/sse/README.md'),
+            date: '2024-09-13'
+          },
         ]
       },
       {
