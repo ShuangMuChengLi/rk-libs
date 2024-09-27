@@ -9,7 +9,7 @@
 }
 ::-webkit-scrollbar-track{
   border-radius: 20px;
-  background-color: transparent;a
+  background-color: transparent;
 }
 ::-webkit-scrollbar-thumb{
   background: #ccc;

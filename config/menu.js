@@ -446,6 +446,11 @@ export const menu = [
             source: require('../src/experience/html/code-preview/README.md'),
             date: '2022-01-09'
           },
+          {
+            label: 'vue2 node16兼容问题',
+            source: require('../src/experience/solution/vue2-node16/README.md'),
+            date: '2024-09-27'
+          },
         ]
       },
       {
