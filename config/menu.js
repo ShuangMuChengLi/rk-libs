@@ -451,6 +451,11 @@ export const menu = [
             source: require('../src/experience/solution/vue2-node16/README.md'),
             date: '2024-09-27'
           },
+          {
+            label: 'nginx经验',
+            source: require('../src/experience/solution/nginx/README.md'),
+            date: '2024-10-09'
+          },
         ]
       },
       {
