@@ -456,6 +456,11 @@ export const menu = [
             source: require('../src/experience/solution/nginx/README.md'),
             date: '2024-10-09'
           },
+          {
+            label: 'git经验',
+            source: require('../src/experience/solution/git/README.md'),
+            date: '2024-10-09'
+          },
         ]
       },
       {
