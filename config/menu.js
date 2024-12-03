@@ -45,7 +45,13 @@ export const menu = [
           {
             label: 'video.js实现hlv播放组件',
             source: require('../src/components/video-js-hls/README.md')
+          },
+          {
+            label: 'RKSrs播放器',
+            source: require('../src/components/RkSrs/README.md'),
+            date: '2024-12-03'
           }
+
         ]
       },
       {
