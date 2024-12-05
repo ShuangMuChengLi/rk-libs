@@ -376,6 +376,11 @@ export const menu = [
             source: require('../src/js/tools/export-word/README.md'),
             date: '2024-08-20'
           },
+          {
+            label: 'axios请求封装request.js',
+            source: require('../src/js/tools/request/README.md'),
+            date: '2024-12-05'
+          },
         ]
       },
     ]

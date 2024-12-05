@@ -1,7 +1,163 @@
 /**
  * Created by lin on 2017/7/28.
  */
+import { Message } from 'element-ui';
+import _ from 'lodash';
 export const systemUtil = {
+    /**
+ * 判断某个值是否是空字符串、空对象、空数组、null、undefined、NaN中的一个,不包含数字0
+ * @param {*} val
+ */
+    isEmpty(val) {
+      let flag = false;
+      const type = Object.prototype.toString.call(val);
+      switch (type) {
+      // 空字符串
+      case '[object String]':
+        if(val.trim() === '') {
+          flag = true;
+        }
+        break;
+      // null
+      case '[object Null]':
+        flag = true;
+        break;
+      // undefined
+      case '[object Undefined]':
+        flag = true;
+        break;
+      // NaN
+      case '[object Number]':
+        if(isNaN(val)) {
+          flag = true;
+        }
+        break;
+      // 空数组
+      case '[object Array]':
+        if(val.length === 0) {
+          flag = true;
+        }
+        break;
+      // 空对象
+      case '[object Object]':
+        if(Object.keys(val).length === 0) {
+          flag = true;
+        }
+        break;
+      }
+  
+      return flag;
+    },
+    getFileHeader() {
+      return {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+    },
+    getJsonHeader() {
+      return {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+    },
+    getFormHeader() {
+      return {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      };
+    },
+    handleRequestError(e, isAlert) {
+      if (e.response && e.response.code) {
+        if (e.response.code === 401) {
+          // if (window.location.href.indexOf('/#/login') === -1) {
+          //   Message.error(e.response.data.message);
+          // }
+        } else {
+          if (isAlert) {
+            Message.error(e.response.data.message || '未知异常');
+          }
+        }
+      }
+      // console.error(e);
+      return false;
+    },
+    handleRequestSuccessOrigin(data, isAlert) {
+      
+      if (data && data.code && data.code === 200) {
+        return data;
+      } else {
+        if (isAlert && data && data.message) {
+          Message.error(data.message);
+        }
+        return false;
+      }
+    },
+    handleRequestSuccess(data, isAlert) {
+      if (data && data.code) {
+        if(data.code === 200){
+          return data.data;
+        }else if(data.code === 401){
+          Message.error('登录已过期');
+          window.location.href = './#/login';
+          return false;
+        }else{
+          if (isAlert && data && data.message) {
+            Message.error(data.message);
+          }
+          return false;
+        }
+      } else {
+        if (isAlert && data && data.message) {
+          Message.error(data.message);
+        }
+        return false;
+      }
+    },
+    handleRequestSuccessForAxios(res, isAlert) {
+      const data = _.get(res, 'data');
+      if (data && data.code && data.code === 200) {
+        return data.data;
+      } else {
+        if (isAlert && data && data.message) {
+          Message.error(data.message);
+        }
+        return false;
+      }
+    },
+    handleRequestCodeSuccess(data, isAlert) {
+      console.log(data);
+      if (data && data.code && data.code === 200) {
+        return true;
+      } else {
+        if (isAlert && data && data.message) {
+          Message.error(data.message);
+        }
+        return false;
+      }
+    },
+    getURLData(data = {}) {
+      data = _.pickBy(data, (parameter) => ![undefined, null, ''].includes(parameter));
+      return data;
+    },
+    getFormData(data = {}) {
+      data = _.pickBy(data, (parameter) => ![undefined, null, ''].includes(parameter));
+      return new URLSearchParams(data).toString();
+    },
+    getJSONData(data = {}) {
+      data = _.pickBy(data, (parameter) => ![undefined, null, ''].includes(parameter));
+      return data;
+    },
+    validatePositiveNumber(value) {
+      const val = Number(value);
+      if (_.isNaN(val) || val <= 0) {
+        return false;
+      }
+  
+      return true;
+    },
   /**
    *  校验elementUI表单
    * @param formRef
