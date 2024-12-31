@@ -362,6 +362,11 @@ export const menu = [
         label: 'tools',
         children: [
           {
+            label: '元素全屏',
+            source: require('../src/js/tools/fullscreen/README.md'),
+            date: '2024-12-31'
+          },
+          {
             label: '项目工具包systemUtil',
             source: require('../src/js/tools/system-util/README.md'),
             date: '2024-08-20'
