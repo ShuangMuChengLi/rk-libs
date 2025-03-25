@@ -140,3 +140,15 @@ html {
     top: 0;
 }
 ```
+## 背景模拟虚线
+```css
+.dashed{
+  width: 10px;
+  height: 1px;
+  box-sizing: border-box;
+  background-image: linear-gradient(to right, #2878DE 0%, #2878DE 50%, transparent 50%);
+  background-size: 4px 1px;
+  background-repeat: repeat-x;
+  margin-right: 2px;
+}
+```

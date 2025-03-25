@@ -386,6 +386,11 @@ export const menu = [
             source: require('../src/js/tools/request/README.md'),
             date: '2024-12-05'
           },
+          {
+            label: '微信小程序下载图片，兼容各种图片类型',
+            source: require('../src/js/tools/wx-pic-download/README.md'),
+            date: '2025-03-25'
+          },
         ]
       },
     ]
