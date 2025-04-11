@@ -4,6 +4,15 @@
 import { Message } from 'element-ui';
 import _ from 'lodash';
 export const systemUtil = {
+  jsonToUrlParams(obj) {
+    const params = new URLSearchParams();
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        params.append(key, obj[key]);
+      }
+    }
+    return params.toString();
+  },
     /**
  * 判断某个值是否是空字符串、空对象、空数组、null、undefined、NaN中的一个,不包含数字0
  * @param {*} val

@@ -66,7 +66,13 @@ export const menu = [
             source: require('../src/components/remote-search-input/README.md'),
             date: '2021-11-23'
 
-          }
+          },
+          {
+            label: '带返回结果展示的上传组件（来源小散）',
+            source: require('../src/components/ImportData/README.md'),
+            date: '2025-04-11'
+
+          },
         ]
       },
       {

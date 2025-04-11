@@ -1,0 +1,22 @@
+.flex-column-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  line-height: 3;
+  font-size: 16px;
+  color: #303133;
+
+}
+
+.message {
+  line-height: 1;
+  font-size: 14px;
+  color: #909399;
+}
+.el-button.btn-bottom {
+  margin-top: 50px;
+}

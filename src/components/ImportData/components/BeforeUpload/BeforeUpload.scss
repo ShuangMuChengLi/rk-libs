@@ -1,0 +1,12 @@
+
+// 上传文件
+.upload-btn {
+  display: flex;
+  align-items: center;
+  ::v-deep.el-upload-list.el-upload-list--text {
+    li.el-upload-list__item {
+      margin-top: 0!important;
+    }
+  }
+
+}
