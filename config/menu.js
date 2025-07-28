@@ -87,6 +87,12 @@ export const menu = [
       {
         label: '数据',
         children: [
+
+          {
+            label: 'CustomTree',
+            source: require('../src/components/CustomTree/README.md'),
+            date: '2025-07-28'
+          },
           {
             label: '可配置表格组件common-table',
             source: require('../src/components/common-table/README.md'),
