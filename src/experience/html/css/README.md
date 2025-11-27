@@ -186,3 +186,26 @@ background: conic-gradient(
 #002454 360deg：结束颜色为较深的蓝色（色值 #002454），到 360deg 完成一圈过渡。
 
 由于两者色相接近，实际效果是一个非常柔和的环形渐变，可能看起来接近纯色，但有细微的明暗变化。
+
+
+## 边框渐变
+```css
+.box {
+    width: 112px;
+    height: 96px;
+    opacity: 1;
+
+    /* 自动布局 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 17px;
+
+    background: rgba(48, 83, 166, 0.2);
+
+    box-sizing: border-box;
+    border: 1px solid;
+    border-image: radial-gradient(circle at center, rgba(106, 210, 255, 1), rgba(111, 216, 255, 0)) 1;
+  }
+```
